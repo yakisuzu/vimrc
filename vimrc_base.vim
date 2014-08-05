@@ -48,11 +48,14 @@ set shiftwidth=4
 nnoremap <C-l> :nohlsearch<CR><C-l>
 nnoremap tg gT
 
-"—————————————————————————————————————
+"---------------------------------------------------------------------------
 " 自動コマンド追加
-"—————————————————————————————————————
+"---------------------------------------------------------------------------
 " 透過度
-if has('mac')
+if IsWindows()
+	autocmd GUIenter * set transparency=190
+endif
+if IsMac()
 	set transparency=15
 endif
 
@@ -60,6 +63,8 @@ endif
 " コマンド追加
 "---------------------------------------------------------------------------
 command! -nargs=1 -complete=help H tab h <args>
+command! -nargs=1 -complete=command RedirTab call s:Redir_tab(<q-args>)
+command! -nargs=1 Sh call s:Sh_tab(<q-args>)
 
 command! VimrcBase tabe ~/vimrc/vimrc_base.vim
 command! VimrcWSo w | so ~/vimrc/vimrc.vim
@@ -80,4 +85,30 @@ command! TabeHttpd tabe /private/etc/apache2/httpd.conf
 command! CdWebRoot cd /Library/WebServer/Documents/
 
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
+
+"---------------------------------------------------------------------------
+" Vimscript
+"---------------------------------------------------------------------------
+function! Redir_tab(cmd)
+	redir @*>
+	silent execute a:cmd
+	redir END
+	tabe | normal Pgg
+endfunction
+
+function! Sh_tab(cmd)
+	exe 'tabe | r!'.a:cmd
+endfunction
+
+function! Index_increment()
+	for cnt in range(9,1,-1)
+		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
+	endfo
+endfunction
+
+function! Index_decrement()
+	for cnt in range(2,9)
+		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt-1).'/ge'
+	endfo
+endfunction
 

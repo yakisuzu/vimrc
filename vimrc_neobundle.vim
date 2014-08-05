@@ -18,10 +18,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'Shougo/vimproc'
+if !IsWindows()
+	NeoBundle 'Shougo/vimproc'
+	NeoBundle 'kakkyz81/evervim'
+endif
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'kakkyz81/evervim'
 
 call neobundle#end()
 
