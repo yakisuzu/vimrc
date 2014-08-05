@@ -63,8 +63,8 @@ endif
 " コマンド追加
 "---------------------------------------------------------------------------
 command! -nargs=1 -complete=help H tab h <args>
-command! -nargs=1 -complete=command RedirTab call s:Redir_tab(<q-args>)
-command! -nargs=1 Sh call s:Sh_tab(<q-args>)
+command! -nargs=1 -complete=command RedirTab call Redir_tab(<q-args>)
+command! -nargs=1 ShTab call Sh_tab(<q-args>)
 
 command! VimrcBase tabe ~/vimrc/vimrc_base.vim
 command! VimrcWSo w | so ~/vimrc/vimrc.vim
