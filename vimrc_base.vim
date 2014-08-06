@@ -77,6 +77,12 @@ command! -nargs=1 SetSpLinesUp normal <args>-
 command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
+command! SetEncUtf8 set encoding=utf-8
+command! SetEncCp932 set encoding=cp932
+
+command! GetEnc set encoding?
+
+command! Bd bufdo bd!
 
 command! Wsudo w !sudo tee % > /dev/null
 
@@ -89,6 +95,8 @@ command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "---------------------------------------------------------------------------
 " Vimscript
 "---------------------------------------------------------------------------
+cd ~
+
 function! Redir_tab(cmd)
 	redir @*>
 	silent execute a:cmd
