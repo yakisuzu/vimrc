@@ -108,15 +108,18 @@ function! Sh_tab(cmd)
 	exe 'tabe | r!'.a:cmd
 endfunction
 
+function! S_clip()
+	%s//\=@+/ge
+endfunction
+
 function! Index_increment()
-	for cnt in range(9,1,-1)
-		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
-	endfo
+	%s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)+1/ge
+	"	for cnt in range(9,1,-1)
+	"		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
+	"	endfo
 endfunction
 
 function! Index_decrement()
-	for cnt in range(2,9)
-		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt-1).'/ge'
-	endfo
+	%s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)-1/ge
 endfunction
 
