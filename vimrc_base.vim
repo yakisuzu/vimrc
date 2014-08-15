@@ -41,6 +41,8 @@ set hidden
 set history=500
 " インデントに使われる空白の数 sw
 set shiftwidth=4
+" 折り畳みの種類 fdm
+set foldmethod=marker
 
 "---------------------------------------------------------------------------
 " キーマップ追加
@@ -66,10 +68,11 @@ command! -nargs=1 -complete=help H tab h <args>
 command! -nargs=1 -complete=command RedirTab call Redir_tab(<q-args>)
 command! -nargs=1 ShTab call Sh_tab(<q-args>)
 
-command! VimrcBase tabe ~/vimrc/vimrc_base.vim
 command! VimrcWSo w | so ~/vimrc/vimrc.vim
-command! GVimrcBase tabe ~/vimrc/gvimrc_base.vim
+command! VimrcBase tabe ~/vimrc/vimrc_base.vim
+command! VimrcNeoBundle tabe ~/vimrc/vimrc_neobundle.vim
 command! GVimrcWSo w | so ~/vimrc/gvimrc.vim
+command! GVimrcBase tabe ~/vimrc/gvimrc_base.vim
 
 command! -nargs=1 SetCo set columns+=<args>
 command! -nargs=1 SetLines set lines+=<args>

@@ -18,12 +18,26 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
+" NeoBundle 'Shougo/vimproc'"{{{
+if !neobundle#is_installed('vimproc')
+	NeoBundle 'Shougo/vimproc', {
+				\ 'build' : {
+				\     'mac' : 'make -f make_mac.mak',
+				\    },
+				\ }
+endif"}}}
 if !IsWindows()
-	NeoBundle 'Shougo/vimproc'
 	NeoBundle 'kakkyz81/evervim'
 endif
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'tpope/vim-fugitive'
+
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+if neobundle#is_installed('neocomplete')
+	" Use neocomplete.
+	let g:neocomplete#enable_at_startup = 1
+endif
 
 call neobundle#end()
 
