@@ -36,7 +36,7 @@ NeoBundle 'Shougo/unite.vim' "{{{
 if neobundle#is_installed('unite.vim')
 	command! UBookmarkT Unite bookmark -vertical -direction=leftabove -winwidth=60 -default-action=tabvimfilter
 	command! UBookmark  Unite bookmark -vertical -direction=leftabove -winwidth=60 -default-action=vimfilter
-	command! TabeBookmark tabe ~/.cache/unite/default
+	command! TabeBookmark tabe ~/.cache/unite/bookmark/default
 endif "}}}
 
 NeoBundle 'Shougo/neocomplete.vim' "{{{
