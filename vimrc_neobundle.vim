@@ -20,35 +20,61 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc! "}}}
 "---------------------------------------------------------------------------
-" NeoBundle 'Shougo/vimproc' "{{{
-if !neobundle#is_installed('vimproc')
-	NeoBundle 'Shougo/vimproc', {
+
+" NeoBundle 'Shougo/vimproc.vim' "{{{
+if !IsWindows()
+	NeoBundle 'Shougo/vimproc.vim', {
 				\ 'build' : {
 				\     'mac' : 'make -f make_mac.mak',
 				\    },
 				\ }
 endif "}}}
 
-if !IsWindows()
-	NeoBundle 'kakkyz81/evervim'
-endif
+NeoBundle 'Shougo/vimshell.vim'
 
-NeoBundle 'Shougo/vimshell'
-
-NeoBundle 'tpope/vim-fugitive'
-
-NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite.vim' "{{{
+if neobundle#is_installed('unite.vim')
+	command! UBookmarkT Unite bookmark -vertical -direction=leftabove -winwidth=60 -default-action=tabvimfilter
+	command! UBookmark  Unite bookmark -vertical -direction=leftabove -winwidth=60 -default-action=vimfilter
+	command! TabeBookmark tabe ~/.cache/unite/default
+endif "}}}
 
 NeoBundle 'Shougo/neocomplete.vim' "{{{
-if neobundle#is_installed('neocomplete')
+if neobundle#is_installed('neocomplete.vim')
 	" Use neocomplete.
 	let g:neocomplete#enable_at_startup = 1
 endif "}}}
 
-NeoBundle 'Shougo/vimfiler' "{{{
-if neobundle#is_installed('vimfiler')
+NeoBundle 'Shougo/vimfiler.vim' "{{{
+if neobundle#is_installed('vimfiler.vim')
 	let g:vimfiler_as_default_explorer = 1
 endif "}}}
+
+NeoBundle 'thinca/vim-quickrun' "{{{
+if neobundle#is_installed('thinca/vim-quickrun')
+	let g:quickrun_config = {
+				\  "_" : {
+				\    "runner" : "vimproc",
+				\    "runner/vimproc/updatetime" : 60
+				\  },
+				\}
+	if IsWindows()
+		let g:quickrun_config = {
+					\  "cs/csc": {
+					\    "command": "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe",
+					\  },
+					\}
+	endif
+endif "}}}
+
+NeoBundle 'tpope/vim-fugitive'
+
+" NeoBundle 'kakkyz81/evervim' "{{{
+if !IsWindows()
+	NeoBundle 'kakkyz81/evervim'
+endif
+"}}}
+
 "---------------------------------------------------------------------------
 " Required end "{{{
 call neobundle#end()
