@@ -89,7 +89,7 @@ command! SetEncCp932 set encoding=cp932
 command! GetEnc set encoding?
 
 command! Bd bufdo bd!
-
+command! T tabe
 command! Wsudo w !sudo tee % > /dev/null
 
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
