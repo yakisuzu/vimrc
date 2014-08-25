@@ -89,6 +89,10 @@ if neobundle#is_installed('thinca/vim-quickrun')
 	endif
 endif "}}}
 
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
 NeoBundle 'tpope/vim-fugitive'
 
 " NeoBundle 'kakkyz81/evervim' "{{{

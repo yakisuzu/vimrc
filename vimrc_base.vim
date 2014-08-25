@@ -63,6 +63,8 @@ endif
 if IsMac()
 	set transparency=15
 endif
+" ファイルタイプ更新
+au BufRead,BufNewFile *.md set filetype=markdown
 "}}}
 
 "---------------------------------------------------------------------------
