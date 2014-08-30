@@ -126,5 +126,24 @@ endfunction
 function! Index_decrement()
 	%s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)-1/ge
 endfunction
+
+let g:conv_md_codetype = ''
+function! Conv_backlog_to_md()
+	%s/\v^\*{3}\s?/### /ge
+	%s/\v^\*{2}\s?/## /ge
+	%s/\v^\*{1}\s?/# /ge
+	%s/\v^\{code}/\='```'.g:conv_md_codetype/ge
+	%s/\v^\{\/code}/```/ge
+	%s/\v\s{1}$/  /ge
+endfunction
+
+function! Conv_md_to_backlog()
+	%s/\v^\#{3}\s?/*** /ge
+	%s/\v^\#{2}\s?/** /ge
+	%s/\v^\#{1}\s?/* /ge
+	exe '%s/\v^```'.g:conv_md_codetype.'/{code}/ge'
+	%s/\v^```$/{\/code}/ge
+	%s/\v\s{2}$/ /ge
+endfunction
 "}}}
 
