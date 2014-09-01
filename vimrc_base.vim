@@ -64,13 +64,14 @@ if IsMac()
 	set transparency=15
 endif
 " ファイルタイプ更新
-au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md set filetype=markdown | set foldmethod=marker
 "}}}
 
 "---------------------------------------------------------------------------
 " コマンド追加"{{{
 command! -nargs=1 -complete=help H tab h <args>
 command! -nargs=1 -complete=command RedirTab call Redir_tab(<q-args>)
+command! -nargs=1 -complete=command DebugProfile call Debug_profile(<q-args>)
 command! -nargs=1 ShTab call Sh_tab(<q-args>)
 
 command! VimrcWSo w | so ~/vimrc/vimrc.vim
@@ -106,6 +107,14 @@ function! Redir_tab(cmd)
 	silent execute a:cmd
 	redir END
 	tabe | normal Pgg
+endfunction
+
+function! Debug_profile(cmd)
+	cd ~
+	profile start profile.log
+	profile func *
+	silent exe a:cmd
+	qa!
 endfunction
 
 function! Sh_tab(cmd)
