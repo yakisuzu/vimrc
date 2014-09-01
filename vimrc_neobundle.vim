@@ -73,7 +73,7 @@ if neobundle#is_installed('neosnippet.vim')
 endif "}}}
 
 NeoBundle 'thinca/vim-quickrun' "{{{
-if neobundle#is_installed('thinca/vim-quickrun')
+if neobundle#is_installed('vim-quickrun')
 	let g:quickrun_config = {
 				\  "_" : {
 				\    "runner" : "vimproc",
