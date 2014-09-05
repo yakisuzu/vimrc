@@ -57,11 +57,13 @@ nnoremap tg gT
 "---------------------------------------------------------------------------
 " 自動コマンド追加"{{{
 " 透過度
-if IsWindows()
-	autocmd GUIenter * set transparency=190
-endif
-if IsMac()
-	set transparency=15
+if IsGui()
+	if IsWindows()
+		autocmd GUIenter * set transparency=190
+	endif
+	if IsMac()
+		set transparency=15
+	endif
 endif
 " ファイルタイプ更新
 au BufRead,BufNewFile *.md set filetype=markdown | set foldmethod=marker

@@ -39,10 +39,13 @@ if neobundle#is_installed('unite.vim')
 	command! BookmarkT tabe ~/.cache/unite/bookmark/default
 endif "}}}
 
-NeoBundle 'Shougo/neocomplete.vim' "{{{
-if neobundle#is_installed('neocomplete.vim')
-	" Use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
+"NeoBundle 'Shougo/neocomplete.vim' "{{{
+if v:version > 703  && has('lua')
+	NeoBundle 'Shougo/neocomplete.vim'
+	if neobundle#is_installed('neocomplete.vim')
+		" Use neocomplete.
+		let g:neocomplete#enable_at_startup = 1
+	endif
 endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
