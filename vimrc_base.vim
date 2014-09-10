@@ -87,7 +87,7 @@ command! GetEnc set encoding?
 command! -nargs=* GitCommit echo system("git commit " . expand("%:p") ." -m " . shellescape(<q-args>))
 
 command! Bd bufdo bd!
-command! -nargs=? -complete=file T tabe
+command! -nargs=? -complete=file T tabe <args>
 command! Wsudo w !sudo tee % > /dev/null
 
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
