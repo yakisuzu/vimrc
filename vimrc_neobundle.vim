@@ -104,6 +104,8 @@ if !IsWindows()
 endif
 "}}}
 
+NeoBundle 'tyru/restart.vim'
+
 "---------------------------------------------------------------------------
 " Required end "{{{
 call neobundle#end()
