@@ -12,6 +12,3 @@ function! IsMac()
 				\ system('uname') =~? '^darwin'))
 endfunction
 
-function! IsGui()
-	return has('gui')
-endfunction

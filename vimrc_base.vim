@@ -56,17 +56,8 @@ nnoremap tg gT
 
 "---------------------------------------------------------------------------
 " 自動コマンド追加"{{{
-" 透過度
-if IsGui()
-	if IsWindows()
-		autocmd GUIenter * set transparency=190
-	endif
-	if IsMac()
-		set transparency=15
-	endif
-endif
 " ファイルタイプ更新
-au BufRead,BufNewFile *.md set filetype=markdown | set foldmethod=marker
+au BufRead,BufNewFile *.md set ft=markdown fdm=marker
 "}}}
 
 "---------------------------------------------------------------------------
@@ -92,6 +83,8 @@ command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
 
 command! GetEnc set encoding?
+
+command! -nargs=* GitCommit echo system("git commit " . expand("%:p") ." -m " . shellescape(<q-args>))
 
 command! Bd bufdo bd!
 command! T tabe
