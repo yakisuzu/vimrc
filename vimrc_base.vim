@@ -84,7 +84,8 @@ command! SetEncCp932 set encoding=cp932
 
 command! GetEnc set encoding?
 
-command! -nargs=* GitCommit echo system("git commit " . expand("%:p") ." -m " . shellescape(<q-args>))
+command! GitAdd echo system("git add ".expand("%:p"))
+command! -nargs=* GitCommit echo system("git commit ".expand("%:p")." -m ".shellescape(<q-args>))
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
