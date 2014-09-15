@@ -84,6 +84,8 @@ command! SetEncCp932 set encoding=cp932
 
 command! GetEnc set encoding?
 
+command! GitPull echo system("git pull")
+command! GitCheckout echo system("git checkout ".expand("%:p"))
 command! GitAdd echo system("git add ".expand("%:p"))
 command! -nargs=* GitCommit echo system("git commit ".expand("%:p")." -m ".shellescape(<q-args>))
 command! GitPush echo system("git push")
