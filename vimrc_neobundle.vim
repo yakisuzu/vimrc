@@ -101,6 +101,7 @@ NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'kakkyz81/evervim' "{{{
 if !IsWindows()
 	NeoBundle 'kakkyz81/evervim'
+	" let g:evervim_devtoken=''
 endif
 "}}}
 
