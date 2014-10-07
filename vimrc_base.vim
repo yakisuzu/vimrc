@@ -57,7 +57,29 @@ nnoremap tg gT
 "---------------------------------------------------------------------------
 " 自動コマンド追加"{{{
 " ファイルタイプ更新
-au BufRead,BufNewFile *.md set ft=markdown fdm=marker
+au BufRead,BufNewFile *.md set nowrap ft=markdown
+au BufWritePre *.md call WritePre_md()
+
+function! WritePre_md()
+	silent %s/\v[^ ]@<= $/  /ge
+
+	let regexList=[]
+	call add(regexList,'^')
+	call add(regexList,'^---')
+	call add(regexList,' {2}')
+	call add(regexList,'^\|.+\|')
+
+	let regexStr=''
+	for regex in regexList
+		if !empty(regexStr)
+			let regexStr=regexStr.'|'
+		endif
+		let regexStr=regexStr.regex
+	endfor
+	let exeCom='v/\v('.regexStr.')$/normal A  '
+	" echomsg exeCom
+	silent exe exeCom
+endfunction
 "}}}
 
 "---------------------------------------------------------------------------
@@ -92,6 +114,7 @@ command! GitPush echo system("git push")
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
+command! MessageClear for n in range(200) | echom "" | endfor
 command! Wsudo w !sudo tee % > /dev/null
 
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
