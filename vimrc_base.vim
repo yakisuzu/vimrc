@@ -57,6 +57,8 @@ set nrformats=
 nnoremap <Esc><Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap tg gT
+nnoremap zl 10zl
+nnoremap zh 10zh
 "}}}
 
 "---------------------------------------------------------------------------
@@ -103,6 +105,9 @@ command! VimrcNeoBundle tabe ~/vimrc/vimrc_neobundle.vim
 command! GVimrcWSo w | so ~/vimrc/gvimrc.vim
 command! GVimrcBase tabe ~/vimrc/gvimrc_base.vim
 
+" ''(default):can move the cursor after the last character.
+" all:Allow virtual editing in all modes.
+command! -nargs=? SetVirtualEdit set virtualedit=<args>
 command! -nargs=1 SetCo set columns+=<args>
 command! -nargs=1 SetLines set lines+=<args>
 command! -nargs=1 SetSpLinesUp normal <args>-
@@ -113,6 +118,7 @@ command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
 
 command! GetEnc set encoding?
+
 
 command! GitPull echo system("git pull")
 command! GitCheckout echo system("git checkout ".expand("%:p"))

@@ -15,3 +15,8 @@ endif
 if IsMac()
 	set transparency=15
 endif
+
+" guiの挙動を変更 go
+set guioptions-=mT
+set guioptions+=bh
+

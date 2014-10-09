@@ -94,10 +94,11 @@ endif "}}}
 
 NeoBundle 'vim-scripts/Align' "{{{
 if neobundle#is_installed('Align')
-	command! -nargs=1 SetAlignXstrlen call SetAlignXstrlen(<args>)
-	function! SetAlignXstrlen(val)
-		let g:Align_xstrlen=a:val
-	endfunction
+	" 0:for utf-8?
+	" 1(default):fastest
+	" 2:Number of spacing codepoints?
+	" 3:Virtual length?, multi-byte support
+	command! -nargs=1 SetAlignXstrlen let g:Align_xstrlen=<args>
 endif "}}}
 
 NeoBundle 'plasticboy/vim-markdown'
