@@ -46,40 +46,48 @@ set foldmethod=marker
 if has('vim_starting')
 	set fileencodings+=cp932
 endif
+" 自動的に読み直す ar
+set autoread
+" 進数 nf
+set nrformats=
 "}}}
 
 "---------------------------------------------------------------------------
 " キーマップ追加"{{{
 nnoremap <Esc><Esc> :nohlsearch<CR>
+nnoremap <C-l> :checktime<CR><C-l>
 nnoremap tg gT
 "}}}
 
 "---------------------------------------------------------------------------
 " 自動コマンド追加"{{{
 " ファイルタイプ更新
-au BufRead,BufNewFile *.md set nowrap ft=markdown
-au BufWritePre *.md call WritePre_md()
+augroup markdown
+	autocmd!
+	au BufRead,BufNewFile *.md set nowrap
+	au BufWritePre *.md call WritePre_md()
 
-function! WritePre_md()
-	silent %s/\v[^ ]@<= $/  /ge
+	function! WritePre_md()
+		silent %s/\v[^ ]@<= $/  /ge
 
-	let regexList=[]
-	call add(regexList,'^')
-	call add(regexList,'^---')
-	call add(regexList,' {2}')
-	call add(regexList,'^\|.+\|')
+		let regexList=[]
+		call add(regexList,'^')
+		call add(regexList,'^---')
+		call add(regexList,' {2}')
+		call add(regexList,'^\|.+\|')
 
-	let regexStr=''
-	for regex in regexList
-		if !empty(regexStr)
-			let regexStr=regexStr.'|'
-		endif
-		let regexStr=regexStr.regex
-	endfor
-	let exeCom='v/\v('.regexStr.')$/normal A  '
-	" echomsg exeCom
-	silent exe exeCom
-endfunction
+		let regexStr=''
+		for regex in regexList
+			if !empty(regexStr)
+				let regexStr=regexStr.'|'
+			endif
+			let regexStr=regexStr.regex
+		endfor
+		let exeCom='v/\v('.regexStr.')$/normal A  '
+		" echomsg exeCom
+		silent exe exeCom
+	endfunction
+augroup END
 "}}}
 
 "---------------------------------------------------------------------------
@@ -115,8 +123,8 @@ command! GitPush echo system("git push")
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
 command! MessageClear for n in range(200) | echom "" | endfor
-command! Wsudo w !sudo tee % > /dev/null
 
+command! Wsudo w !sudo tee % > /dev/null
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "}}}
 

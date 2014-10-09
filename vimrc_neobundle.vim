@@ -92,6 +92,14 @@ if neobundle#is_installed('vim-quickrun')
 	endif
 endif "}}}
 
+NeoBundle 'vim-scripts/Align' "{{{
+if neobundle#is_installed('Align')
+	command! -nargs=1 SetAlignXstrlen call SetAlignXstrlen(<args>)
+	function! SetAlignXstrlen(val)
+		let g:Align_xstrlen=a:val
+	endfunction
+endif "}}}
+
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
