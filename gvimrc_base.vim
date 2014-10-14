@@ -17,6 +17,8 @@ if IsMac()
 endif
 
 " guiの挙動を変更 go
-set guioptions-=mT
-set guioptions+=bh
+set guioptions-=m
+set guioptions-=T
+set guioptions+=b
+set guioptions+=h
 

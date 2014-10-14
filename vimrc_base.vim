@@ -57,8 +57,8 @@ set nrformats=
 nnoremap <Esc><Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap tg gT
-nnoremap zl 10zl
-nnoremap zh 10zh
+nnoremap zl 20zl
+nnoremap zh 20zh
 "}}}
 
 "---------------------------------------------------------------------------
