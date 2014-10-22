@@ -190,5 +190,9 @@ function! Conv_md_to_backlog()
 	%s/\v^```$/{\/code}/ge
 	%s/\v\s{2}$/ /ge
 endfunction
+
+function! Git_filter_branch()
+	!git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
+endfunction
 "}}}
 
