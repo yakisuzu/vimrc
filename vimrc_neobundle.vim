@@ -102,7 +102,7 @@ if neobundle#is_installed('Align')
 endif "}}}
 
 NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
+NeoBundle 'yakisuzu/previm'
 NeoBundle 'tyru/open-browser.vim'
 
 NeoBundle 'tpope/vim-fugitive'

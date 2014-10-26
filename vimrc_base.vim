@@ -114,9 +114,11 @@ command! -nargs=1 SetSpLinesUp normal <args>-
 command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
+command! SetIndentTab4 set noexpandtab shiftwidth=4
+command! SetIndentSpace2 set expandtab shiftwidth=2
+
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
-
 command! GetEnc set encoding?
 
 
