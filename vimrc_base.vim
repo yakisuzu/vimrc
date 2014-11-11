@@ -72,20 +72,15 @@ augroup markdown
 	function! WritePre_md()
 		silent %s/\v[^ ]@<= $/  /ge
 
-		let regexList=[]
-		call add(regexList,'^')
-		call add(regexList,'^---')
-		call add(regexList,' {2}')
-		call add(regexList,'^\|.+\|')
+		let regexList=[
+					\ '^'
+					\ ,'^---'
+					\ ,'^```.*'
+					\ ,' {2}'
+					\ ,'^\|.+'
+					\ ]
 
-		let regexStr=''
-		for regex in regexList
-			if !empty(regexStr)
-				let regexStr=regexStr.'|'
-			endif
-			let regexStr=regexStr.regex
-		endfor
-		let exeCom='v/\v('.regexStr.')$/normal A  '
+		let exeCom='v/\v('.join(regexList,'|').')$/normal A  '
 		" echomsg exeCom
 		silent exe exeCom
 	endfunction
@@ -181,7 +176,7 @@ function! Conv_backlog_to_md()
 	%s/\v^\*{1}\s?/# /ge
 	%s/\v^\{code}/\='```'.g:conv_md_codetype/ge
 	%s/\v^\{\/code}/```/ge
-	%s/\v\s{1}$/  /ge
+	%s/\v {1}$/  /ge
 endfunction
 
 function! Conv_md_to_backlog()
@@ -189,8 +184,8 @@ function! Conv_md_to_backlog()
 	%s/\v^\#{2}\s?/** /ge
 	%s/\v^\#{1}\s?/* /ge
 	exe '%s/\v^```'.g:conv_md_codetype.'/{code}/ge'
-	%s/\v^```$/{\/code}/ge
-	%s/\v\s{2}$/ /ge
+	%s/\v^```/{\/code}/ge
+	%s/\v {2}$/ /ge
 endfunction
 
 function! Git_filter_branch()

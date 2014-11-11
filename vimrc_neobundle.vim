@@ -101,6 +101,16 @@ if neobundle#is_installed('Align')
 	command! -nargs=1 SetAlignXstrlen let g:Align_xstrlen=<args>
 endif "}}}
 
+NeoBundle 'cohama/lexima.vim'
+
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'haya14busa/incsearch.vim' "{{{
+if neobundle#is_installed('incsearch.vim')
+	map /  <Plug>(incsearch-forward)
+	map ?  <Plug>(incsearch-backward)
+	map g/ <Plug>(incsearch-stay)
+endif "}}}
+
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'yakisuzu/previm'
 NeoBundle 'tyru/open-browser.vim'
