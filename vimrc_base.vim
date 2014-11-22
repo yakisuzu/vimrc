@@ -92,6 +92,12 @@ augroup markdown
     silent exe exeCom
   endfunction
 augroup END
+augroup highlightCr
+  autocmd!
+  autocmd ColorScheme * highlight HiCr term=underline ctermbg=DarkGreen guibg=DarkGreen
+  autocmd BufWinEnter * match HiCr /\r/
+augroup END
+
 "}}}
 
 "---------------------------------------------------------------------------
@@ -101,10 +107,10 @@ command! -nargs=1 -complete=command RedirTab call Redir_tab(<q-args>)
 command! -nargs=1 -complete=command DebugProfile call Debug_profile(<q-args>)
 command! -nargs=1 ShTab call Sh_tab(<q-args>)
 
-command! VimrcWSo w | so ~/vimrc/vimrc.vim
+command! VimrcSo so ~/_vimrc
 command! VimrcBase tabe ~/vimrc/vimrc_base.vim
 command! VimrcNeoBundle tabe ~/vimrc/vimrc_neobundle.vim
-command! GVimrcWSo w | so ~/vimrc/gvimrc.vim
+command! GVimrcSo so ~/_gvimrc
 command! GVimrcBase tabe ~/vimrc/gvimrc_base.vim
 
 " ''(default):can move the cursor after the last character.
