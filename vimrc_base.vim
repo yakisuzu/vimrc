@@ -92,12 +92,6 @@ augroup markdown
     silent exe exeCom
   endfunction
 augroup END
-augroup highlightCr
-  autocmd!
-  autocmd ColorScheme * highlight HiCr term=underline ctermbg=DarkGreen guibg=DarkGreen
-  autocmd BufWinEnter * match HiCr /\r/
-augroup END
-
 "}}}
 
 "---------------------------------------------------------------------------
