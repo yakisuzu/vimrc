@@ -39,6 +39,11 @@ if neobundle#is_installed('unite.vim')
   command! BookmarkT tabe ~/.cache/unite/bookmark/default
 endif "}}}
 
+NeoBundle 'Shougo/vimfiler.vim' "{{{
+if neobundle#is_installed('vimfiler.vim')
+  let g:vimfiler_as_default_explorer = 1
+endif "}}}
+
 "NeoBundle 'Shougo/neocomplete.vim' "{{{
 if !IsMac()
   if v:version > 703  && has('lua')
@@ -50,32 +55,27 @@ if !IsMac()
       let g:neocomplete#lock_iminsert = 1
     endif
   endif
-endif "}}}
 
-NeoBundle 'Shougo/vimfiler.vim' "{{{
-if neobundle#is_installed('vimfiler.vim')
-  let g:vimfiler_as_default_explorer = 1
-endif "}}}
+  NeoBundle 'Shougo/neosnippet.vim'
+  NeoBundle 'Shougo/neosnippet-snippets'
+  if neobundle#is_installed('neosnippet.vim')
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-NeoBundle 'Shougo/neosnippet.vim' "{{{
-NeoBundle 'Shougo/neosnippet-snippets'
-if neobundle#is_installed('neosnippet.vim')
-  " Plugin key-mappings.
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+          \ "\<Plug>(neosnippet_expand_or_jump)"
+          \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+          \ "\<Plug>(neosnippet_expand_or_jump)"
+          \: "\<TAB>"
 
-  " SuperTab like snippets behavior.
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)"
-        \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)"
-        \: "\<TAB>"
-
-  " For snippet_complete marker.
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
+    " For snippet_complete marker.
+    if has('conceal')
+      set conceallevel=2 concealcursor=i
+    endif
   endif
 endif "}}}
 

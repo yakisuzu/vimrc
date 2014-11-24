@@ -39,7 +39,7 @@ set hidden
 " コマンドと検索の履歴数 hi
 set history=500
 " <Tab> を挿入するとき、代わりに適切な数の空白を使う et
-set noexpandtab
+set expandtab
 " インデントに使われる空白の数 sw
 set shiftwidth=2
 " 折り畳みの種類 fdm
