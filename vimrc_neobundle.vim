@@ -45,15 +45,13 @@ if neobundle#is_installed('vimfiler.vim')
 endif "}}}
 
 "NeoBundle 'Shougo/neocomplete.vim' "{{{
-if !IsMac()
-  if v:version > 703  && has('lua')
-    NeoBundle 'Shougo/neocomplete.vim'
-    if neobundle#is_installed('neocomplete.vim')
-      " Use neocomplete.
-      let g:neocomplete#enable_at_startup = 1
-      " neocomplete locks when 'iminsert' is non-zero.
-      let g:neocomplete#lock_iminsert = 1
-    endif
+if v:version > 703  && has('lua')
+  NeoBundle 'Shougo/neocomplete.vim'
+  if neobundle#is_installed('neocomplete.vim')
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " neocomplete locks when 'iminsert' is non-zero.
+    let g:neocomplete#lock_iminsert = 1
   endif
 
   NeoBundle 'Shougo/neosnippet.vim'
@@ -105,7 +103,8 @@ if neobundle#is_installed('Align')
   command! -nargs=1 SetAlignXstrlen let g:Align_xstrlen=<args>
 endif "}}}
 
-NeoBundle 'cohama/lexima.vim'
+"imeが英字に戻る現象の確認
+"NeoBundle 'cohama/lexima.vim'
 
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'haya14busa/incsearch.vim' "{{{
