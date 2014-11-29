@@ -55,7 +55,7 @@ set fileencodings+=cp932
 " <EOL> を、カレントバッファについて設定する ff
 set fileformat=unix
 " ステータス行の表示内容を設定する stl
-set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][fenc='.&fenc.'][ff='.&ff.']'}%=%l,%c%V%8P
+set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
 "}}}
 
 "---------------------------------------------------------------------------
