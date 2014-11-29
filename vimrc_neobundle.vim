@@ -38,6 +38,8 @@ if neobundle#is_installed('unite.vim')
   command! UBookmarkT tabe | UBookmark
   command! BookmarkT tabe ~/.cache/unite/bookmark/default
   command! UBuffer Unite buffer
+
+  NeoBundle 'ujihisa/unite-colorscheme'
 endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
