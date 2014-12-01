@@ -5,12 +5,19 @@
 if has('vim_starting')
   " Be iMproved
   set nocompatible
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  " Required: rtp
+  exe 'set runtimepath+='. g:dir_bundle. 'neobundle.vim/'
 endif
 
+try
+  echo g:neobundle#exists_not_installed_bundles()
+catch /.*/
+  echom 'neobundle not installed'
+  finish
+endtry
+
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(g:dir_bundle)
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -114,7 +121,7 @@ if neobundle#is_installed('Align')
   command! -nargs=1 SetAlignXstrlen let g:Align_xstrlen=<args>
 endif "}}}
 
-"imeが英字に戻る現象の確認
+" TODO imeが英字に戻る現象の確認
 "NeoBundle 'cohama/lexima.vim'
 
 NeoBundle 'rhysd/clever-f.vim'

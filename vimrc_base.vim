@@ -102,10 +102,12 @@ command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
 command! -nargs=1 ShTab call g:Sh_tab(<q-args>)
 
 command! VimrcSo so ~/_vimrc
-command! VimrcBase tabe ~/vimrc/vimrc_base.vim
-command! VimrcNeoBundle tabe ~/vimrc/vimrc_neobundle.vim
+command! VimrcInit exe 'tabe '. g:dir_vimrc. 'vimrc_init.vim'
+command! VimrcNeoBundle exe 'tabe '. g:dir_vimrc. 'vimrc_neobundle.vim'
+command! VimrcBase exe 'tabe '. g:dir_vimrc. 'vimrc_base.vim'
+command! VimrcAdd exe 'tabe '. g:dir_vimrc. 'vimrc_add.vim'
 command! GVimrcSo so ~/_gvimrc
-command! GVimrcBase tabe ~/vimrc/gvimrc_base.vim
+command! GVimrcBase exe 'tabe '. g:dir_vimrc. 'gvimrc_base.vim'
 
 " ''(default):can move the cursor after the last character.
 " all:Allow virtual editing in all modes.
