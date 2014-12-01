@@ -45,6 +45,14 @@ endif "}}}
 NeoBundle 'Shougo/vimfiler.vim' "{{{
 if neobundle#is_installed('vimfiler.vim')
   let g:vimfiler_as_default_explorer = 1
+
+  augroup vimfiler
+    autocmd!
+    autocmd FileType vimfiler call s:filetype_vimfiler()
+  augroup END
+  function! s:filetype_vimfiler()
+    nmap <buffer> <Enter> atabopen<CR>
+  endfunction
 endif "}}}
 
 "NeoBundle 'Shougo/neocomplete.vim' "{{{

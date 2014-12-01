@@ -73,8 +73,8 @@ nnoremap <Leader>h :tab<Space>h<Space><C-r><C-w><CR>
 " ファイルタイプ更新
 augroup markdown
   autocmd!
-  au BufRead,BufNewFile *.md set nowrap
-  au BufWritePre *.md call WritePre_md()
+  autocmd BufRead,BufNewFile *.md set nowrap
+  autocmd BufWritePre *.md call WritePre_md()
 
   function! WritePre_md()
     silent %s/\v[^ ]@<= $/  /ge
@@ -139,6 +139,8 @@ command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "---------------------------------------------------------------------------
 " vim script"{{{
 cd ~
+let g:debug = expand('g:debug') ? g:debug : 0
+command! ToggleDebug let g:debug = g:debug ? 0 : 1
 
 function! Redir_tab(cmd)
   redir @*>
