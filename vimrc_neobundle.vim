@@ -22,7 +22,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "---------------------------------------------------------------------------
 
 " NeoBundle 'Shougo/vimproc.vim' "{{{
-if !IsWindows()
+if !g:Is_windows()
   NeoBundle 'Shougo/vimproc.vim', {
         \ 'build' : {
         \     'mac' : 'make -f make_mac.mak',
@@ -96,7 +96,7 @@ if neobundle#is_installed('vim-quickrun')
         \    "runner/vimproc/updatetime" : 60
         \  },
         \}
-  if IsWindows()
+  if g:Is_windows()
     let g:quickrun_config = {
           \  "cs/csc": {
           \    "command": "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe",
@@ -135,7 +135,7 @@ endif "}}}
 NeoBundle 'tpope/vim-fugitive'
 
 " NeoBundle 'kakkyz81/evervim' "{{{
-if !IsWindows()
+if !g:Is_windows()
   NeoBundle 'kakkyz81/evervim'
   " let g:evervim_devtoken=''
 endif

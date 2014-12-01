@@ -74,9 +74,9 @@ nnoremap <Leader>h :tab<Space>h<Space><C-r><C-w><CR>
 augroup markdown
   autocmd!
   autocmd BufRead,BufNewFile *.md set nowrap
-  autocmd BufWritePre *.md call WritePre_md()
+  autocmd BufWritePre *.md call s:writePre_md()
 
-  function! WritePre_md()
+  function! s:writePre_md()
     silent %s/\v[^ ]@<= $/  /ge
 
     let regexList=[
@@ -97,9 +97,9 @@ augroup END
 "---------------------------------------------------------------------------
 " コマンド追加"{{{
 command! -nargs=1 -complete=help H tab h <args>
-command! -nargs=1 -complete=command RedirTab call Redir_tab(<q-args>)
-command! -nargs=1 -complete=command DebugProfile call Debug_profile(<q-args>)
-command! -nargs=1 ShTab call Sh_tab(<q-args>)
+command! -nargs=1 -complete=command RedirTab call g:Redir_tab(<q-args>)
+command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
+command! -nargs=1 ShTab call g:Sh_tab(<q-args>)
 
 command! VimrcSo so ~/_vimrc
 command! VimrcBase tabe ~/vimrc/vimrc_base.vim
@@ -142,14 +142,14 @@ cd ~
 let g:debug = expand('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
 
-function! Redir_tab(cmd)
+function! g:Redir_tab(cmd)
   redir @*>
   silent execute a:cmd
   redir END
   tabe | normal Pgg
 endfunction
 
-function! Debug_profile(cmd)
+function! g:Debug_profile(cmd)
   cd ~
   profile start profile.log
   profile func *
@@ -157,27 +157,27 @@ function! Debug_profile(cmd)
   qa!
 endfunction
 
-function! Sh_tab(cmd)
+function! g:Sh_tab(cmd)
   exe 'tabe | r!'.a:cmd
 endfunction
 
-function! S_clip()
+function! g:S_clip()
   %s//\=@+/ge
 endfunction
 
-function! Index_increment()
+function! g:Index_increment()
   %s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)+1/ge
   "	for cnt in range(9,1,-1)
   "		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
   "	endfo
 endfunction
 
-function! Index_decrement()
+function! g:Index_decrement()
   %s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)-1/ge
 endfunction
 
-let g:conv_md_codetype = ''
-function! Conv_backlog_to_md()
+let g:conv_md_codetype = 'java'
+function! g:Conv_backlog_to_md()
   %s/\v^\*{3}\s?/### /ge
   %s/\v^\*{2}\s?/## /ge
   %s/\v^\*{1}\s?/# /ge
@@ -186,7 +186,7 @@ function! Conv_backlog_to_md()
   %s/\v {1}$/  /ge
 endfunction
 
-function! Conv_md_to_backlog()
+function! g:Conv_md_to_backlog()
   %s/\v^\#{3}\s?/*** /ge
   %s/\v^\#{2}\s?/** /ge
   %s/\v^\#{1}\s?/* /ge
@@ -195,7 +195,7 @@ function! Conv_md_to_backlog()
   %s/\v {2}$/ /ge
 endfunction
 
-function! Git_filter_branch()
+function! g:Git_filter_branch()
   !git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
 endfunction
 "}}}

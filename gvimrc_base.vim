@@ -6,13 +6,14 @@ set columns=200
 " ウインドウの高さ
 set lines=40
 " 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
-colorscheme evening " (GUI使用時)
+" colorscheme evening
+colorscheme desert
 
 " 透過度
-if IsWindows()
-  autocmd GUIenter * set transparency=190
+if g:Is_windows()
+  autocmd GUIenter * set transparency=200
 endif
-if IsMac()
+if g:Is_mac()
   set transparency=15
 endif
 
