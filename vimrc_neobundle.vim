@@ -61,7 +61,7 @@ if neobundle#is_installed('vimfiler.vim')
     nmap <buffer> <CR> atabopen<CR>
     " return to default key
     nnoremap <buffer> [space] <Plug>(vimfiler_toggle_mark_current_line)
-    nnoremap <buffer> [t] <Plug>(vimfiler_expand_tree)
+    "nnoremap <buffer> [t] <Plug>(vimfiler_expand_tree)
   endfunction
 endif "}}}
 

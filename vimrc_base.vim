@@ -74,8 +74,9 @@ vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 " 挿入、コマンドライン
 noremap! <C-j> <Esc>
 " ノーマル
-nmap t [t]
-nnoremap [t]g gT
+"nmap t [t]
+"nnoremap [t]g gT
+nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
 nnoremap Q :bd<CR>
