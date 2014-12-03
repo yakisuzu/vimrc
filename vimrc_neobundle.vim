@@ -6,11 +6,11 @@ if has('vim_starting')
   " Be iMproved
   set nocompatible
   " Required: rtp
-  exe 'set runtimepath+='. g:dir_bundle. 'neobundle.vim/'
+  let &runtimepath = &runtimepath. ','. g:dir_bundle. 'neobundle.vim/'
 endif
 
 try
-  echo g:neobundle#exists_not_installed_bundles()
+  call g:neobundle#exists_not_installed_bundles()
 catch /.*/
   echom 'neobundle not installed'
   finish
@@ -58,7 +58,10 @@ if neobundle#is_installed('vimfiler.vim')
     autocmd FileType vimfiler call s:filetype_vimfiler()
   augroup END
   function! s:filetype_vimfiler()
-    nmap <buffer> <Enter> atabopen<CR>
+    nmap <buffer> <CR> atabopen<CR>
+    " return to default key
+    nnoremap <buffer> [space] <Plug>(vimfiler_toggle_mark_current_line)
+    nnoremap <buffer> [t] <Plug>(vimfiler_expand_tree)
   endfunction
 endif "}}}
 
@@ -121,7 +124,7 @@ if neobundle#is_installed('Align')
   command! -nargs=1 SetAlignXstrlen let g:Align_xstrlen=<args>
 endif "}}}
 
-" TODO imeが英字に戻る現象の確認
+" TODO: ime returns to the letter problem
 "NeoBundle 'cohama/lexima.vim'
 
 NeoBundle 'rhysd/clever-f.vim'

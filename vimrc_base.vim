@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "---------------------------------------------------------------------------
 " 編集に関する設定:"{{{
 " タブの画面上での幅 ts
@@ -60,12 +61,31 @@ set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft=
 
 "---------------------------------------------------------------------------
 " キーマップ追加"{{{
-nnoremap <Esc><Esc> :nohlsearch<CR>
-nnoremap <C-l> :checktime<CR><C-l>
-nnoremap tg gT
+" ノーマル、ビジュアル、選択、演算待ち状態
+map <C-j> <Esc>
+map <Space> [space]
+noremap [space] <Nop>
+noremap [space]h ^
+noremap [space]l $
+" ビジュアル、選択
+vnoremap * y/<C-r>0<CR>
+vnoremap [space]/ :s/
+vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
+" 挿入、コマンドライン
+noremap! <C-j> <Esc>
+" ノーマル
+nmap t [t]
+nnoremap [t]g gT
 nnoremap zl 20zl
 nnoremap zh 20zh
-nnoremap <Leader>h :tab<Space>h<Space><C-r><C-w><CR>
+nnoremap Q :bd<CR>
+nnoremap * /<C-r><C-w><CR>
+nnoremap <Esc> :nohlsearch<CR>
+nnoremap <C-l> :checktime<CR><C-l>
+nnoremap <C-Tab> <C-w><C-w>
+nnoremap [space]/ :%s/
+nnoremap [space]o o<Esc>
+nnoremap <Leader>h :tab<Space>help<Space><C-r><C-w>
 "}}}
 
 "---------------------------------------------------------------------------
@@ -141,7 +161,7 @@ command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "---------------------------------------------------------------------------
 " vim script"{{{
 cd ~
-let g:debug = expand('g:debug') ? g:debug : 0
+let g:debug = exists('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
 
 function! g:Redir_tab(cmd)
