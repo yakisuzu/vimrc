@@ -58,10 +58,12 @@ if neobundle#is_installed('vimfiler.vim')
     autocmd FileType vimfiler call s:filetype_vimfiler()
   augroup END
   function! s:filetype_vimfiler()
-    nmap <buffer> <CR> atabopen<CR>
-    " return to default key
-    nnoremap <buffer> [space] <Plug>(vimfiler_toggle_mark_current_line)
-    "nnoremap <buffer> [t] <Plug>(vimfiler_expand_tree)
+    nnoremap <silent><buffer><expr> <CR> vimfiler#do_switch_action('tabopen')
+    " change keymap t to o
+    unmap <buffer> t
+    unmap <buffer> T
+    nmap <buffer> o <Plug>(vimfiler_expand_tree)
+    nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
   endfunction
 endif "}}}
 

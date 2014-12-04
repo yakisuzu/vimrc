@@ -64,7 +64,6 @@ set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft=
 " ノーマル、ビジュアル、選択、演算待ち状態
 map <C-j> <Esc>
 map <Space> [space]
-noremap [space] <Nop>
 noremap [space]h ^
 noremap [space]l $
 " ビジュアル、選択
@@ -74,8 +73,6 @@ vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 " 挿入、コマンドライン
 noremap! <C-j> <Esc>
 " ノーマル
-"nmap t [t]
-"nnoremap [t]g gT
 nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
@@ -151,6 +148,8 @@ command! GitAdd echo system("git add ".expand("%:p"))
 command! -nargs=* GitCommit echo system("git commit ".expand("%:p")." -m ".shellescape(<q-args>))
 command! GitPush echo system("git push")
 
+command! GetTimeToYank let @+ = strftime('%Y%m%d_%H%M_')
+
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
 command! MessageClear for n in range(200) | echom "" | endfor
@@ -164,6 +163,9 @@ command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 cd ~
 let g:debug = exists('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
+function! g:Echomsg(st_msg)
+  if g:debug | echomsg st_msg | endif
+endfunction
 
 function! g:Redir_tab(cmd)
   redir @*>
