@@ -41,6 +41,9 @@ NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'Shougo/unite.vim' "{{{
 if neobundle#is_installed('unite.vim')
+  NeoBundle 'ujihisa/unite-colorscheme'
+  NeoBundle 'osyo-manga/unite-quickfix'
+
   command! UBuffer Unite buffer
 
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
@@ -51,10 +54,10 @@ if neobundle#is_installed('unite.vim')
         \ BookmarkT call s:unite_bookmark_edit(<q-args>)
 
   " TODO: first time g:unite_source_bookmark_directory is fail
-  let s:li_comp_unite_buf = []
   function! s:comp_unite_bookmark(A,L,P)
-    let s:li_comp_unite_buf = empty(s:li_comp_unite_buf) ? split(system('ls '. g:unite_source_bookmark_directory),'\n') : s:li_comp_unite_buf
-    return s:li_comp_unite_buf
+    return sort(map(
+          \ split(glob(g:unite_source_bookmark_directory . '/*'), '\n'),
+          \ 'fnamemodify(v:val, ":t")'))
   endfunction
   function! s:unite_bookmark_open(...)
     let li_arg = ['bookmark'] + a:000
@@ -67,7 +70,6 @@ if neobundle#is_installed('unite.vim')
     silent exe st_com
   endfunction
 
-  NeoBundle 'ujihisa/unite-colorscheme'
 endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
