@@ -46,6 +46,7 @@ if neobundle#is_installed('unite.vim')
 
   command! UBuffer Unite buffer
 
+  " for bookmark
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
         \ UBookmark call s:unite_bookmark_open(<q-args>)
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
@@ -61,7 +62,13 @@ if neobundle#is_installed('unite.vim')
   endfunction
   function! s:unite_bookmark_open(...)
     let li_arg = ['bookmark'] + a:000
-    let st_com = 'Unite '. join(li_arg,':'). ' -vertical -direction=leftabove -winwidth=60 -default-action=vimfiler'
+    let li_option = [
+          \  '-vertical'
+          \ ,'-direction=leftabove'
+          \ ,'-winwidth=60'
+          \ ,'-default-action=vimfiler'
+          \ ]
+    let st_com = 'Unite '. join(li_arg,':'). ' '. join(li_option, ' ')
     silent exe st_com
   endfunction
   function! s:unite_bookmark_edit(...)
