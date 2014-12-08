@@ -164,7 +164,7 @@ cd ~
 let g:debug = exists('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
 function! g:Echomsg(st_msg)
-  if g:debug | echomsg st_msg | endif
+  if g:debug | echomsg a:st_msg | endif
 endfunction
 
 function! g:Redir_tab(cmd)
