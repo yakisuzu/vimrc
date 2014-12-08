@@ -2,7 +2,7 @@ scriptencoding utf-8
 "---------------------------------------------------------------------------
 " 編集に関する設定:"{{{
 " タブの画面上での幅 ts
-set tabstop=4
+set tabstop=2
 " 検索時にファイルの最後まで行ったら最初に戻る (nowrapscan:戻らない) ws
 set nowrapscan
 "}}}
@@ -127,17 +127,19 @@ command! VimrcAdd exe 'tabe '. g:dir_vimrc. 'vimrc_add.vim'
 command! GVimrcSo so ~/_gvimrc
 command! GVimrcBase exe 'tabe '. g:dir_vimrc. 'gvimrc_base.vim'
 
-" ''(default):can move the cursor after the last character.
-" all:Allow virtual editing in all modes.
-command! -nargs=? SetVirtualEdit set virtualedit=<args>
 command! -nargs=1 SetCo set columns+=<args>
 command! -nargs=1 SetLines set lines+=<args>
 command! -nargs=1 SetSpLinesUp normal <args>-
 command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
-command! SetIndentTab4 set noet sw=4
-command! SetIndentSpace2 set et sw=2
+
+" ''(default):can move the cursor after the last character.
+" all:Allow virtual editing in all modes.
+command! -nargs=? SetVirtualEdit set virtualedit=<args>
+
+command! SetIndentTab4 set noet sw=4 ts=4
+command! SetIndentSpace2 set et sw=2 ts=2
 
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
