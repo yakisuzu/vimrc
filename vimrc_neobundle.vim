@@ -43,6 +43,7 @@ NeoBundle 'Shougo/unite.vim' "{{{
 if neobundle#is_installed('unite.vim')
   NeoBundle 'ujihisa/unite-colorscheme'
   NeoBundle 'osyo-manga/unite-quickfix'
+  NeoBundle 'yakisuzu/unite-breakpoint'
 
   command! UBuffer Unite buffer
 
