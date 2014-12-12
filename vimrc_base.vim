@@ -73,6 +73,7 @@ vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 " 挿入、コマンドライン
 noremap! <C-j> <Esc>
 " ノーマル
+nnoremap Y y$
 nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh

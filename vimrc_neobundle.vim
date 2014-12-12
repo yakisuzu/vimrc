@@ -47,37 +47,51 @@ if neobundle#is_installed('unite.vim')
 
   command! UBuffer Unite buffer
 
+  " for vimgrep
+  command! -nargs=1
+        \ UVimgrep call s:unite_vimgrep(<q-args>)
+
+  function! s:unite_vimgrep(st_arg) "{{{
+    CdCurrent
+    let li_cmd = [
+          \   'Unite'
+          \ , 'vimgrep:./**/*.*:' . a:st_arg
+          \ , '-auto-preview'
+          \ , '-vertical-preview'
+          \ , '-no-quit'
+          \ ]
+    silent exe join(li_cmd)
+  endfunction "}}}
+
   " for bookmark
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
-        \ UBookmark call s:unite_bookmark_open(<q-args>)
+        \ UBookmark call unite#custom#default_action('directory', 'vimfiler') | call s:unite_bookmark_open(<q-args>)
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
-        \ UBookmarkT tabe | UBookmark <args>
+        \ UBookmarkT call unite#custom#default_action('directory', 'tabvimfiler') | call s:unite_bookmark_open(<q-args>)
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
         \ BookmarkT call s:unite_bookmark_edit(<q-args>)
 
   " TODO: first time g:unite_source_bookmark_directory is fail
-  function! s:comp_unite_bookmark(A,L,P)
+  function! s:comp_unite_bookmark(A,L,P) "{{{
     return sort(map(
           \ split(glob(g:unite_source_bookmark_directory . '/*'), '\n'),
           \ 'fnamemodify(v:val, ":t")'))
-  endfunction
-  function! s:unite_bookmark_open(...)
-    let li_arg = ['bookmark'] + a:000
-    let li_option = [
-          \  '-vertical'
-          \ ,'-direction=leftabove'
-          \ ,'-winwidth=60'
-          \ ,'-default-action=vimfiler'
+  endfunction "}}}
+  function! s:unite_bookmark_open(st_arg) "{{{
+    let li_cmd = [
+          \   'Unite'
+          \ , 'bookmark:' . a:st_arg
+          \ , '-vertical'
+          \ , '-direction=leftabove'
+          \ , '-winwidth=60'
           \ ]
-    let st_com = 'Unite '. join(li_arg,':'). ' '. join(li_option, ' ')
-    silent exe st_com
-  endfunction
-  function! s:unite_bookmark_edit(...)
-    let st_arg = empty(a:1) ? 'default' : a:1
-    let st_com = 'tabe '. g:unite_source_bookmark_directory. '/'. st_arg
-    silent exe st_com
-  endfunction
-
+    silent exe join(li_cmd)
+  endfunction "}}}
+  function! s:unite_bookmark_edit(st_arg) "{{{
+    let st_file = empty(a:st_arg) ? 'default' : a:st_arg
+    let st_cmd = 'tabe '. g:unite_source_bookmark_directory. '/'. st_file
+    silent exe st_cmd
+  endfunction "}}}
 endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
