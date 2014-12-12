@@ -45,6 +45,7 @@ if neobundle#is_installed('unite.vim')
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'yakisuzu/unite-breakpoint'
 
+  command! UBreakpoint Unite breakpoint
   command! UBuffer Unite buffer
 
   " for vimgrep
