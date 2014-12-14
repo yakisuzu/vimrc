@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "---------------------------------------------------------------------------
 " NeoBundle
 "---------------------------------------------------------------------------
@@ -175,6 +176,21 @@ endif "}}}
 
 " TODO: ime returns to the letter problem
 "NeoBundle 'cohama/lexima.vim'
+
+" NeoBundle 'supermomonga/shaberu.vim' "{{{
+let g:nu_plugin_shaberu = 0
+if g:Is_mac()
+  NeoBundle 'supermomonga/shaberu.vim'
+  if neobundle#is_installed('shaberu.vim')
+    let g:nu_plugin_shaberu = 1
+    augroup shaberu
+      au!
+      " TODO: when vimenter, message is random
+      au VimEnter * ShaberuSay 'welcom to vim'
+      au VimLeave * ShaberuSay 'お疲れ様でした。進捗どうですか。'
+    augroup END
+  endif
+endif "}}}
 
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'haya14busa/incsearch.vim' "{{{

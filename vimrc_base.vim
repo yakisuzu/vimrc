@@ -228,5 +228,12 @@ endfunction
 function! g:Git_filter_branch()
   !git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
 endfunction
+
+function! g:ShaberuSayPrint(st_arg)
+  echo a:st_arg
+  if g:nu_plugin_shaberu
+    call shaberu#say(a:st_arg)
+  endif
+endfunction
 "}}}
 
