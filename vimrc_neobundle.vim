@@ -37,6 +37,7 @@ if !g:Is_windows()
         \ }
 endif "}}}
 
+NeoBundle 'vim-jp/vital.vim'
 NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'Shougo/unite.vim' "{{{
