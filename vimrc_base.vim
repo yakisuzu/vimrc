@@ -57,6 +57,8 @@ set fileencodings+=cp932
 set fileformat=unix
 " ステータス行の表示内容を設定する stl
 set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
+" ワイルドカードの展開時と、ファイル／ディレクトリ名の補完時に無視される wig
+set wildignore+=tags
 "}}}
 
 "---------------------------------------------------------------------------
@@ -127,6 +129,7 @@ command! VimrcBase exe 'tabe '. g:dir_vimrc. 'vimrc_base.vim'
 command! VimrcAdd exe 'tabe '. g:dir_vimrc. 'vimrc_add.vim'
 command! GVimrcSo so ~/_gvimrc
 command! GVimrcBase exe 'tabe '. g:dir_vimrc. 'gvimrc_base.vim'
+command! Vrapperrc tabe +set\ ft=vim ~/_vrapperrc
 
 command! -nargs=1 SetCo set columns+=<args>
 command! -nargs=1 SetLines set lines+=<args>
@@ -232,6 +235,10 @@ function! g:ShaberuSayPrint(st_arg)
   if g:nu_plugin_shaberu
     call shaberu#say(a:st_arg)
   endif
+endfunction
+
+function! g:UpdateTags(li_arg)
+  let &tags = join([&tags] + a:li_arg, ',')
 endfunction
 "}}}
 
