@@ -104,6 +104,17 @@ if neobundle#tap('unite.vim')
 
   function! neobundle#hooks.on_source(bundle)
     call unite#custom#default_action('directory', 'tabvimfiler')
+
+    let di_action = {
+          \ 'is_selectable' : 1,
+          \ }
+    function! di_action.func(li_c)
+      let VMfile = g:V.import('System.File')
+      for di_c in a:li_c
+        call VMfile.open(di_c.action__path)
+      endfor
+    endfunction
+    call unite#custom#action('jump_list', 'execute', di_action)
   endfunction
 
   call neobundle#untap()
