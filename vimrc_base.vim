@@ -240,5 +240,10 @@ endfunction
 function! g:UpdateTags(li_arg)
   let &tags = join([&tags] + a:li_arg, ',')
 endfunction
+
+function! g:SayRandom(li_str)
+  let VMran = g:V.import('Random')
+  call ShaberuSayPrint(VMran.sample(a:li_str))
+endfunction
 "}}}
 

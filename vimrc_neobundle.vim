@@ -226,9 +226,8 @@ if g:Is_mac()
     let g:nu_plugin_shaberu = 1
     augroup shaberu
       autocmd!
-      " TODO: when vimenter, message is random
-      autocmd VimEnter * ShaberuSay 'welcom to vim'
-      autocmd VimLeave * ShaberuSay 'お疲れ様でした。進捗どうですか。'
+      autocmd VimEnter * call g:SayRandom(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
+      autocmd VimLeave * call g:SayRandom(['お疲れ様でした。進捗どうですか'])
     augroup END
 
     call neobundle#untap()
