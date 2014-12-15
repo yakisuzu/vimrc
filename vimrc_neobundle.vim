@@ -117,6 +117,14 @@ if neobundle#tap('unite.vim')
     call unite#custom#action('jump_list', 'execute', di_action)
   endfunction
 
+  augroup unite
+    autocmd!
+    autocmd FileType unite call s:filetype_unite()
+  augroup END
+  function! s:filetype_unite()
+    nnoremap <silent><buffer><expr> x unite#do_action('execute')
+  endfunction
+
   call neobundle#untap()
 endif "}}}
 
