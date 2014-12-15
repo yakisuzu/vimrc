@@ -38,7 +38,15 @@ if !g:Is_windows()
         \ }
 endif "}}}
 
-NeoBundle 'vim-jp/vital.vim'
+NeoBundle 'vim-jp/vital.vim' "{{{
+if neobundle#tap('vital.vim')
+  function! neobundle#hooks.on_source(bundle)
+    let g:V = vital#of('vital')
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
+
 NeoBundle 'Shougo/vimshell.vim'
 
 NeoBundle 'Shougo/unite.vim' "{{{

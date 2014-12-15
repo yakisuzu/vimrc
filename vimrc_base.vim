@@ -170,8 +170,6 @@ function! g:Echomsg(st_msg)
   if g:debug | echomsg a:st_msg | endif
 endfunction
 
-let g:V = vital#of('vital')
-
 function! g:Redir_tab(cmd)
   redir @*>
   silent execute a:cmd
