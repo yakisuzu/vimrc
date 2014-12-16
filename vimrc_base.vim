@@ -80,13 +80,13 @@ nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
 nnoremap Q :bd<CR>
-nnoremap * /<C-r><C-w><CR>
+nnoremap * yiw/<C-r>0<CR>
 nnoremap <Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap <C-Tab> <C-w><C-w>
 nnoremap [space]/ :%s/
 nnoremap [space]o o<Esc>
-nnoremap <Leader>h :tab<Space>help<Space><C-r><C-w>
+nnoremap <Leader>h yiw:tab<Space>help<Space><C-r>0
 "}}}
 
 "---------------------------------------------------------------------------
@@ -230,20 +230,8 @@ function! g:Git_filter_branch()
   !git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
 endfunction
 
-function! g:ShaberuSayPrint(st_arg)
-  echo a:st_arg
-  if g:nu_plugin_shaberu
-    call shaberu#say(a:st_arg)
-  endif
-endfunction
-
-function! g:UpdateTags(li_arg)
+function! g:Update_Tags(li_arg)
   let &tags = join([&tags] + a:li_arg, ',')
-endfunction
-
-function! g:SayRandom(li_str)
-  let VMran = g:V.import('Random')
-  call ShaberuSayPrint(VMran.sample(a:li_str))
 endfunction
 "}}}
 

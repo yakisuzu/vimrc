@@ -219,15 +219,23 @@ endif "}}}
 " NeoBundle 'cohama/lexima.vim'
 
 " NeoBundle 'supermomonga/shaberu.vim' "{{{
-let g:nu_plugin_shaberu = 0
 if g:Is_mac()
   NeoBundle 'supermomonga/shaberu.vim'
   if neobundle#tap('shaberu.vim')
-    let g:nu_plugin_shaberu = 1
+    function! g:Shaberu_say_print(st_arg)
+      echo a:st_arg
+      call shaberu#say(a:st_arg)
+    endfunction
+
+    function! g:Say_random(li_str)
+      let VMran = g:V.import('Random')
+      call Shaberu_say_print(VMran.sample(a:li_str))
+    endfunction
+
     augroup shaberu
       autocmd!
-      autocmd VimEnter * call g:SayRandom(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
-      autocmd VimLeave * call g:SayRandom(['お疲れ様でした。進捗どうですか'])
+      autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
+      autocmd VimLeave * call g:Say_random(['お疲れ様でした。進捗どうですか'])
     augroup END
 
     call neobundle#untap()
