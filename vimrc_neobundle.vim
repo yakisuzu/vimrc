@@ -87,6 +87,12 @@ if neobundle#tap('unite.vim')
           \ 'fnamemodify(v:val, ":t")'))
   endfunction "}}}
   function! s:unite_bookmark_open(st_arg) "{{{
+    if &ft == 'vimfiler'
+      call unite#custom#default_action('directory', 'vimfiler')
+    else
+      call unite#custom#default_action('directory', 'tabvimfiler')
+    endif
+
     let li_cmd = [
           \   'Unite'
           \ , 'bookmark:' . a:st_arg
@@ -103,8 +109,6 @@ if neobundle#tap('unite.vim')
   endfunction "}}}
 
   function! neobundle#hooks.on_source(bundle)
-    call unite#custom#default_action('directory', 'tabvimfiler')
-
     let di_action = {
           \ 'is_selectable' : 1,
           \ }
