@@ -148,17 +148,19 @@ command! SetIndentSpace2 set et sw=2 ts=2
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
 
-command! GitPull echo system("git pull")
-command! GitCheckout echo system("git checkout ".expand("%:p"))
-command! GitAdd echo system("git add ".expand("%:p"))
-command! -nargs=* GitCommit echo system("git commit ".expand("%:p")." -m ".shellescape(<q-args>))
-command! GitPush echo system("git push")
+command! GitPull call g:GitEcho('git pull')
+command! GitCheckout call g:GitEcho('git checkout ' . expand('%:p'))
+command! GitAdd call g:GitEcho('git add ' . expand('%:p'))
+command! GitDiff call g:GitEcho('git diff')
+command! -nargs=+ GitCommit call g:GitEcho('git commit -m ' . shellescape(<q-args>))
+command! GitPush call g:GitEcho('git push')
+command! -nargs=+ GitCommitThis call g:GitEcho('git commit ' . expand('%:p') . ' -m ' . shellescape(<q-args>))
 
 command! GetTimeToYank let @+ = strftime('%Y%m%d_%H%M_')
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
-command! MessageClear for n in range(200) | echom "" | endfor
+command! MClear for n in range(200) | echom '' | endfor
 
 command! Wsudo w !sudo tee % > /dev/null
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
@@ -171,6 +173,11 @@ let g:debug = exists('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
 function! g:Echomsg(st_msg)
   if g:debug | echomsg a:st_msg | endif
+endfunction
+
+function! g:GitEcho(st_cmd)
+  CdCurrent
+  echo vimproc#system(a:st_cmd)
 endfunction
 
 function! g:Redir_tab(cmd)
@@ -230,7 +237,7 @@ function! g:Git_filter_branch()
   !git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
 endfunction
 
-function! g:Update_Tags(li_arg)
+function! g:Update_tags(li_arg)
   let &tags = join([&tags] + a:li_arg, ',')
 endfunction
 "}}}

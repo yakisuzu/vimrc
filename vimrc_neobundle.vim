@@ -63,7 +63,6 @@ if neobundle#tap('unite.vim')
         \ UVimgrep call s:unite_vimgrep(<q-args>)
 
   function! s:unite_vimgrep(st_arg) "{{{
-    CdCurrent
     let li_cmd = [
           \   'Unite'
           \ , 'vimgrep:./**/*.*:' . a:st_arg
@@ -135,6 +134,10 @@ endif "}}}
 NeoBundle 'Shougo/vimfiler.vim' "{{{
 if neobundle#tap('vimfiler.vim')
   let g:vimfiler_as_default_explorer = 1
+
+  function! neobundle#hooks.on_source(bundle)
+    call vimfiler#custom#profile('default', 'context', {'auto_cd' : 1})
+  endfunction
 
   augroup vimfiler
     autocmd!
