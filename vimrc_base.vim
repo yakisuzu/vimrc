@@ -164,6 +164,8 @@ command! MClear for n in range(200) | echom '' | endfor
 
 command! Wsudo w !sudo tee % > /dev/null
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
+
+command! CdC call g:CdC()
 "}}}
 
 "---------------------------------------------------------------------------
@@ -176,8 +178,14 @@ function! g:Echomsg(st_msg)
 endfunction
 
 function! g:GitEcho(st_cmd)
-  CdCurrent
+  call g:CdC()
   echo system(a:st_cmd)
+endfunction
+
+function! g:CdC()
+  if !empty(glob(expand('%:p:h')))
+    CdCurrent
+  endif
 endfunction
 
 function! g:Redir_tab(cmd)
