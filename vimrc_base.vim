@@ -177,7 +177,7 @@ endfunction
 
 function! g:GitEcho(st_cmd)
   CdCurrent
-  echo vimproc#system(a:st_cmd)
+  echo system(a:st_cmd)
 endfunction
 
 function! g:Redir_tab(cmd)
