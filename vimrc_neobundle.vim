@@ -59,13 +59,23 @@ if neobundle#tap('unite.vim')
   command! UBuffer Unite buffer
 
   " for vimgrep
-  command! -nargs=1
-        \ UVimgrep call s:unite_vimgrep(<q-args>)
+  command! -nargs=+
+        \ UVimgrep call s:unite_vimgrep(<f-args>)
 
-  function! s:unite_vimgrep(st_arg) "{{{
+  function! s:unite_vimgrep(...) "{{{
+    let li_args = []
+    if a:0 == 1
+      let li_args = ['*', a:1]
+    elseif a:0 ==2
+      let li_args = [a:1, a:2]
+    else
+      echomsg 'args count is fail'
+      return 1
+    endif
+
     let li_cmd = [
           \   'Unite'
-          \ , 'vimgrep:./**/*.*:' . a:st_arg
+          \ , 'vimgrep:./**/*.' . li_args[0] . ':' . li_args[1]
           \ , '-auto-preview'
           \ , '-vertical-preview'
           \ , '-no-quit'
