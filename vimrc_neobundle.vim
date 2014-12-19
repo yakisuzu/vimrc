@@ -55,7 +55,7 @@ if neobundle#tap('unite.vim')
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'yakisuzu/unite-breakpoint'
 
-  command! UBreakpoint Unite breakpoint
+  command! UBreakpoint Unite breakpoint -auto-preview -vertical-preview
   command! UBuffer Unite buffer
 
   " for vimgrep
@@ -240,7 +240,7 @@ if g:Is_mac()
   NeoBundle 'supermomonga/shaberu.vim'
   if neobundle#tap('shaberu.vim')
     function! g:Shaberu_say_print(st_arg)
-      echo a:st_arg
+      echom a:st_arg
       call shaberu#say(a:st_arg)
     endfunction
 

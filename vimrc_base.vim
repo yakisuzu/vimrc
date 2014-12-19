@@ -68,8 +68,10 @@ map <C-j> <Esc>
 map <Space> [space]
 noremap [space]h ^
 noremap [space]l $
+noremap j gj
+noremap k gk
 " ビジュアル、選択
-vnoremap * y/<C-r>0<CR>
+vnoremap * y/<C-r>0<CR>N
 vnoremap [space]/ :s/
 vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 " 挿入、コマンドライン
@@ -80,13 +82,14 @@ nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
 nnoremap Q :bd<CR>
-nnoremap * yiw/<C-r>0<CR>
+nnoremap * yiw/<C-r>0<CR>N
 nnoremap <Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap <C-Tab> <C-w><C-w>
 nnoremap [space]/ :%s/
 nnoremap [space]o o<Esc>
 nnoremap <Leader>h yiw:tab<Space>help<Space><C-r>0
+nnoremap <C-]> g<C-]>
 "}}}
 
 "---------------------------------------------------------------------------
@@ -160,6 +163,7 @@ command! GetTimeToYank let @+ = strftime('%Y%m%d_%H%M_')
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
+command! TA tab ball
 command! MClear for n in range(200) | echom '' | endfor
 
 command! Wsudo w !sudo tee % > /dev/null
