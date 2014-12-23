@@ -111,7 +111,7 @@ augroup markdown
           \ ,'^\|.+'
           \ ]
 
-    let exeCom='v/\v('.join(regexList,'|').')$/normal A  '
+    let exeCom='v/\v(' . join(regexList,'|') . ')$/normal A  '
     " echomsg exeCom
     silent exe exeCom
   endfunction
@@ -126,12 +126,12 @@ command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
 command! -nargs=1 ShTab call g:Sh_tab(<q-args>)
 
 command! VimrcSo so ~/_vimrc
-command! VimrcInit exe 'tabe '. g:dir_vimrc. 'vimrc_init.vim'
-command! VimrcNeoBundle exe 'tabe '. g:dir_vimrc. 'vimrc_neobundle.vim'
-command! VimrcBase exe 'tabe '. g:dir_vimrc. 'vimrc_base.vim'
-command! VimrcAdd exe 'tabe '. g:dir_vimrc. 'vimrc_add.vim'
+command! VimrcInit exe 'tabe ' . g:dir_vimrc . 'vimrc_init.vim'
+command! VimrcNeoBundle exe 'tabe ' . g:dir_vimrc . 'vimrc_neobundle.vim'
+command! VimrcBase exe 'tabe ' . g:dir_vimrc . 'vimrc_base.vim'
+command! VimrcAdd exe 'tabe ' . g:dir_vimrc . 'vimrc_add.vim'
 command! GVimrcSo so ~/_gvimrc
-command! GVimrcBase exe 'tabe '. g:dir_vimrc. 'gvimrc_base.vim'
+command! GVimrcBase exe 'tabe ' . g:dir_vimrc . 'gvimrc_base.vim'
 command! Vrapperrc tabe +set\ ft=vim ~/_vrapperrc
 
 command! -nargs=1 SetCo set columns+=<args>
@@ -141,12 +141,8 @@ command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
 
-" ''(default):can move the cursor after the last character.
-" all:Allow virtual editing in all modes.
-command! -nargs=? SetVirtualEdit set virtualedit=<args>
-
-command! SetIndentTab4 set noet sw=4 ts=4
-command! SetIndentSpace2 set et sw=2 ts=2
+command! ToggleWrap exe &wrap ? 'set nowrap ve=all' : 'set wrap ve='
+command! ToggleExpandtab exe &et ? 'set noet sw=4 ts=4' : 'set et sw=2 ts=2'
 
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
@@ -208,7 +204,7 @@ function! g:Debug_profile(cmd)
 endfunction
 
 function! g:Sh_tab(cmd)
-  exe 'tabe | r!'.a:cmd
+  exe 'tabe | r!' . a:cmd
 endfunction
 
 function! g:S_clip()
@@ -231,7 +227,7 @@ function! g:Conv_backlog_to_md()
   %s/\v^\*{3}\s?/### /ge
   %s/\v^\*{2}\s?/## /ge
   %s/\v^\*{1}\s?/# /ge
-  %s/\v^\{code}/\='```'.g:conv_md_codetype/ge
+  %s/\v^\{code}/\='```' . g:conv_md_codetype/ge
   %s/\v^\{\/code}/```/ge
   %s/\v {1}$/  /ge
 endfunction
@@ -240,7 +236,7 @@ function! g:Conv_md_to_backlog()
   %s/\v^\#{3}\s?/*** /ge
   %s/\v^\#{2}\s?/** /ge
   %s/\v^\#{1}\s?/* /ge
-  exe '%s/\v^```'.g:conv_md_codetype.'/{code}/ge'
+  exe '%s/\v^```' . g:conv_md_codetype . '/{code}/ge'
   %s/\v^```/{\/code}/ge
   %s/\v {2}$/ /ge
 endfunction
