@@ -72,7 +72,7 @@ noremap j gj
 noremap k gk
 " ビジュアル、選択
 vnoremap * y/<C-r>0<CR>N
-vnoremap [space]/ :s/
+vnoremap [space]/ :s///g<Left><Left>
 vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 " 挿入、コマンドライン
 noremap! <C-j> <Esc>
@@ -86,7 +86,7 @@ nnoremap * yiw/<C-r>0<CR>N
 nnoremap <Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap <C-Tab> <C-w><C-w>
-nnoremap [space]/ :%s/
+nnoremap [space]/ :%s///g<Left><Left>
 nnoremap [space]o o<Esc>
 nnoremap <Leader>h yiw:tab<Space>help<Space><C-r>0
 nnoremap <C-]> g<C-]>

@@ -91,6 +91,9 @@ if neobundle#tap('unite.vim')
 
   " TODO: first time g:unite_source_bookmark_directory is fail
   function! s:comp_unite_bookmark(A,L,P) "{{{
+    if !exists('g:unite_source_bookmark_directory')
+      return []
+    endif
     return sort(map(
           \ split(glob(g:unite_source_bookmark_directory . '/*'), '\n'),
           \ 'fnamemodify(v:val, ":t")'))
