@@ -7,7 +7,7 @@ if has('vim_starting')
   " Be iMproved
   set nocompatible
   " Required: rtp
-  let &runtimepath = &runtimepath. ','. g:dir_bundle. 'neobundle.vim/'
+  let &runtimepath .= ',' . g:dir_bundle . 'neobundle.vim/'
 endif
 
 try
@@ -286,7 +286,7 @@ NeoBundle 'tpope/vim-fugitive'
 " NeoBundle 'kakkyz81/evervim' "{{{
 if !g:Is_windows()
   NeoBundle 'kakkyz81/evervim'
-  " let g:evervim_devtoken=''
+  " let g:evervim_devtoken = ''
 endif
 "}}}
 

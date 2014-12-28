@@ -105,7 +105,7 @@ augroup markdown
   function! s:writePre_md()
     silent %s/\v[^ ]@<= $/  /ge
 
-    let regexList=[
+    let regexList = [
           \ '^'
           \ ,'^---'
           \ ,'^```.*'
@@ -113,7 +113,7 @@ augroup markdown
           \ ,'^\|.+'
           \ ]
 
-    let exeCom='v/\v(' . join(regexList,'|') . ')$/normal A  '
+    let exeCom = 'v/\v(' . join(regexList,'|') . ')$/normal A  '
     " echomsg exeCom
     silent exe exeCom
   endfunction
@@ -248,7 +248,7 @@ function! g:Git_filter_branch()
 endfunction
 
 function! g:Update_tags(li_arg)
-  let &tags = join([&tags] + a:li_arg, ',')
+  let &tags .= ',' . a:li_arg
 endfunction
 "}}}
 
