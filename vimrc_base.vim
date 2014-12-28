@@ -67,6 +67,8 @@ set wildignore+=tags
 map <C-j> <Esc>
 map <Space> [space]
 noremap [space]h ^
+noremap [space]j <C-f>
+noremap [space]k <C-b>
 noremap [space]l $
 noremap j gj
 noremap k gk
