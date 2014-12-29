@@ -14,3 +14,14 @@ endfunction
 
 let g:dir_bundle = '~/.vim/bundle/'
 let g:dir_vimrc = '~/vimrc/'
+
+function! g:Vimrcadd_init()
+  let st_addfile = fnamemodify(g:dir_vimrc . 'vimrc_add.vim', ':p')
+  if empty(glob(st_addfile))
+    call writefile([''], st_addfile)
+  endif
+endfunction
+if has('vim_starting')
+  call Vimrcadd_init()
+endif
+
