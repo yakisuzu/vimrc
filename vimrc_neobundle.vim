@@ -146,10 +146,15 @@ endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
 if neobundle#tap('vimfiler.vim')
+  command! VFexplorer VimFiler -explorer -simple -edit-action=open
+
   let g:vimfiler_as_default_explorer = 1
 
   function! neobundle#hooks.on_source(bundle)
-    call vimfiler#custom#profile('default', 'context', {'auto_cd' : 1})
+    call vimfiler#custom#profile('default', 'context', {
+          \   'auto_cd' : 1
+          \ , 'edit_action' : 'tabopen'
+          \ })
   endfunction
 
   augroup vimfiler
@@ -157,7 +162,7 @@ if neobundle#tap('vimfiler.vim')
     autocmd FileType vimfiler call s:filetype_vimfiler()
   augroup END
   function! s:filetype_vimfiler()
-    nnoremap <silent><buffer><expr> <CR> vimfiler#do_switch_action('tabopen')
+    "nnoremap <silent><buffer><expr> <CR> vimfiler#do_switch_action('tabopen')
     " change keymap t to o
     unmap <buffer> t
     unmap <buffer> T
