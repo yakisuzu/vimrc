@@ -67,8 +67,8 @@ set wildignore+=tags
 map <C-j> <Esc>
 map <Space> [space]
 noremap [space]h ^
-noremap [space]j <C-f>
-noremap [space]k <C-b>
+noremap [space]j <C-f>zz
+noremap [space]k <C-b>zz
 noremap [space]l $
 noremap j gj
 noremap k gk
@@ -80,6 +80,8 @@ vnoremap <Leader>h y:tab<Space>help<Space><C-r>0
 noremap! <C-j> <Esc>
 " ノーマル
 nnoremap Y y$
+nnoremap n nzz
+nnoremap N Nzz
 nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
@@ -132,6 +134,7 @@ command! VimrcInit exe 'tabe ' . g:dir_vimrc . 'vimrc_init.vim'
 command! VimrcNeoBundle exe 'tabe ' . g:dir_vimrc . 'vimrc_neobundle.vim'
 command! VimrcBase exe 'tabe ' . g:dir_vimrc . 'vimrc_base.vim'
 command! VimrcAdd exe 'tabe ' . g:dir_vimrc . 'vimrc_add.vim'
+command! VimrcVrapper exe 'tabe ' . g:dir_vimrc . 'vimrc_vrapper.vim'
 command! GVimrcSo so ~/_gvimrc
 command! GVimrcBase exe 'tabe ' . g:dir_vimrc . 'gvimrc_base.vim'
 command! Vrapperrc tabe +set\ ft=vim ~/_vrapperrc
