@@ -42,6 +42,11 @@ NeoBundle 'vim-jp/vital.vim' "{{{
 if neobundle#tap('vital.vim')
   function! neobundle#hooks.on_source(bundle)
     let g:V = vital#of('vital')
+    let g:VMfile = g:V.import('System.File')
+    let g:VMran  = g:V.import('Random')
+    let g:VMxml  = g:V.import('Web.XML')
+    let g:VMjson = g:V.import('Web.JSON')
+    let g:VMhttp = g:V.import('Web.HTTP')
   endfunction
 
   call neobundle#untap()
@@ -73,6 +78,7 @@ if neobundle#tap('unite.vim')
       return 1
     endif
 
+    let @/ = li_args[1]
     let li_cmd = [
           \   'Unite'
           \ , 'vimgrep:./**/*.' . li_args[0] . ':' . li_args[1]
@@ -89,11 +95,7 @@ if neobundle#tap('unite.vim')
   command! -nargs=? -complete=customlist,s:comp_unite_bookmark
         \ BookmarkT call s:unite_bookmark_edit(<q-args>)
 
-  " TODO: first time g:unite_source_bookmark_directory is fail
   function! s:comp_unite_bookmark(A,L,P) "{{{
-    if !exists('g:unite_source_bookmark_directory')
-      return []
-    endif
     return sort(map(
           \ split(glob(g:unite_source_bookmark_directory . '/*'), '\n'),
           \ 'fnamemodify(v:val, ":t")'))
@@ -121,13 +123,16 @@ if neobundle#tap('unite.vim')
   endfunction "}}}
 
   function! neobundle#hooks.on_source(bundle)
+    " init unite bookmark
+    call unite#sources#bookmark#define()
+
+    " add unite action execute
     let di_action = {
           \ 'is_selectable' : 1,
           \ }
     function! di_action.func(li_c)
-      let VMfile = g:V.import('System.File')
       for di_c in a:li_c
-        call VMfile.open(di_c.action__path)
+        call g:VMfile.open(di_c.action__path)
       endfor
     endfunction
     call unite#custom#action('jump_list', 'execute', di_action)
@@ -146,7 +151,7 @@ endif "}}}
 
 NeoBundle 'Shougo/vimfiler.vim' "{{{
 if neobundle#tap('vimfiler.vim')
-  command! VFexplorer VimFiler -explorer -simple -edit-action=open
+  command! -nargs=? VFexplorer VimFiler -explorer -simple -edit-action=open <args>
 
   let g:vimfiler_as_default_explorer = 1
 
@@ -243,6 +248,15 @@ endif "}}}
 " TODO: ime returns to the letter problem
 " NeoBundle 'cohama/lexima.vim'
 
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'rhysd/vim-operator-surround'
+if neobundle#tap('vim-operator-surround')
+  map <silent> <Leader>sa <Plug>(operator-surround-append)
+  map <silent> <Leader>sd <Plug>(operator-surround-delete)
+  map <silent> <Leader>sr <Plug>(operator-surround-replace)
+  call neobundle#untap()
+endif "}}}
+
 " NeoBundle 'supermomonga/shaberu.vim' "{{{
 if g:Is_mac()
   NeoBundle 'supermomonga/shaberu.vim'
@@ -253,8 +267,7 @@ if g:Is_mac()
     endfunction
 
     function! g:Say_random(li_str)
-      let VMran = g:V.import('Random')
-      call Shaberu_say_print(VMran.sample(a:li_str))
+      call Shaberu_say_print(g:VMran.sample(a:li_str))
     endfunction
 
     augroup shaberu
