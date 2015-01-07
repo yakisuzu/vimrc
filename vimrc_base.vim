@@ -130,14 +130,26 @@ command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
 command! -nargs=1 ShTab call g:Sh_tab(<q-args>)
 
 command! VimrcSo so ~/_vimrc
-command! VimrcInit exe 'tabe ' . g:dir_vimrc . 'vimrc_init.vim'
-command! VimrcNeoBundle exe 'tabe ' . g:dir_vimrc . 'vimrc_neobundle.vim'
-command! VimrcBase exe 'tabe ' . g:dir_vimrc . 'vimrc_base.vim'
-command! VimrcAdd exe 'tabe ' . g:dir_vimrc . 'vimrc_add.vim'
-command! VimrcVrapper exe 'tabe ' . g:dir_vimrc . 'vimrc_vrapper.vim'
 command! GVimrcSo so ~/_gvimrc
-command! GVimrcBase exe 'tabe ' . g:dir_vimrc . 'gvimrc_base.vim'
 command! Vrapperrc tabe +set\ ft=vim ~/_vrapperrc
+command! -nargs=? -complete=customlist,s:vimrc_comp
+      \ VimrcOpen call s:vimrc_open(<q-args>, 'vimrc_base.vim')
+command! -nargs=? -complete=customlist,s:gvimrc_comp
+      \ GVimrcOpen call s:vimrc_open(<q-args>, 'gvimrc_base.vim')
+
+function! s:vimrc_comp(A,L,P) "{{{
+  return g:File_list(g:dir_vimrc . 'vimrc_*')
+endfunction "}}}
+function! s:gvimrc_comp(A,L,P) "{{{
+  return g:File_list(g:dir_vimrc . 'gvimrc_*')
+endfunction "}}}
+function! s:vimrc_open(st_file, st_default_file) "{{{
+  let st_exe_file = !empty(a:st_file) ? a:st_file : a:st_default_file
+  let st_path = glob(g:dir_vimrc . st_exe_file)
+  if !empty(st_path)
+    exe 'tabe ' . st_path
+  endif
+endfunction "}}}
 
 command! -nargs=1 SetCo set columns+=<args>
 command! -nargs=1 SetLines set lines+=<args>
@@ -252,6 +264,12 @@ endfunction
 
 function! g:Update_tags(li_arg)
   let &tags = join([&tags] + a:li_arg, ',')
+endfunction
+
+function! g:File_list(st_path)
+  return sort(map(
+        \ split(glob(a:st_path), '\n'),
+        \ 'fnamemodify(v:val, ":t")'))
 endfunction
 "}}}
 

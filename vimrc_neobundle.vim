@@ -90,15 +90,13 @@ if neobundle#tap('unite.vim')
   endfunction "}}}
 
   " for bookmark
-  command! -nargs=? -complete=customlist,s:comp_unite_bookmark
+  command! -nargs=? -complete=customlist,s:unite_bookmark_comp
         \ UBookmark call s:unite_bookmark_open(<q-args>)
-  command! -nargs=? -complete=customlist,s:comp_unite_bookmark
+  command! -nargs=? -complete=customlist,s:unite_bookmark_comp
         \ BookmarkT call s:unite_bookmark_edit(<q-args>)
 
-  function! s:comp_unite_bookmark(A,L,P) "{{{
-    return sort(map(
-          \ split(glob(g:unite_source_bookmark_directory . '/*'), '\n'),
-          \ 'fnamemodify(v:val, ":t")'))
+  function! s:unite_bookmark_comp(A,L,P) "{{{
+    return g:File_list(g:unite_source_bookmark_directory . '/*')
   endfunction "}}}
   function! s:unite_bookmark_open(st_arg) "{{{
     if &ft == 'vimfiler'
