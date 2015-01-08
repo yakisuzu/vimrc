@@ -247,7 +247,7 @@ endif "}}}
 " NeoBundle 'cohama/lexima.vim'
 
 NeoBundle 'kana/vim-operator-user'
-NeoBundle 'rhysd/vim-operator-surround'
+NeoBundle 'rhysd/vim-operator-surround' "{{{
 if neobundle#tap('vim-operator-surround')
   map <silent> <Leader>sa <Plug>(operator-surround-append)
   map <silent> <Leader>sd <Plug>(operator-surround-delete)

@@ -59,6 +59,8 @@ set fileformat=unix
 set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
 " ワイルドカードの展開時と、ファイル／ディレクトリ名の補完時に無視される wig
 set wildignore+=tags
+" テキスト表示の方法を変える dy
+set display=lastline
 "}}}
 
 "---------------------------------------------------------------------------
@@ -72,6 +74,8 @@ noremap [space]k <C-b>zz
 noremap [space]l $
 noremap j gj
 noremap k gk
+noremap <Leader>p "0p
+noremap <Leader>P "0P
 " ビジュアル、選択
 vnoremap * y/<C-r>0<CR>N
 vnoremap [space]/ :s///g<Left><Left>
@@ -158,11 +162,17 @@ command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
 
-command! ToggleWrap exe &wrap ? 'set nowrap ve=all' : 'set wrap ve='
-command! ToggleExpandtab exe &et ? 'set noet sw=4 ts=4' : 'set et sw=2 ts=2'
+command! SetWrap set wrap ve=
+command! SetWrapNo set nowrap ve=all
+command! SetExpandtab set et sw=2 ts=2
+command! SetExpandtabNo set noet sw=4 ts=4
 
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
+
+command! GetYankFile let @+ = expand('%:p')
+command! GetYankPath let @+ = expand('%:t:p')
+command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_')
 
 command! GitPull call g:GitEcho('git pull')
 command! GitCheckout call g:GitEcho('git checkout ' . expand('%:p'))
@@ -171,8 +181,6 @@ command! GitDiff call g:GitEcho('git diff')
 command! -nargs=+ GitCommit call g:GitEcho('git commit -m ' . shellescape(<q-args>))
 command! GitPush call g:GitEcho('git push')
 command! -nargs=+ GitCommitThis call g:GitEcho('git commit ' . expand('%:p') . ' -m ' . shellescape(<q-args>))
-
-command! GetTimeToYank let @+ = strftime('%Y%m%d_%H%M_')
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
