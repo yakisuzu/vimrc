@@ -170,8 +170,8 @@ command! SetExpandtabNo set noet sw=4 ts=4
 command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
 
-command! GetYankFile let @+ = expand('%:p')
-command! GetYankPath let @+ = expand('%:t:p')
+command! GetYankFileName let @+ = expand('%:p:t')
+command! GetYankFullPath let @+ = expand('%:t')
 command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_')
 
 command! GitPull call g:GitEcho('git pull')
