@@ -89,13 +89,13 @@ nnoremap N Nzz
 nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
-nnoremap Q :bd<CR>
 nnoremap * yiw/<C-r>0<CR>N
 nnoremap <Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
-nnoremap <C-Tab> <C-w><C-w>
+nnoremap [space]<Tab> <C-w><C-w>
 nnoremap [space]/ :%s///g<Left><Left>
 nnoremap [space]o o<Esc>
+nnoremap [space]d :bd<CR>
 nnoremap <Leader>h yiw:tab<Space>help<Space><C-r>0
 nnoremap <C-]> g<C-]>
 "}}}
@@ -123,6 +123,11 @@ augroup markdown
     " echomsg exeCom
     silent exe exeCom
   endfunction
+augroup END
+
+augroup java
+  autocmd!
+  autocmd BufRead,BufNewFile *.java set fdm=syntax noet sw=4 ts=4
 augroup END
 "}}}
 

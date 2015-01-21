@@ -1,5 +1,4 @@
-command! VrapperrcUpdate call g:Vrapperrc_write()
-function! g:Vrapperrc_write()
+function! s:vrapperrc_write()
   let st_file = fnamemodify('~/_vrapperrc', ':p')
   let li_line = [
         \   '"update:' . strftime('%Y%m%d_%H%M')
@@ -11,6 +10,8 @@ function! g:Vrapperrc_write()
         \ , 'noremap <Space>j <C-f>zz'
         \ , 'noremap <Space>k <C-b>zz'
         \ , 'noremap <Space>l $'
+        \ , 'noremap \p "0p'
+        \ , 'noremap \P "0P'
         \ , 'vnoremap * y/<C-r>0<CR>N'
         \ , 'vnoremap <Space>/ :s///g<Left><Left>'
         \ , 'inoremap <C-j> <Esc>'
@@ -20,10 +21,10 @@ function! g:Vrapperrc_write()
         \ , 'nnoremap tg gT'
         \ , 'nnoremap zl 20zl'
         \ , 'nnoremap zh 20zh'
-        \ , 'nnoremap Q :bd<CR>'
         \ , 'nnoremap * yiw/<C-r>0<CR>N'
         \ , 'nnoremap <Space>/ :%s///g<Left><Left>'
         \ , 'nnoremap <Space>o o<Esc>'
+        \ , 'nnoremap <Space>d :bd<CR>'
         \ , ''
         \ , 'command So source ' . st_file
         \ , ''
@@ -34,4 +35,5 @@ function! g:Vrapperrc_write()
         \ ]
   call writefile(li_line, st_file)
 endfunction
+call s:vrapperrc_write()
 
