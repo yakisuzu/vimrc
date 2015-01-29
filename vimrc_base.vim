@@ -54,7 +54,7 @@ set encoding=utf-8
 " ファイル編集時に考慮される文字エンコーディングリスト fencs
 set fileencodings+=cp932
 " <EOL> を、カレントバッファについて設定する ff
-set fileformat=unix
+let &ff = g:Is_windows() ? 'dos' : 'unix'
 " ステータス行の表示内容を設定する stl
 set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
 " ワイルドカードの展開時と、ファイル／ディレクトリ名の補完時に無視される wig
