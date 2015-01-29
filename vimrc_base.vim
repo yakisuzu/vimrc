@@ -176,7 +176,8 @@ command! SetEncUtf8 set encoding=utf-8
 command! SetEncCp932 set encoding=cp932
 
 command! GetYankFileName let @+ = expand('%:p:t')
-command! GetYankFullPath let @+ = expand('%:t')
+command! GetYankFileNameSimple let @+ = expand('%:p:t:r')
+command! GetYankFullPath let @+ = expand('%:p')
 command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_')
 
 command! GitPull call g:GitEcho('git pull')
