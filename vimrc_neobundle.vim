@@ -81,7 +81,7 @@ if neobundle#tap('unite.vim')
     let @/ = li_args[1]
     let li_cmd = [
           \   'Unite'
-          \ , 'vimgrep:./**/*.' . li_args[0] . ':' . li_args[1]
+          \ , 'vimgrep:./**/*' . li_args[0] . ':' . li_args[1]
           \ , '-auto-preview'
           \ , '-vertical-preview'
           \ , '-no-quit'
@@ -298,6 +298,7 @@ if neobundle#tap('open-browser.vim')
 endif "}}}
 
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kmnk/vim-unite-giti'
 
 " NeoBundle 'kakkyz81/evervim' "{{{
 if !g:Is_windows()

@@ -127,7 +127,14 @@ augroup END
 
 augroup java
   autocmd!
-  autocmd BufRead,BufNewFile *.java set fdm=syntax noet sw=4 ts=4
+  autocmd BufRead,BufNewFile *.java call s:bufRead_java()
+
+  function! s:bufRead_java()
+    if &fdm != 'diff'
+      set fdm=syntax
+    endif
+    set noet sw=4 ts=4
+  endfunction
 augroup END
 "}}}
 
@@ -193,7 +200,12 @@ command! -nargs=? -complete=file T tabe <args>
 command! TA tab ball
 command! MClear for n in range(200) | echom '' | endfor
 
-command! Wsudo w !sudo tee % > /dev/null
+if g:Is_windows()
+  command! Cmd !start cmd
+  command! Mintty !start mintty
+else
+  command! Wsudo w !sudo tee % > /dev/null
+endif
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 
 command! CdC call g:CdC()
