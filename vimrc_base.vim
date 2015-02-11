@@ -105,7 +105,7 @@ nnoremap <C-]> g<C-]>
 " ファイルタイプ更新
 augroup markdown
   autocmd!
-  autocmd BufRead,BufNewFile *.md set nowrap
+  autocmd BufRead,BufNewFile *.md SetWrapNo
   autocmd BufWritePre *.md call s:writePre_md()
 
   function! s:writePre_md()
@@ -133,8 +133,13 @@ augroup java
     if &fdm != 'diff'
       set fdm=syntax
     endif
-    set noet sw=4 ts=4
+    SetExpandtabNo
   endfunction
+augroup END
+
+augroup wsf
+  autocmd!
+  autocmd BufRead,BufNewFile *.wsf set ft=xml
 augroup END
 "}}}
 
