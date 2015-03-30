@@ -293,8 +293,12 @@ function! g:Git_filter_branch()
   !git filter-branch -f --env-filter "GIT_AUTHOR_NAME='yakisuzu';GIT_AUTHOR_EMAIL='yakisuzu@gmail.com';GIT_COMMITTER_NAME='yakisuzu';GIT_COMMITTER_EMAIL='yakisuzu@gmail.com';" HEAD
 endfunction
 
-function! g:Update_tags(li_arg)
-  let &tags = join([&tags] + a:li_arg, ',')
+function! g:Update_tags(li_args)
+  for st_arg in a:li_args
+    if index(split(&tags, ','), st_arg) == -1
+      let &tags = join([&tags] + [st_arg], ',')
+    endif
+  endfor
 endfunction
 
 function! g:File_list(st_path)

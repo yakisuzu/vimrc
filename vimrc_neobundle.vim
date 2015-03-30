@@ -85,6 +85,8 @@ if neobundle#tap('unite.vim')
           \ , '-auto-preview'
           \ , '-vertical-preview'
           \ , '-no-quit'
+          \ , '-tab'
+          \ , '-default-action=tabopen'
           \ ]
     silent exe join(li_cmd)
   endfunction "}}}
