@@ -139,7 +139,7 @@ augroup END
 
 augroup wsf
   autocmd!
-  autocmd BufRead,BufNewFile *.wsf set ft=xml
+  autocmd BufRead,BufNewFile *.wsf set ft=javascript
 augroup END
 "}}}
 
@@ -296,7 +296,7 @@ endfunction
 function! g:Update_tags(li_args)
   for st_arg in a:li_args
     if index(split(&tags, ','), st_arg) == -1
-      let &tags = join([&tags] + [st_arg], ',')
+      let &tags .= ',' . st_arg
     endif
   endfor
 endfunction
