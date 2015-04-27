@@ -4,6 +4,12 @@ function! s:vrapperrc_write()
         \   '"update:' . strftime('%Y%m%d_%H%M')
         \ , 'set clipboard=unnamed'
         \ , 'set ignorecase'
+        \ , 'set hlsearch'
+        \ , 'set list'
+        \ , ''
+        \ , 'set gvimpath=gvim'
+        \ , 'set gvimargs=+{line} --servername vrapper --remote-tab-silent {file}'
+        \ , 'set contentassistmode'
         \ , ''
         \ , 'map <C-j> <Esc>'
         \ , 'noremap <Space>h ^'
