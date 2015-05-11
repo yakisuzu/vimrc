@@ -306,5 +306,11 @@ function! g:File_list(st_path)
         \ split(glob(a:st_path), '\n'),
         \ 'fnamemodify(v:val, ":t")'))
 endfunction
+
+function! g:Add_runtimepath(st_pkg)
+  let st_path = g:dir_bundle . a:st_pkg . (match(a:st_pkg, '.*/$') == 0 ? '' : '/')
+  let &runtimepath .= ',' . st_path
+  exe 'helptags ' . st_path . 'doc'
+endfunction
 "}}}
 
