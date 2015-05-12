@@ -310,7 +310,11 @@ endfunction
 function! g:Add_runtimepath(st_pkg)
   let st_path = g:dir_bundle . a:st_pkg . (match(a:st_pkg, '.*/$') == 0 ? '' : '/')
   let &runtimepath .= ',' . st_path
-  exe 'helptags ' . st_path . 'doc'
+
+  let st_doc_path = st_path . 'doc'
+  if !empty(glob(st_doc_path))
+    exe 'helptags ' . st_doc_path
+  endif
 endfunction
 "}}}
 
