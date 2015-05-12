@@ -10,6 +10,10 @@ if has('vim_starting')
   let &runtimepath .= ',' . g:dir_bundle . 'neobundle.vim/'
 endif
 
+function! s:use_local()
+  return 0
+endfunction
+
 try
   call g:neobundle#exists_not_installed_bundles()
 catch /.*/
@@ -22,24 +26,67 @@ call neobundle#begin(g:dir_bundle)
 
 " Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if !s:use_local()
+  NeoBundleFetch 'Shougo/neobundle.vim'
+endif
+if s:use_local()
+  call neobundle#local(g:dir_bundle, {})
+endif
 
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc! "}}}
 "---------------------------------------------------------------------------
-
-" NeoBundle 'Shougo/vimproc.vim' "{{{
-if !g:Is_windows()
-  NeoBundle 'Shougo/vimproc.vim', {
-        \ 'build' : {
-        \     'mac' : 'make -f make_mac.mak',
-        \    },
-        \ }
+" plugin list "{{{
+if !s:use_local()
+  " NeoBundle 'Shougo/vimproc.vim' "{{{
+  if !g:Is_windows()
+    NeoBundle 'Shougo/vimproc.vim', {
+          \ 'build' : {
+          \     'mac' : 'make -f make_mac.mak',
+          \    },
+          \ }
+  endif "}}}
+  NeoBundle 'vim-jp/vital.vim'
+  NeoBundle 'Shougo/vimshell.vim'
+  NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'ujihisa/unite-colorscheme'
+  NeoBundle 'osyo-manga/unite-quickfix'
+  NeoBundle 'yakisuzu/unite-breakpoint'
+  NeoBundle 'Shougo/vimfiler.vim'
+  "NeoBundle 'Shougo/neocomplete.vim' "{{{
+  if v:version > 703  && has('lua')
+    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neosnippet.vim'
+    NeoBundle 'Shougo/neosnippet-snippets'
+  endif "}}}
+  NeoBundle 'thinca/vim-quickrun'
+  NeoBundle 'vim-scripts/Align'
+  " TODO: ime returns to the letter problem
+  " NeoBundle 'cohama/lexima.vim'
+  NeoBundle 'kana/vim-operator-user'
+  NeoBundle 'rhysd/vim-operator-surround'
+  " NeoBundle 'supermomonga/shaberu.vim' "{{{
+  if g:Is_mac()
+    NeoBundle 'supermomonga/shaberu.vim'
+  endif "}}}
+  NeoBundle 'rhysd/clever-f.vim'
+  NeoBundle 'haya14busa/incsearch.vim'
+  NeoBundle 'plasticboy/vim-markdown'
+  NeoBundle 'yakisuzu/previm'
+  NeoBundle 'tyru/open-browser.vim'
+  NeoBundle 'tpope/vim-fugitive'
+  NeoBundle 'kmnk/vim-unite-giti'
+  " NeoBundle 'kakkyz81/evervim' "{{{
+  if !g:Is_windows()
+    NeoBundle 'kakkyz81/evervim'
+    " let g:evervim_devtoken = ''
+  endif
+  "}}}
+  NeoBundle 'tyru/restart.vim'
 endif "}}}
 
-NeoBundle 'vim-jp/vital.vim' "{{{
-if neobundle#tap('vital.vim')
+if neobundle#tap('vital.vim') "{{{
   function! neobundle#hooks.on_source(bundle)
     let g:V = vital#of('vital')
     let g:VMfile = g:V.import('System.File')
@@ -51,15 +98,7 @@ if neobundle#tap('vital.vim')
 
   call neobundle#untap()
 endif "}}}
-
-NeoBundle 'Shougo/vimshell.vim'
-
-NeoBundle 'Shougo/unite.vim' "{{{
-if neobundle#tap('unite.vim')
-  NeoBundle 'ujihisa/unite-colorscheme'
-  NeoBundle 'osyo-manga/unite-quickfix'
-  NeoBundle 'yakisuzu/unite-breakpoint'
-
+if neobundle#tap('unite.vim') "{{{
   command! UBreakpoint Unite breakpoint -auto-preview -vertical-preview
   command! UBuffer Unite buffer
 
@@ -148,9 +187,7 @@ if neobundle#tap('unite.vim')
 
   call neobundle#untap()
 endif "}}}
-
-NeoBundle 'Shougo/vimfiler.vim' "{{{
-if neobundle#tap('vimfiler.vim')
+if neobundle#tap('vimfiler.vim') "{{{
   command! -nargs=? VFexplorer VimFiler -explorer -simple -edit-action=open <args>
 
   let g:vimfiler_as_default_explorer = 1
@@ -177,46 +214,36 @@ if neobundle#tap('vimfiler.vim')
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('neocomplete.vim') "{{{
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " neocomplete locks when 'iminsert' is non-zero.
+  let g:neocomplete#lock_iminsert = 1
 
-"NeoBundle 'Shougo/neocomplete.vim' "{{{
-if v:version > 703  && has('lua')
-  NeoBundle 'Shougo/neocomplete.vim'
-  if neobundle#tap('neocomplete.vim')
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " neocomplete locks when 'iminsert' is non-zero.
-    let g:neocomplete#lock_iminsert = 1
-
-    call neobundle#untap()
-  endif
-
-  NeoBundle 'Shougo/neosnippet.vim'
-  NeoBundle 'Shougo/neosnippet-snippets'
-  if neobundle#tap('neosnippet.vim')
-    " Plugin key-mappings.
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-
-    " SuperTab like snippets behavior.
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-          \ "\<Plug>(neosnippet_expand_or_jump)"
-          \ : pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-          \ "\<Plug>(neosnippet_expand_or_jump)"
-          \ : "\<TAB>"
-
-    " For snippet_complete marker.
-    if has('conceal')
-      set conceallevel=2 concealcursor=i
-    endif
-
-    call neobundle#untap()
-  endif
+  call neobundle#untap()
 endif "}}}
+if neobundle#tap('neosnippet.vim') "{{{
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
 
-NeoBundle 'thinca/vim-quickrun' "{{{
-if neobundle#tap('vim-quickrun')
+  " SuperTab like snippets behavior.
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \ : pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \ : "\<TAB>"
+
+  " For snippet_complete marker.
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
+  endif
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-quickrun') "{{{
   let g:quickrun_config = {
         \  "_" : {
         \    "runner" : "vimproc",
@@ -233,9 +260,7 @@ if neobundle#tap('vim-quickrun')
 
   call neobundle#untap()
 endif "}}}
-
-NeoBundle 'vim-scripts/Align' "{{{
-if neobundle#tap('Align')
+if neobundle#tap('Align') "{{{
   " 0:for utf-8?
   " 1(default):fastest
   " 2:Number of spacing codepoints?
@@ -244,72 +269,43 @@ if neobundle#tap('Align')
 
   call neobundle#untap()
 endif "}}}
-
-" TODO: ime returns to the letter problem
-" NeoBundle 'cohama/lexima.vim'
-
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'rhysd/vim-operator-surround' "{{{
-if neobundle#tap('vim-operator-surround')
+if neobundle#tap('vim-operator-surround') "{{{
   map <silent> <Leader>sa <Plug>(operator-surround-append)
   map <silent> <Leader>sd <Plug>(operator-surround-delete)
   map <silent> <Leader>sr <Plug>(operator-surround-replace)
+
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('shaberu.vim') "{{{
+  function! g:Shaberu_say_print(st_arg)
+    echom a:st_arg
+    call shaberu#say(a:st_arg)
+  endfunction
 
-" NeoBundle 'supermomonga/shaberu.vim' "{{{
-if g:Is_mac()
-  NeoBundle 'supermomonga/shaberu.vim'
-  if neobundle#tap('shaberu.vim')
-    function! g:Shaberu_say_print(st_arg)
-      echom a:st_arg
-      call shaberu#say(a:st_arg)
-    endfunction
+  function! g:Say_random(li_str)
+    call Shaberu_say_print(g:VMran.sample(a:li_str))
+  endfunction
 
-    function! g:Say_random(li_str)
-      call Shaberu_say_print(g:VMran.sample(a:li_str))
-    endfunction
+  augroup shaberu
+    autocmd!
+    autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
+    autocmd VimLeave * call g:Say_random(['お疲れ様でした。進捗どうですか'])
+  augroup END
 
-    augroup shaberu
-      autocmd!
-      autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
-      autocmd VimLeave * call g:Say_random(['お疲れ様でした。進捗どうですか'])
-    augroup END
-
-    call neobundle#untap()
-  endif
+  call neobundle#untap()
 endif "}}}
-
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'haya14busa/incsearch.vim' "{{{
-if neobundle#tap('incsearch.vim')
+if neobundle#tap('incsearch.vim') "{{{
   map /  <Plug>(incsearch-forward)
   map ?  <Plug>(incsearch-backward)
   map g/ <Plug>(incsearch-stay)
 
   call neobundle#untap()
 endif "}}}
-
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'yakisuzu/previm'
-NeoBundle 'tyru/open-browser.vim' "{{{
-if neobundle#tap('open-browser.vim')
+if neobundle#tap('open-browser.vim') "{{{
   command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
 
   call neobundle#untap()
 endif "}}}
-
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'kmnk/vim-unite-giti'
-
-" NeoBundle 'kakkyz81/evervim' "{{{
-if !g:Is_windows()
-  NeoBundle 'kakkyz81/evervim'
-  " let g:evervim_devtoken = ''
-endif
-"}}}
-
-NeoBundle 'tyru/restart.vim'
 
 "---------------------------------------------------------------------------
 " Required end "{{{
