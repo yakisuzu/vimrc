@@ -49,34 +49,48 @@ if !s:use_local()
   endif "}}}
   NeoBundle 'vim-jp/vital.vim'
   NeoBundle 'Shougo/vimshell.vim'
+        \ , {'depends' : ['Shougo/vimproc.vim']}
+
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'ujihisa/unite-colorscheme'
+        \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'osyo-manga/unite-quickfix'
+        \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-breakpoint'
+        \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'Shougo/vimfiler.vim'
+        \ , {'depends' : ['Shougo/unite.vim']}
+  NeoBundle 'kmnk/vim-unite-giti'
+        \ , {'depends' : ['Shougo/unite.vim']}
+
   "NeoBundle 'Shougo/neocomplete.vim' "{{{
   if v:version > 703  && has('lua')
     NeoBundle 'Shougo/neocomplete.vim'
-    NeoBundle 'Shougo/neosnippet.vim'
-    NeoBundle 'Shougo/neosnippet-snippets'
   endif "}}}
-  NeoBundle 'thinca/vim-quickrun'
-  NeoBundle 'vim-scripts/Align'
-  " TODO: ime returns to the letter problem
-  " NeoBundle 'cohama/lexima.vim'
+  NeoBundle 'Shougo/neosnippet.vim'
+        \ , {'depends' : ['Shougo/neocomplete.vim']}
+  NeoBundle 'Shougo/neosnippet-snippets'
+        \ , {'depends' : ['Shougo/neocomplete.vim']}
+
   NeoBundle 'kana/vim-operator-user'
   NeoBundle 'rhysd/vim-operator-surround'
+        \ , {'depends' : ['kana/vim-operator-user']}
+
+  NeoBundle 'plasticboy/vim-markdown'
+  NeoBundle 'yakisuzu/previm'
+  NeoBundle 'tyru/open-browser.vim'
+
+  " TODO: ime returns to the letter problem
+  " NeoBundle 'cohama/lexima.vim'
+  NeoBundle 'thinca/vim-quickrun'
+  NeoBundle 'vim-scripts/Align'
   " NeoBundle 'supermomonga/shaberu.vim' "{{{
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
   endif "}}}
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
-  NeoBundle 'plasticboy/vim-markdown'
-  NeoBundle 'yakisuzu/previm'
-  NeoBundle 'tyru/open-browser.vim'
   NeoBundle 'tpope/vim-fugitive'
-  NeoBundle 'kmnk/vim-unite-giti'
   " NeoBundle 'kakkyz81/evervim' "{{{
   if !g:Is_windows()
     NeoBundle 'kakkyz81/evervim'
