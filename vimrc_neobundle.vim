@@ -58,6 +58,8 @@ if !s:use_local()
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-breakpoint'
         \ , {'depends' : ['Shougo/unite.vim']}
+  NeoBundle 'yakisuzu/unite-amazingbookmark'
+        \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'Shougo/vimfiler.vim'
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'kmnk/vim-unite-giti'
@@ -113,10 +115,10 @@ if neobundle#tap('vital.vim') "{{{
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('unite.vim') "{{{
-  command! UBreakpoint Unite breakpoint -auto-preview -vertical-preview
+  " for buffer "{{{
   command! UBuffer Unite buffer
-
-  " for vimgrep
+  "}}}
+  " for vimgrep "{{{
   command! -nargs=+
         \ UVimgrep call s:unite_vimgrep(<f-args>)
 
@@ -143,39 +145,40 @@ if neobundle#tap('unite.vim') "{{{
           \ ]
     silent exe join(li_cmd)
   endfunction "}}}
-
-  " for bookmark
+  "}}}
+  " for bookmark "{{{
   command! -nargs=? -complete=customlist,s:unite_bookmark_comp
-        \ UBookmark call s:unite_bookmark_open(<q-args>)
+        \ UBookmark call s:unite_bookmark_open(<q-args>, 'default')
   command! -nargs=? -complete=customlist,s:unite_bookmark_comp
-        \ BookmarkT call s:unite_bookmark_edit(<q-args>)
+        \ BookmarkT call s:unite_bookmark_edit(<q-args>, 'default')
 
   function! s:unite_bookmark_comp(A,L,P) "{{{
     return g:File_list(g:unite_source_bookmark_directory . '/*')
   endfunction "}}}
-  function! s:unite_bookmark_open(st_arg) "{{{
+  function! s:unite_bookmark_open(st_arg, st_default) "{{{
     if &ft == 'vimfiler'
       call unite#custom#default_action('directory', 'vimfiler')
     else
       call unite#custom#default_action('directory', 'tabvimfiler')
     endif
 
+    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
     let li_cmd = [
           \   'Unite'
-          \ , 'bookmark:' . a:st_arg
+          \ , 'bookmark:' . st_file
           \ , '-vertical'
           \ , '-direction=leftabove'
           \ , '-winwidth=60'
           \ ]
     silent exe join(li_cmd)
   endfunction "}}}
-  function! s:unite_bookmark_edit(st_arg) "{{{
-    let st_file = empty(a:st_arg) ? 'default' : a:st_arg
-    let st_cmd = 'tabe '. g:unite_source_bookmark_directory. '/'. st_file
+  function! s:unite_bookmark_edit(st_arg, st_default) "{{{
+    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
+    let st_cmd = 'tabe ' . g:unite_source_bookmark_directory . '/' . st_file
     silent exe st_cmd
   endfunction "}}}
-
-  function! neobundle#hooks.on_source(bundle)
+  "}}}
+  function! neobundle#hooks.on_source(bundle) "{{{
     " init unite bookmark
     call unite#sources#bookmark#define()
 
@@ -189,15 +192,54 @@ if neobundle#tap('unite.vim') "{{{
       endfor
     endfunction
     call unite#custom#action('jump_list', 'execute', di_action)
-  endfunction
-
-  augroup unite
+  endfunction "}}}
+  augroup unite "{{{
     autocmd!
     autocmd FileType unite call s:filetype_unite()
   augroup END
   function! s:filetype_unite()
     nnoremap <silent><buffer><expr> x unite#do_action('execute')
-  endfunction
+  endfunction "}}}
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('unite-breakpoint') "{{{
+  command! UBreakpoint Unite breakpoint -auto-preview -vertical-preview
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('unite-amazingbookmark') "{{{
+  command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
+        \ UABookmark call s:unite_amazingbookmark_open(<q-args>, 'default.json')
+  command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
+        \ ABookmarkT call s:unite_amazingbookmark_edit(<q-args>, 'default.json')
+
+  function! s:unite_amazingbookmark_comp(A,L,P) "{{{
+    return g:File_list(g:unite_source_amazingbookmark_directory . '/*')
+  endfunction "}}}
+  function! s:unite_amazingbookmark_open(st_arg, st_default) "{{{
+    if &ft == 'vimfiler'
+      call unite#custom#default_action('directory', 'vimfiler')
+    else
+      call unite#custom#default_action('directory', 'tabvimfiler')
+    endif
+
+    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
+    let li_cmd = [
+          \   'Unite'
+          \ , 'amazingbookmark:' . st_file
+          \ , '-vertical'
+          \ , '-direction=leftabove'
+          \ , '-winwidth=60'
+          \ ]
+    echom join(li_cmd)
+    silent exe join(li_cmd)
+  endfunction "}}}
+  function! s:unite_amazingbookmark_edit(st_arg, st_default) "{{{
+    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
+    let st_cmd = 'tabe ' . g:unite_source_amazingbookmark_directory . '/' . st_file
+    silent exe st_cmd
+  endfunction "}}}
 
   call neobundle#untap()
 endif "}}}
