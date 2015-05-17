@@ -344,8 +344,9 @@ if neobundle#tap('shaberu.vim') "{{{
 
   augroup shaberu
     autocmd!
-    autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね'])
-    autocmd VimLeave * call g:Say_random(['お疲れ様でした。進捗どうですか'])
+    autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね', 'イーマックスへようこそ', 'ビムです', 'ビムではありません'])
+    autocmd MenuPopup * call g:Say_random(['そんなにマウスが好きですか'])
+    autocmd VimLeavePre * call g:Say_random(['お疲れ様でした。進捗どうですか', '終了します'])
   augroup END
 
   call neobundle#untap()
