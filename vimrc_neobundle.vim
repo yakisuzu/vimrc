@@ -196,10 +196,11 @@ if neobundle#tap('unite.vim') "{{{
   augroup unite "{{{
     autocmd!
     autocmd FileType unite call s:filetype_unite()
+
+    function! s:filetype_unite()
+      nnoremap <silent><buffer><expr> x unite#do_action('execute')
+    endfunction "}}}
   augroup END
-  function! s:filetype_unite()
-    nnoremap <silent><buffer><expr> x unite#do_action('execute')
-  endfunction "}}}
 
   call neobundle#untap()
 endif "}}}
@@ -232,7 +233,6 @@ if neobundle#tap('unite-amazingbookmark') "{{{
           \ , '-direction=leftabove'
           \ , '-winwidth=60'
           \ ]
-    echom join(li_cmd)
     silent exe join(li_cmd)
   endfunction "}}}
   function! s:unite_amazingbookmark_edit(st_arg, st_default) "{{{
@@ -240,6 +240,11 @@ if neobundle#tap('unite-amazingbookmark') "{{{
     let st_cmd = 'tabe ' . g:unite_source_amazingbookmark_directory . '/' . st_file
     silent exe st_cmd
   endfunction "}}}
+
+  function! neobundle#hooks.on_source(bundle)
+    " init unite amazingbookmark
+    call unite#sources#amazingbookmark#define()
+  endfunction
 
   call neobundle#untap()
 endif "}}}
@@ -258,15 +263,16 @@ if neobundle#tap('vimfiler.vim') "{{{
   augroup vimfiler
     autocmd!
     autocmd FileType vimfiler call s:filetype_vimfiler()
+
+    function! s:filetype_vimfiler()
+      "nnoremap <silent><buffer><expr> <CR> vimfiler#do_switch_action('tabopen')
+      " change keymap t to o
+      unmap <buffer> t
+      unmap <buffer> T
+      nmap <buffer> o <Plug>(vimfiler_expand_tree)
+      nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
+    endfunction
   augroup END
-  function! s:filetype_vimfiler()
-    "nnoremap <silent><buffer><expr> <CR> vimfiler#do_switch_action('tabopen')
-    " change keymap t to o
-    unmap <buffer> t
-    unmap <buffer> T
-    nmap <buffer> o <Plug>(vimfiler_expand_tree)
-    nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
-  endfunction
 
   call neobundle#untap()
 endif "}}}
