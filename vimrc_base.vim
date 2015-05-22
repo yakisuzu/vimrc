@@ -50,11 +50,15 @@ set autoread
 " 進数 nf
 set nrformats=
 " Vim内部で使われる文字エンコーディングを設定する enc
-set encoding=utf-8
+if g:Is_windows() && !has('gui_running')
+  set encoding=cp932
+else
+  set encoding=utf8
+endif
 " ファイル編集時に考慮される文字エンコーディングリスト fencs
 set fileencodings+=cp932
 " <EOL> を、カレントバッファについて設定する ff
-let &ff = g:Is_windows() ? 'dos' : 'unix'
+"let &ff = g:Is_windows() ? 'dos' : 'unix'
 " ステータス行の表示内容を設定する stl
 set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
 " ワイルドカードの展開時と、ファイル／ディレクトリ名の補完時に無視される wig
@@ -105,7 +109,7 @@ nnoremap <C-]> g<C-]>
 " ファイルタイプ更新
 augroup markdown
   autocmd!
-  autocmd BufRead,BufNewFile *.md SetWrapNo
+  autocmd BufRead,BufNewFile *.md setlocal nowrap
   autocmd BufWritePre *.md call s:writePre_md()
 
   function! s:writePre_md()
@@ -148,7 +152,6 @@ augroup END
 command! -nargs=1 -complete=help H tab h <args>
 command! -nargs=1 -complete=command RedirTab call g:Redir_tab(<q-args>)
 command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
-command! -nargs=1 ShTab call g:Sh_tab(<q-args>)
 
 command! VimrcSo so ~/_vimrc
 command! GVimrcSo so ~/_gvimrc
@@ -207,7 +210,7 @@ command! MClear for n in range(200) | echom '' | endfor
 
 if g:Is_windows()
   command! Cmd !start cmd
-  command! Mintty !start mintty
+  command! Sh !start sh --login -i
 else
   command! Wsudo w !sudo tee % > /dev/null
 endif
@@ -249,10 +252,6 @@ function! g:Debug_profile(cmd)
   profile func *
   silent exe a:cmd
   qa!
-endfunction
-
-function! g:Sh_tab(cmd)
-  exe 'tabe | r!' . a:cmd
 endfunction
 
 function! g:S_clip()
