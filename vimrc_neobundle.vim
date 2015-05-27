@@ -153,7 +153,7 @@ if neobundle#tap('unite.vim') "{{{
         \ BookmarkT call s:unite_bookmark_edit(<q-args>, 'default')
 
   function! s:unite_bookmark_comp(A,L,P) "{{{
-    return g:File_list(g:unite_source_bookmark_directory . '/*')
+    return g:File_list(g:unite_source_bookmark_directory . '/' . a:A . '*')
   endfunction "}}}
   function! s:unite_bookmark_open(st_arg, st_default) "{{{
     if &ft == 'vimfiler'
@@ -174,8 +174,11 @@ if neobundle#tap('unite.vim') "{{{
   endfunction "}}}
   function! s:unite_bookmark_edit(st_arg, st_default) "{{{
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let st_cmd = 'tabe ' . g:unite_source_bookmark_directory . '/' . st_file
-    silent exe st_cmd
+    let st_path = g:unite_source_bookmark_directory . '/' . st_file
+    if empty(glob(st_path))
+      echom 'file not found ' . st_path
+    endif
+    silent exe join(['tabe', st_path])
   endfunction "}}}
   "}}}
   function! neobundle#hooks.on_source(bundle) "{{{
@@ -211,12 +214,14 @@ if neobundle#tap('unite-breakpoint') "{{{
 endif "}}}
 if neobundle#tap('unite-amazingbookmark') "{{{
   command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
-        \ UABookmark call s:unite_amazingbookmark_open(<q-args>, 'default.json')
+        \ UABookmark call s:unite_amazingbookmark_open(<q-args>, 'default')
   command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
-        \ ABookmarkT call s:unite_amazingbookmark_edit(<q-args>, 'default.json')
+        \ ABookmarkT call s:unite_amazingbookmark_edit(<q-args>, 'default')
 
   function! s:unite_amazingbookmark_comp(A,L,P) "{{{
-    return g:File_list(g:unite_source_amazingbookmark_directory . '/*')
+    return map(g:File_list(g:unite_source_amazingbookmark_directory . '/' . a:A . '*.md'), "
+          \ substitute(v:val, '\.md$', '', '')
+          \ ")
   endfunction "}}}
   function! s:unite_amazingbookmark_open(st_arg, st_default) "{{{
     if &ft == 'vimfiler'
@@ -226,6 +231,7 @@ if neobundle#tap('unite-amazingbookmark') "{{{
     endif
 
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
+    let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
     let li_cmd = [
           \   'Unite'
           \ , 'amazingbookmark:' . st_file
@@ -237,8 +243,11 @@ if neobundle#tap('unite-amazingbookmark') "{{{
   endfunction "}}}
   function! s:unite_amazingbookmark_edit(st_arg, st_default) "{{{
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let st_cmd = 'tabe ' . g:unite_source_amazingbookmark_directory . '/' . st_file
-    silent exe st_cmd
+    let st_path = g:unite_source_amazingbookmark_directory . '/' . st_file
+    if empty(glob(st_path))
+      echom 'file not found ' . st_path
+    endif
+    silent exe join(['tabe', st_path])
   endfunction "}}}
 
   function! neobundle#hooks.on_source(bundle)
