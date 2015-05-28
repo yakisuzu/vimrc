@@ -58,7 +58,7 @@ if !s:use_local()
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-breakpoint'
         \ , {'depends' : ['Shougo/unite.vim']}
-  NeoBundle 'yakisuzu/unite-amazingbookmark'
+  NeoBundle 'yakisuzu/unite-bookmarkamazing'
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'Shougo/vimfiler.vim'
         \ , {'depends' : ['Shougo/unite.vim']}
@@ -216,18 +216,18 @@ if neobundle#tap('unite-breakpoint') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('unite-amazingbookmark') "{{{
-  command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
-        \ UABookmark call s:unite_amazingbookmark_open(<q-args>, 'default')
-  command! -nargs=? -complete=customlist,s:unite_amazingbookmark_comp
-        \ ABookmarkT call s:unite_amazingbookmark_edit(<q-args>, 'default')
+if neobundle#tap('unite-bookmarkamazing') "{{{
+  command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
+        \ UABookmark call s:unite_bookmarkamazing_open(<q-args>, 'default')
+  command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
+        \ ABookmarkT call s:unite_bookmarkamazing_edit(<q-args>, 'default')
 
-  function! s:unite_amazingbookmark_comp(A,L,P) "{{{
-    return map(g:File_list(g:unite_source_amazingbookmark_directory . '/' . a:A . '*.md'), "
+  function! s:unite_bookmarkamazing_comp(A,L,P) "{{{
+    return map(g:File_list(g:unite_source_bookmarkamazing_directory . '/' . a:A . '*.md'), "
           \ substitute(v:val, '\.md$', '', '')
           \ ")
   endfunction "}}}
-  function! s:unite_amazingbookmark_open(st_arg, st_default) "{{{
+  function! s:unite_bookmarkamazing_open(st_arg, st_default) "{{{
     if &ft == 'vimfiler'
       call unite#custom#default_action('directory', 'vimfiler')
     else
@@ -238,17 +238,17 @@ if neobundle#tap('unite-amazingbookmark') "{{{
     let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
     let li_cmd = [
           \   'Unite'
-          \ , 'amazingbookmark:' . st_file
+          \ , 'bookmarkamazing:' . st_file
           \ , '-vertical'
           \ , '-direction=leftabove'
           \ , '-winwidth=60'
           \ ]
     silent exe join(li_cmd)
   endfunction "}}}
-  function! s:unite_amazingbookmark_edit(st_arg, st_default) "{{{
+  function! s:unite_bookmarkamazing_edit(st_arg, st_default) "{{{
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
     let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
-    let st_path = g:unite_source_amazingbookmark_directory . '/' . st_file
+    let st_path = g:unite_source_bookmarkamazing_directory . '/' . st_file
     if empty(glob(st_path))
       echom 'file not found ' . st_path
     endif
@@ -256,8 +256,8 @@ if neobundle#tap('unite-amazingbookmark') "{{{
   endfunction "}}}
 
   function! neobundle#hooks.on_source(bundle)
-    " init unite amazingbookmark
-    call unite#sources#amazingbookmark#define()
+    " init unite bookmarkamazing
+    call unite#sources#bookmarkamazing#define()
   endfunction
 
   call neobundle#untap()
