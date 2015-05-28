@@ -103,6 +103,10 @@ if !s:use_local()
 endif "}}}
 
 if neobundle#tap('vital.vim') "{{{
+  command! -nargs=1 -complete=file
+        \ Open call g:VMfile.open(<q-args>)
+  command! OpenClipbord call g:VMfile.open(@+)
+
   function! neobundle#hooks.on_source(bundle)
     let g:V = vital#of('vital')
     let g:VMfile = g:V.import('System.File')
@@ -243,6 +247,7 @@ if neobundle#tap('unite-amazingbookmark') "{{{
   endfunction "}}}
   function! s:unite_amazingbookmark_edit(st_arg, st_default) "{{{
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
+    let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
     let st_path = g:unite_source_amazingbookmark_directory . '/' . st_file
     if empty(glob(st_path))
       echom 'file not found ' . st_path

@@ -171,7 +171,7 @@ function! s:vimrc_open(st_file, st_default_file) "{{{
   let st_exe_file = !empty(a:st_file) ? a:st_file : a:st_default_file
   let st_path = glob(g:dir_vimrc . st_exe_file)
   if !empty(st_path)
-    exe 'tabe ' . st_path
+    exe join(['tabe', st_path])
   endif
 endfunction "}}}
 
