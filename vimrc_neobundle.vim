@@ -118,6 +118,24 @@ if neobundle#tap('vital.vim') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('vimshell.vim') "{{{
+  let di_bin_path = {}
+  if g:Is_mac()
+    let di_bin_path = {'/usr/bin' : 'utf-8-mac'}
+  elseif has('win32')
+    let di_bin_path = {'C:/Program Files/Git/bin' : 'utf-8'}
+  elseif has('win64')
+    let di_bin_path = {'C:/Program Files (x86)/Git/bin' : 'utf-8'}
+  endif
+  if !empty(di_bin_path)
+    let g:vimshell_interactive_encodings = di_bin_path
+  endif
+
+  function! neobundle#hooks.on_source(bundle)
+  endfunction
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('unite.vim') "{{{
   " for buffer "{{{
   command! UBuffer Unite buffer
@@ -206,8 +224,8 @@ if neobundle#tap('unite.vim') "{{{
 
     function! s:filetype_unite()
       nnoremap <silent><buffer><expr> x unite#do_action('execute')
-    endfunction "}}}
-  augroup END
+    endfunction
+  augroup END "}}}
 
   call neobundle#untap()
 endif "}}}
@@ -274,7 +292,7 @@ if neobundle#tap('vimfiler.vim') "{{{
           \ })
   endfunction
 
-  augroup vimfiler
+  augroup vimfiler "{{{
     autocmd!
     autocmd FileType vimfiler call s:filetype_vimfiler()
 
@@ -286,7 +304,7 @@ if neobundle#tap('vimfiler.vim') "{{{
       nmap <buffer> o <Plug>(vimfiler_expand_tree)
       nmap <buffer> O <Plug>(vimfiler_expand_tree_recursive)
     endfunction
-  augroup END
+  augroup END "}}}
 
   call neobundle#untap()
 endif "}}}
