@@ -107,25 +107,32 @@ nnoremap <C-]> g<C-]>
 "---------------------------------------------------------------------------
 " 自動コマンド追加"{{{
 " ファイルタイプ更新
+let s:markdown_add_suffix = 1
 augroup markdown
   autocmd!
   autocmd BufRead,BufNewFile *.md setlocal nowrap
   autocmd BufWritePre *.md call s:writePre_md()
 
+  command! ToggleMarkdownSuffix let s:markdown_add_suffix = (s:markdown_add_suffix ? 0 : 1)
   function! s:writePre_md()
-    silent %s/\v[^ ]@<= $/  /ge
+    silent %s/\v^#.*\zs  $//ge
+    silent %s/\v[^ ]\zs $//ge
 
     let regexList = [
-          \ '^'
+          \ '^$'
+          \ ,'^#'
           \ ,'^---'
-          \ ,'^```.*'
-          \ ,' {2}'
-          \ ,'^\|.+'
+          \ ,'^```'
+          \ ,'^\|'
+          \ ,'  $'
           \ ]
+    let exeCom = 'v/\v(' . join(regexList,'|') . ')/normal A  '
 
-    let exeCom = 'v/\v(' . join(regexList,'|') . ')$/normal A  '
-    " echomsg exeCom
-    silent exe exeCom
+    if s:markdown_add_suffix
+      silent exe exeCom
+    else
+      silent %s/  $//ge
+    endif
   endfunction
 augroup END
 
@@ -216,7 +223,7 @@ else
 endif
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 
-command! CdC call g:CdC()
+command! CdCurrent if !empty(glob(expand('%:p:h')))|cd %:p:h|endif
 "}}}
 
 "---------------------------------------------------------------------------
@@ -229,14 +236,8 @@ function! g:Echomsg(st_msg)
 endfunction
 
 function! g:GitEcho(st_cmd)
-  call g:CdC()
+  CdCurrent
   echo system(a:st_cmd)
-endfunction
-
-function! g:CdC()
-  if !empty(glob(expand('%:p:h')))
-    CdCurrent
-  endif
 endfunction
 
 function! g:Redir_tab(cmd)
@@ -254,19 +255,15 @@ function! g:Debug_profile(cmd)
   qa!
 endfunction
 
-function! g:S_clip()
-  %s//\=@+/ge
-endfunction
-
 function! g:Index_increment()
-  %s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)+1/ge
+  %s/\v(^\t*)@<=\d+/\=submatch(0)+1/ge
   "	for cnt in range(9,1,-1)
   "		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
   "	endfo
 endfunction
 
 function! g:Index_decrement()
-  %s/\v(^\t*)@<=\d{1,}\.@=/\=submatch(0)-1/ge
+  %s/\v(^\t*)@<=\d+/\=submatch(0)-1/ge
 endfunction
 
 let g:conv_md_codetype = 'java'

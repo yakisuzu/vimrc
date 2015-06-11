@@ -105,7 +105,8 @@ endif "}}}
 if neobundle#tap('vital.vim') "{{{
   command! -nargs=1 -complete=file
         \ Open call g:VMfile.open(<q-args>)
-  command! OpenClipbord call g:VMfile.open(@+)
+  command! OpenClipbord echom 'open ' . @+ | call g:VMfile.open(@+)
+  command! OpenParenthese exe 'normal "oyi)' | echom 'open ' . @o | call g:VMfile.open(@o)
 
   function! neobundle#hooks.on_source(bundle)
     let g:V = vital#of('vital')
@@ -168,41 +169,6 @@ if neobundle#tap('unite.vim') "{{{
     silent exe join(li_cmd)
   endfunction "}}}
   "}}}
-  " for bookmark "{{{
-  command! -nargs=? -complete=customlist,s:unite_bookmark_comp
-        \ UBookmark call s:unite_bookmark_open(<q-args>, 'default')
-  command! -nargs=? -complete=customlist,s:unite_bookmark_comp
-        \ BookmarkT call s:unite_bookmark_edit(<q-args>, 'default')
-
-  function! s:unite_bookmark_comp(A,L,P) "{{{
-    return g:File_list(g:unite_source_bookmark_directory . '/' . a:A . '*')
-  endfunction "}}}
-  function! s:unite_bookmark_open(st_arg, st_default) "{{{
-    if &ft == 'vimfiler'
-      call unite#custom#default_action('directory', 'vimfiler')
-    else
-      call unite#custom#default_action('directory', 'tabvimfiler')
-    endif
-
-    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let li_cmd = [
-          \   'Unite'
-          \ , 'bookmark:' . st_file
-          \ , '-vertical'
-          \ , '-direction=leftabove'
-          \ , '-winwidth=60'
-          \ ]
-    silent exe join(li_cmd)
-  endfunction "}}}
-  function! s:unite_bookmark_edit(st_arg, st_default) "{{{
-    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let st_path = g:unite_source_bookmark_directory . '/' . st_file
-    if empty(glob(st_path))
-      echom 'file not found ' . st_path
-    endif
-    silent exe join(['tabe', st_path])
-  endfunction "}}}
-  "}}}
   function! neobundle#hooks.on_source(bundle) "{{{
     " init unite bookmark
     call unite#sources#bookmark#define()
@@ -236,9 +202,9 @@ if neobundle#tap('unite-breakpoint') "{{{
 endif "}}}
 if neobundle#tap('unite-bookmarkamazing') "{{{
   command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
-        \ UABookmark call s:unite_bookmarkamazing_open(<q-args>, 'default')
+        \ UBookmarkA call s:unite_bookmarkamazing_open(<q-args>, 'default')
   command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
-        \ ABookmarkT call s:unite_bookmarkamazing_edit(<q-args>, 'default')
+        \ BookmarkAT call s:unite_bookmarkamazing_edit(<q-args>, 'default')
 
   function! s:unite_bookmarkamazing_comp(A,L,P) "{{{
     return map(g:File_list(g:unite_source_bookmarkamazing_directory . '/' . a:A . '*.md'), "
