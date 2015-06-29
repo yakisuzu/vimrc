@@ -266,23 +266,29 @@ function! g:Index_decrement()
   %s/\v(^\t*)@<=\d+/\=submatch(0)-1/ge
 endfunction
 
-let g:conv_md_codetype = 'java'
+let g:conv_md_codetype = 'sh'
 function! g:Conv_backlog_to_md()
-  %s/\v^\*{3}\s?/### /ge
-  %s/\v^\*{2}\s?/## /ge
-  %s/\v^\*{1}\s?/# /ge
-  %s/\v^\{code}/\='```' . g:conv_md_codetype/ge
-  %s/\v^\{\/code}/```/ge
-  %s/\v {1}$/  /ge
+  silent %s/\v^\*{3}\s?/### /ge
+  silent %s/\v^\*{2}\s?/## /ge
+  silent %s/\v^\*{1}\s?/# /ge
+  silent %s/\v^\{code}/\='```' . g:conv_md_codetype/ge
+  silent %s/\v^\{\/code}/```/ge
+  silent %s/\v {1}$/  /ge
+  silent %s/\v^\[\[/\[/ge
+  silent %s/\v:/\]\(/ge
+  silent %s/\v\]\]/\)/ge
 endfunction
 
 function! g:Conv_md_to_backlog()
-  %s/\v^\#{3}\s?/*** /ge
-  %s/\v^\#{2}\s?/** /ge
-  %s/\v^\#{1}\s?/* /ge
-  exe '%s/\v^```' . g:conv_md_codetype . '/{code}/ge'
-  %s/\v^```/{\/code}/ge
-  %s/\v {2}$/ /ge
+  silent %s/\v^\#{3}\s?/*** /ge
+  silent %s/\v^\#{2}\s?/** /ge
+  silent %s/\v^\#{1}\s?/* /ge
+  silent exe '%s/\v^```' . g:conv_md_codetype . '/{code}/ge'
+  silent %s/\v^```/{\/code}/ge
+  silent %s/\v {2}$/ /ge
+  silent %s/\v^\[/\[\[/ge
+  silent %s/\v\]\(/:/ge
+  silent %s/\v\)/\]\]/ge
 endfunction
 
 function! g:Git_filter_branch()
