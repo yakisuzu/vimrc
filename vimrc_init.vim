@@ -22,6 +22,6 @@ function! g:Vimrcadd_init()
   endif
 endfunction
 if has('vim_starting')
-  call Vimrcadd_init()
+  call g:Vimrcadd_init()
 endif
 

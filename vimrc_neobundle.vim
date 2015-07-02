@@ -49,8 +49,6 @@ if !s:use_local()
   endif "}}}
   NeoBundle 'vim-jp/vital.vim'
   NeoBundle 'Shougo/vimshell.vim'
-        \ , {'depends' : ['Shougo/vimproc.vim']}
-
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'ujihisa/unite-colorscheme'
         \ , {'depends' : ['Shougo/unite.vim']}

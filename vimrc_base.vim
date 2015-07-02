@@ -157,7 +157,6 @@ augroup END
 "---------------------------------------------------------------------------
 " コマンド追加"{{{
 command! -nargs=1 -complete=help H tab h <args>
-command! -nargs=1 -complete=command RedirTab call g:Redir_tab(<q-args>)
 command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
 
 command! VimrcSo so ~/_vimrc
@@ -202,28 +201,31 @@ command! GetYankFileNameSimple let @+ = expand('%:p:t:r')
 command! GetYankFullPath let @+ = expand('%:p')
 command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_')
 
-command! GitPull call g:GitEcho('git pull')
-command! GitCheckout call g:GitEcho('git checkout ' . expand('%:p'))
-command! GitAdd call g:GitEcho('git add ' . expand('%:p'))
-command! GitDiff call g:GitEcho('git diff')
-command! -nargs=+ GitCommit call g:GitEcho('git commit -m ' . shellescape(<q-args>))
-command! GitPush call g:GitEcho('git push')
-command! -nargs=+ GitCommitThis call g:GitEcho('git commit ' . expand('%:p') . ' -m ' . shellescape(<q-args>))
-
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>
 command! TA tab ball
 command! MClear for n in range(200) | echom '' | endfor
+command! CdCurrent if !empty(glob(expand('%:p:h')))|cd %:p:h|endif
+command! -nargs=1 System exe 'CdCurrent'|echo system(<q-args>)
+
+command! ClipToSlash let @+ = substitute(@+, '\\', '\/', 'g')
+command! ClipToYen let @+ = substitute(@+, '\/', '\\', 'g')
+
+command! GitPull System 'git pull'
+command! GitCheckout System 'git checkout ' . expand('%:p')
+command! GitAdd System 'git add ' . expand('%:p')
+command! GitDiff System 'git diff'
+command! -nargs=+ GitCommit System 'git commit -m ' . shellescape(<q-args>)
+command! GitPush System 'git push'
+command! -nargs=+ GitCommitThis System 'git commit ' . expand('%:p') . ' -m ' . shellescape(<q-args>)
 
 if g:Is_windows()
-  command! Cmd !start cmd
-  command! Sh !start sh --login -i
+  command! ExCmd !start cmd
+  command! ExSh !start sh --login -i
 else
   command! Wsudo w !sudo tee % > /dev/null
 endif
 command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
-
-command! CdCurrent if !empty(glob(expand('%:p:h')))|cd %:p:h|endif
 "}}}
 
 "---------------------------------------------------------------------------
@@ -233,18 +235,6 @@ let g:debug = exists('g:debug') ? g:debug : 0
 command! ToggleDebug let g:debug = g:debug ? 0 : 1
 function! g:Echomsg(st_msg)
   if g:debug | echomsg a:st_msg | endif
-endfunction
-
-function! g:GitEcho(st_cmd)
-  CdCurrent
-  echo system(a:st_cmd)
-endfunction
-
-function! g:Redir_tab(cmd)
-  redir @*>
-  silent execute a:cmd
-  redir END
-  tabe | normal Pgg
 endfunction
 
 function! g:Debug_profile(cmd)
@@ -264,6 +254,10 @@ endfunction
 
 function! g:Index_decrement()
   %s/\v(^\t*)@<=\d+/\=submatch(0)-1/ge
+endfunction
+
+function! g:Index_increment_lines()
+  g/./exe 'normal ' . (line('.')-1) . ''
 endfunction
 
 let g:conv_md_codetype = 'sh'
