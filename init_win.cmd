@@ -1,3 +1,3 @@
-mklink %HOMEPATH%\_vimrc %HOMEPATH%\vimrc\vimrc.vim
-mklink %HOMEPATH%\_gvimrc %HOMEPATH%\vimrc\gvimrc.vim
+mklink %HOMEPATH%\_vimrc %~dp0vimrc.vim
+mklink %HOMEPATH%\_gvimrc %~dp0gvimrc.vim
 pause
