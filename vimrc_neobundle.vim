@@ -90,6 +90,8 @@ if !s:use_local()
   endif "}}}
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
+  NeoBundle 'nathanaelkane/vim-indent-guides'
+
   NeoBundle 'tpope/vim-fugitive'
   " NeoBundle 'kakkyz81/evervim' "{{{
   if !g:Is_windows()
@@ -360,6 +362,11 @@ if neobundle#tap('incsearch.vim') "{{{
   map g/ <Plug>(incsearch-stay)
 
   call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-indent-guides') "{{{
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_start_level = 2
+  let g:indent_guides_guide_size = 1
 endif "}}}
 if neobundle#tap('open-browser.vim') "{{{
   command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
