@@ -253,6 +253,7 @@ if neobundle#tap('vimfiler.vim') "{{{
     call vimfiler#custom#profile('default', 'context', {
           \   'auto_cd' : 1
           \ , 'edit_action' : 'tabopen'
+          \ , 'sort_type' : 'none'
           \ })
   endfunction
 
