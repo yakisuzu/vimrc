@@ -94,6 +94,7 @@ nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
 nnoremap * yiw/<C-r>0<CR>N
+"TODO macデフォルトのvimで:nohlsearch<CR>がバグる
 nnoremap <Esc> :nohlsearch<CR>
 nnoremap <C-l> :checktime<CR><C-l>
 nnoremap [space]<Tab> <C-w><C-w>
