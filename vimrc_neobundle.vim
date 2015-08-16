@@ -90,7 +90,7 @@ if !s:use_local()
   endif "}}}
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
-  NeoBundle 'nathanaelkane/vim-indent-guides'
+  NeoBundle 'Yggdroot/indentLine'
 
   NeoBundle 'tpope/vim-fugitive'
   " NeoBundle 'kakkyz81/evervim' "{{{
@@ -100,6 +100,12 @@ if !s:use_local()
   endif
   "}}}
   NeoBundle 'tyru/restart.vim'
+
+  " for python
+  NeoBundle 'davidhalter/jedi-vim'
+  NeoBundle 'andviro/flake8-vim'
+  NeoBundle 'hynek/vim-python-pep8-indent'
+
 endif "}}}
 
 if neobundle#tap('vital.vim') "{{{
@@ -255,7 +261,7 @@ if neobundle#tap('vimfiler.vim') "{{{
     call vimfiler#custom#profile('default', 'context', {
           \   'auto_cd' : 1
           \ , 'edit_action' : 'tabopen'
-          \ , 'sort_type' : 'none'
+          \ , 'sort_type' : 'filename'
           \ })
   endfunction
 
@@ -363,10 +369,8 @@ if neobundle#tap('incsearch.vim') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-indent-guides') "{{{
-  let g:indent_guides_enable_on_vim_startup = 1
-  let g:indent_guides_start_level = 2
-  let g:indent_guides_guide_size = 1
+if neobundle#tap('indentLine') "{{{
+  let g:indentLine_color_gui='#808080'
 endif "}}}
 if neobundle#tap('open-browser.vim') "{{{
   command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
