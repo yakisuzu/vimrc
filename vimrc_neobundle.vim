@@ -209,8 +209,6 @@ endif "}}}
 if neobundle#tap('unite-bookmarkamazing') "{{{
   command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
         \ UBookmarkA call s:unite_bookmarkamazing_open(<q-args>, 'default')
-  command! -nargs=? -complete=customlist,s:unite_bookmarkamazing_comp
-        \ BookmarkAT call s:unite_bookmarkamazing_edit(<q-args>, 'default')
 
   function! s:unite_bookmarkamazing_comp(A,L,P) "{{{
     return filter(unite#sources#bookmarkamazing#get_bookmark_file_complete_list(a:A, a:L, a:P), "
@@ -233,15 +231,6 @@ if neobundle#tap('unite-bookmarkamazing') "{{{
           \ , '-winwidth=60'
           \ ]
     silent exe join(li_cmd)
-  endfunction "}}}
-  function! s:unite_bookmarkamazing_edit(st_arg, st_default) "{{{
-    let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
-    let st_path = g:unite_source_bookmarkamazing_directory . '/' . st_file
-    if empty(glob(st_path))
-      echom 'file not found ' . st_path
-    endif
-    silent exe join(['tabe', st_path])
   endfunction "}}}
 
   function! neobundle#hooks.on_source(bundle)
