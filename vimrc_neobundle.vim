@@ -213,8 +213,8 @@ if neobundle#tap('unite-bookmarkamazing') "{{{
         \ BookmarkAT call s:unite_bookmarkamazing_edit(<q-args>, 'default')
 
   function! s:unite_bookmarkamazing_comp(A,L,P) "{{{
-    return map(g:File_list(g:unite_source_bookmarkamazing_directory . '/' . a:A . '*.md'), "
-          \ substitute(v:val, '\.md$', '', '')
+    return filter(unite#sources#bookmarkamazing#get_bookmark_file_complete_list(a:A, a:L, a:P), "
+          \ v:val != '*'
           \ ")
   endfunction "}}}
   function! s:unite_bookmarkamazing_open(st_arg, st_default) "{{{
@@ -225,7 +225,6 @@ if neobundle#tap('unite-bookmarkamazing') "{{{
     endif
 
     let st_file = empty(a:st_arg) ? a:st_default : a:st_arg
-    let st_file = (st_file =~? '\.md$') ? st_file : st_file . '.md'
     let li_cmd = [
           \   'Unite'
           \ , 'bookmarkamazing:' . st_file
