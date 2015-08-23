@@ -10,26 +10,22 @@ if has('vim_starting')
   let &runtimepath .= ',' . g:dir_bundle . 'neobundle.vim/'
 endif
 
-function! s:use_local()
-  return 0
-endfunction
+let use_local = 0
 
+" Required:
 try
-  call g:neobundle#exists_not_installed_bundles()
+  call neobundle#begin(g:dir_bundle)
 catch /.*/
   echom 'neobundle not installed'
   finish
 endtry
 
-" Required:
-call neobundle#begin(g:dir_bundle)
-
 " Let NeoBundle manage NeoBundle
 " Required:
-if !s:use_local()
+if !use_local
   NeoBundleFetch 'Shougo/neobundle.vim'
 endif
-if s:use_local()
+if use_local
   call neobundle#local(g:dir_bundle, {})
 endif
 
@@ -38,7 +34,7 @@ endif
 " Note: You don't set neobundle setting in .gvimrc! "}}}
 "---------------------------------------------------------------------------
 " plugin list "{{{
-if !s:use_local()
+if !use_local
   " NeoBundle 'Shougo/vimproc.vim' "{{{
   if !g:Is_windows()
     NeoBundle 'Shougo/vimproc.vim', {
