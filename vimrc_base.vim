@@ -314,5 +314,27 @@ function! g:Add_runtimepath(st_pkg)
     exe 'helptags ' . st_doc_path
   endif
 endfunction
+
+function! g:Get_current_buf()
+  return getbufline(bufnr('%'), 1, '$')
+endfunction
+
+function! g:Set_current_buf(buf_list)
+  %d
+  return setline(1, a:buf_list)
+endfunction
+
+function! g:Open_args(st_path, li_args)
+  if g:Is_windows()
+    silent exe join(['!start', '"' . a:st_path . '"', join(a:li_args)])
+  else
+    echom 'not support'
+  endif
+endfunction
+
+function! g:Call_python3(st_pyfile, li_args)
+  exe 'python3 import sys; sys.argv = [' . join(a:li_args, ',') . ']'
+  exe 'py3file ' . a:st_pyfile
+endfunction
 "}}}
 
