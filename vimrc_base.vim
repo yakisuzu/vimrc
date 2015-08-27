@@ -225,9 +225,12 @@ if g:Is_windows()
   command! ExCmd !start cmd
   command! ExSh !start sh --login -i
 else
+  if g:Is_mac()
+    command! ExTerminal !open /Applications/Utilities/Terminal.app
+  endif
   command! Wsudo w !sudo tee % > /dev/null
 endif
-command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
+"command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "}}}
 
 "---------------------------------------------------------------------------
