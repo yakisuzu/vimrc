@@ -102,6 +102,9 @@ if !use_local
   NeoBundle 'andviro/flake8-vim'
   NeoBundle 'hynek/vim-python-pep8-indent'
 
+  " for yaml
+  NeoBundle 'chase/vim-ansible-yaml'
+
 endif "}}}
 
 if neobundle#tap('vital.vim') "{{{
@@ -360,6 +363,9 @@ if neobundle#tap('open-browser.vim') "{{{
   command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
 
   call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-ansible-yaml') "{{{
+  command! SetAnsible setl ft=ansible
 endif "}}}
 
 "---------------------------------------------------------------------------
