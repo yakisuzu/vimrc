@@ -366,6 +366,8 @@ if neobundle#tap('open-browser.vim') "{{{
 endif "}}}
 if neobundle#tap('vim-ansible-yaml') "{{{
   command! SetAnsible setl ft=ansible
+
+  call neobundle#untap()
 endif "}}}
 
 "---------------------------------------------------------------------------
