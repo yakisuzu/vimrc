@@ -189,13 +189,13 @@ command! -nargs=1 SetSpLinesDown normal <args>+
 command! -nargs=1 SetSpCoRight normal <args>>
 command! -nargs=1 SetSpCoLeft normal <args><
 
-command! SetWrap set wrap ve=
-command! SetWrapNo set nowrap ve=all
-command! SetExpandtab set et sw=2 ts=2
-command! SetExpandtabNo set noet sw=4 ts=4
+command! SetWrap setl wrap | set ve=
+command! SetWrapNo setl nowrap | set ve=all
+command! SetExpandtab setl et sw=2 ts=2
+command! SetExpandtabNo setl noet sw=4 ts=4
 
-command! SetEncUtf8 set encoding=utf-8
-command! SetEncCp932 set encoding=cp932
+command! EditUtf8 set enc=utf8 | e! ++enc=utf8 ++ff=unix
+command! EditCp932 set enc=cp932 | e! ++enc=cp932 ++ff=dos
 
 command! GetYankFileName let @+ = expand('%:p:t')
 command! GetYankFileNameSimple let @+ = expand('%:p:t:r')
