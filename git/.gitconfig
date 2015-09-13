@@ -1,0 +1,15 @@
+[user]
+	name = null
+	email = null
+[core]
+	editor = vim
+	quotepath = false
+	autocrlf = false
+[push]
+	default = simple
+[diff]
+	patience = true
+[color]
+	ui = true
+[alias]
+	diffw = diff --word-diff=plain
