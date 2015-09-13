@@ -13,9 +13,8 @@ function MACRC(){
     . ~/.nvm/nvm.sh
   fi
 
-  f_vim=/Applications/MacVim.app/Contents/MacOS/Vim
-  if [ -s $f_vim ]; then
-    alias vim=$f_vim + ' "$@"'
+  if [ -s /Applications/MacVim.app/Contents/MacOS/Vim ]; then
+    alias vim='/Applications/MacVim.app/Contents/MacOS/Vim "$@"'
   fi
 }
 
