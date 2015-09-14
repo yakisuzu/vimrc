@@ -8,8 +8,12 @@ function MKLINK(){
 
   echo make $f_link
   ln -s $f_file $f_link
+
+  unset f_link
+  unset f_file
 }
 
 for i in `ls -A $(pwd)/vim/*vimrc.vim`; do
   MKLINK $i
 done
+unset MKLINK

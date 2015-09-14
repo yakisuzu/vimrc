@@ -16,6 +16,7 @@ function MKLINK(){
 for i in `ls -A $(pwd)/git/.gitconfig`; do
   MKLINK $i
 done
+unset MKLINK
 
 for k in `ls -A $(pwd)/git/.gitconfig_*`; do
   f_link=~/`basename $k`
