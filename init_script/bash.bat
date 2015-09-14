@@ -1,10 +1,10 @@
-for %%i in (.¥bash¥*) do (
+for %%i in (.\bash\*) do (
   call :MKLINK %%i
 )
 exit /b
 
 :MKLINK
-  set f_link=%HOMEPATH%¥%~x1
+  set f_link=%HOMEPATH%\%~x1
   set f_file=%~dpnx1
 
   if exist %f_link% ( del %f_link% )
