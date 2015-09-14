@@ -1,4 +1,4 @@
-@echo offf
+@echo off
 pushd %~dp0
 
 echo --------------------

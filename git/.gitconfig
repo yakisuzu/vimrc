@@ -13,3 +13,5 @@
 	ui = true
 [alias]
 	diffw = diff --word-diff=plain
+	diffc = diff --cached
+	logo = log --oneline
