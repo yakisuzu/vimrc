@@ -1,6 +1,5 @@
-[user]
-	name = null
-	email = null
+[include]
+	path = .gitconfig_local
 [core]
 	editor = vim
 	quotepath = false
