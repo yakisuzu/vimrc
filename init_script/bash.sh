@@ -2,7 +2,7 @@ function MKLINK(){
   f_link=~/`basename $1`
   f_file=$1
 
-  if [ -L $f_link ]; then
+  if [ -e $f_link ]; then
     rm $f_link
   fi
 
@@ -13,7 +13,7 @@ function MKLINK(){
   unset f_file
 }
 
-for i in `ls -A $(pwd)/bash/.bash*` `ls -A $(pwd)/bash/.input*`; do
+for i in `ls -A $(pwd)/bash/.[a-z]*`; do
   MKLINK $i
 done
 unset MKLINK
