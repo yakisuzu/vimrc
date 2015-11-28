@@ -7,6 +7,15 @@ export LANG=ja_JP.UTF-8
 alias lsa='ls -la'
 alias vi='vim -u NONE'
 
+# $1 alias name
+# $2 path
+# $3 path prefix
+function MAKE_ALIAS(){
+  if [ -e $2 ]; then
+    alias $1="$3$2"
+  fi
+}
+
 function MACRC(){
   # Node Version Manager
   f_nvm=~/.nvm/nvm.sh
@@ -15,22 +24,16 @@ function MACRC(){
   fi
   unset f_nvm
 
-  f_vim=/Applications/MacVim.app/Contents/MacOS/Vim
-  if [ -s $f_vim ]; then
-    alias vim=$f_vim
-  fi
-  unset f_vim
+  MAKE_ALIAS vim /Applications/MacVim.app/Contents/MacOS/Vim
+  MAKE_ALIAS gvim /Applications/MacVim.app "open "
 }
 
 function WINRC(){
   alias ls='ls --color=auto --show-control-chars'
   alias powershell='powershell -ExecutionPolicy unrestricted'
 
-  f_vim=$SYSTEMDRIVE/ProgramData/vim74-kaoriya-win32/vim.exe
-  if [ -s $f_vim ]; then
-    alias vim=$f_vim
-  fi
-  unset f_vim
+  MAKE_ALIAS vim $SYSTEMDRIVE/ProgramData/vim74-kaoriya-win32/vim.exe
+  MAKE_ALIAS gvim $SYSTEMDRIVE/ProgramData/vim74-kaoriya-win32/gvim.exe
 }
 
 if [ `uname` == 'Darwin' ]; then
@@ -41,3 +44,4 @@ fi
 
 unset MACRC
 unset WINRC
+unset MAKE_ALIAS
