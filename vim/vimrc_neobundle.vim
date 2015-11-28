@@ -337,7 +337,7 @@ if neobundle#tap('shaberu.vim') "{{{
   endfunction
 
   function! g:Say_random(li_str)
-    call Shaberu_say_print(g:VMran.sample(a:li_str))
+    call g:Shaberu_say_print(g:VMran.sample(a:li_str))
   endfunction
 
   augroup shaberu
