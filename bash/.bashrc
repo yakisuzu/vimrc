@@ -4,6 +4,8 @@ export LANG=ja_JP.UTF-8
 #export LESSCHARSET=utf-8
 #export PATH=/usr/local/bin:$PATH
 
+export NVM_DIR=~/.nvm
+
 alias lsa='ls -la'
 alias vi='vim -u NONE'
 
@@ -18,11 +20,9 @@ function MAKE_ALIAS(){
 
 function MACRC(){
   # Node Version Manager
-  f_nvm=~/.nvm/nvm.sh
-  if [ -s $f_nvm ]; then
-    . $f_nvm
+  if [ -d $NVM_DIR ]; then
+    . $(brew --prefix nvm)/nvm.sh
   fi
-  unset f_nvm
 
   MAKE_ALIAS vim /Applications/MacVim.app/Contents/MacOS/Vim
   MAKE_ALIAS gvim /Applications/MacVim.app "open "
