@@ -11,6 +11,8 @@
 [color]
 	ui = true
 [alias]
+	s = status
+	c = commit
 	diffw = diff --word-diff=plain
 	diffc = diff --cached
 	logo = log --oneline
