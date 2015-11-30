@@ -15,9 +15,9 @@ function! g:Is_mac()
 endfunction
 
 function! g:Vimrcadd_init()
-  let st_addfile = fnamemodify(g:dir_vimrc . 'vimrc_add.vim', ':p')
-  if empty(glob(st_addfile))
-    call writefile([''], st_addfile)
+  let st_localfile = fnamemodify('~/_vimrc_local', ':p')
+  if empty(glob(st_localfile))
+    call writefile([''], st_localfile)
   endif
 endfunction
 
