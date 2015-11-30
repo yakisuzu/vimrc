@@ -197,10 +197,11 @@ command! SetExpandtabNo setl noet sw=4 ts=4
 command! EditUtf8 set enc=utf8 | e! ++enc=utf8 ++ff=unix
 command! EditCp932 set enc=cp932 | e! ++enc=cp932 ++ff=dos
 
-command! GetYankFileName let @+ = expand('%:p:t')
-command! GetYankFileNameSimple let @+ = expand('%:p:t:r')
-command! GetYankFullPath let @+ = expand('%:p')
-command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_')
+command! GetYankFileName let @+ = expand('%:p:t') | echo @+
+command! GetYankFileNameSimple let @+ = expand('%:p:t:r') | echo @+
+command! GetYankFullPath let @+ = expand('%:p') | echo @+
+command! GetYankDir let @+ = expand('%:p:h') | echo @+
+command! GetYankTime let @+ = strftime('%Y%m%d_%H%M_') | echo @+
 
 command! Bd bufdo bd!
 command! -nargs=? -complete=file T tabe <args>

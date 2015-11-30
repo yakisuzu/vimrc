@@ -210,9 +210,7 @@ if neobundle#tap('unite-bookmarkamazing') "{{{
         \ UBookmarkA call s:unite_bookmarkamazing_open(<q-args>, 'default')
 
   function! s:unite_bookmarkamazing_comp(A,L,P) "{{{
-    return filter(unite#sources#bookmarkamazing#get_bookmark_file_complete_list(a:A, a:L, a:P), "
-          \ v:val != '*'
-          \ ")
+    return unite#sources#bookmarkamazing#get_bookmark_file_complete_list(a:A, a:L, a:P, ['*'])
   endfunction "}}}
   function! s:unite_bookmarkamazing_open(st_arg, st_default) "{{{
     if &ft == 'vimfiler'
