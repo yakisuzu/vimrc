@@ -20,11 +20,12 @@ unset MKLINK
 
 for k in `ls -A $(pwd)/git/.gitconfig_*`; do
   f_link=~/`basename $k`
-  if [ -f $f_link ]; then
-    rm $f_link
+  if [ -e $f_link ]; then
+    echo exits $f_link
+  else
+    echo cp $f_link
+    cp $k $f_link
   fi
 
-  echo cp $f_link
-  cp $k $f_link
   unset f_link
 done
