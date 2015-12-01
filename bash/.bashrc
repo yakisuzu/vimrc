@@ -42,6 +42,10 @@ elif [ `expr substr $(uname -s) 1 7` == 'MSYS_NT' ]; then
   WINRC
 fi
 
+if [ -e ~/_.bashrc_local ]; then
+  . ~/.bashrc_local
+fi
+
 unset MACRC
 unset WINRC
 unset MAKE_ALIAS

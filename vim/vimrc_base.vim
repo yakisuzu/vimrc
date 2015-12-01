@@ -167,6 +167,7 @@ command! -nargs=? -complete=customlist,s:vimrc_comp
       \ VimrcOpen call s:vimrc_open(<q-args>, 'vimrc_base.vim')
 command! -nargs=? -complete=customlist,s:gvimrc_comp
       \ GVimrcOpen call s:vimrc_open(<q-args>, 'gvimrc_base.vim')
+command! VimrcLocalOpen tabe ~/_vimrc_local
 
 function! s:vimrc_comp(A,L,P) "{{{
   return g:File_list(g:dir_vimrc . 'vimrc_*')
@@ -323,22 +324,26 @@ function! g:Get_current_buf()
   return getbufline(bufnr('%'), 1, '$')
 endfunction
 
-function! g:Set_current_buf(buf_list)
+function! g:Set_current_buf(li_buf)
   %d
-  return setline(1, a:buf_list)
+  return setline(1, a:li_buf)
 endfunction
 
-function! g:Open_args(st_path, li_args)
+function! g:Open_args(st_path, ...)
   if g:Is_windows()
-    silent exe join(['!start', '"' . a:st_path . '"', join(a:li_args)])
+    silent exe join(['!start', '"' . a:st_path . '"', join(a:000)])
   else
     echom 'not support'
   endif
 endfunction
 
-function! g:Call_python3(st_pyfile, li_args)
-  exe 'python3 import sys; sys.argv = [' . join(a:li_args, ',') . ']'
+function! g:Call_python3(st_pyfile, ...)
+  exe 'python3 import sys; sys.argv = [' . join(a:000, ',') . ']'
   exe 'py3file ' . a:st_pyfile
+endfunction
+
+function! g:Call_cscript(st_jsfile, ...)
+  return system(join(['cscript', '//NoLogo', a:st_jsfile, join(a:000), '|ruby', '-ne', '"$_.encode!(%(UTF-8),%(Shift_JIS));puts $_"']))
 endfunction
 "}}}
 
