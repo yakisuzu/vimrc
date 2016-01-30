@@ -4,7 +4,7 @@ for %%i in (.\bash\*) do (
 exit /b
 
 :MKLINK
-  set f_link=%HOMEPATH%\%~x1
+  set f_link=%HOMEPATH%\%~nx1
   set f_file=%~dpnx1
 
   if exist %f_link% ( del %f_link% )
