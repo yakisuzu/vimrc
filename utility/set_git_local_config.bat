@@ -1,8 +1,8 @@
 @echo off
-pushd %~dp0
 
+echo git config init
+cd
 git config --local user.name yakisuzu
 git config --local user.email yakisuzu@gmail.com
 
-popd
 pause
