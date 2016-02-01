@@ -4,7 +4,7 @@ for %%i in (.\vim\*vimrc.vim) do (
 exit /b
 
 :MKLINK
-  set f_link=%HOMEPATH%\_%~n1
+  set f_link=%USERPROFILE%\_%~n1
   set f_file=%~dpnx1
 
   if exist %f_link% ( del %f_link% )

@@ -8,7 +8,7 @@ for %%i in (.\git\.gitconfig_*) do (
 exit /b
 
 :MKLINK
-  set f_link=%HOMEPATH%\%~x1
+  set f_link=%USERPROFILE%\%~x1
   set f_file=%~dpnx1
 
   if exist %f_link% ( del %f_link% )
@@ -19,7 +19,7 @@ exit /b
 exit /b
 
 :MKCP
-  set f_link=%HOMEPATH%\%~x1
+  set f_link=%USERPROFILE%\%~x1
   set f_file=%~dpnx1
 
   if exist %f_link% (
