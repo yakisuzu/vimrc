@@ -72,7 +72,7 @@ if !use_local
   NeoBundle 'rhysd/vim-operator-surround'
         \ , {'depends' : ['kana/vim-operator-user']}
 
-  NeoBundle 'plasticboy/vim-markdown'
+  "NeoBundle 'plasticboy/vim-markdown'
   NeoBundle 'yakisuzu/previm'
   NeoBundle 'tyru/open-browser.vim'
 
