@@ -6,7 +6,7 @@ export LANG=ja_JP.UTF-8
 
 export NVM_DIR=~/.nvm
 
-alias lsa='ls -la'
+alias lsa='ls -lah'
 alias vi='vim -u NONE'
 
 # $1 alias name
