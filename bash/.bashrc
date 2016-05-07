@@ -5,6 +5,7 @@ export LANG=ja_JP.UTF-8
 #export PATH=/usr/local/bin:$PATH
 
 export NVM_DIR=~/.nvm
+export GOPATH=~/work/go
 
 alias lsa='ls -lah'
 alias vi='vim -u NONE'
