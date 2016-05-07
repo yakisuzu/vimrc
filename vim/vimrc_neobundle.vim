@@ -105,6 +105,9 @@ if !use_local
   " for yaml
   NeoBundle 'chase/vim-ansible-yaml'
 
+  " for go
+  NeoBundle 'fatih/vim-go'
+
 endif "}}}
 
 if neobundle#tap('vital.vim') "{{{
@@ -272,6 +275,11 @@ if neobundle#tap('neocomplete.vim') "{{{
   " neocomplete locks when 'iminsert' is non-zero.
   let g:neocomplete#lock_iminsert = 1
 
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
+
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('neosnippet.vim') "{{{
@@ -364,6 +372,16 @@ if neobundle#tap('open-browser.vim') "{{{
 endif "}}}
 if neobundle#tap('vim-ansible-yaml') "{{{
   command! SetAnsible setl ft=ansible
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('vim-go') "{{{
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_structs = 1
+  let g:go_highlight_interfaces = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_build_constraints = 1
 
   call neobundle#untap()
 endif "}}}
