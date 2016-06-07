@@ -87,6 +87,11 @@ if !use_local
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
   NeoBundle 'Yggdroot/indentLine'
+  " NeoBundle 'mattn/emoji-vim' "{{{
+  if !g:Is_windows()
+    NeoBundle 'mattn/emoji-vim'
+  endif
+  "}}}
 
   NeoBundle 'tpope/vim-fugitive'
   " NeoBundle 'kakkyz81/evervim' "{{{
