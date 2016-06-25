@@ -54,6 +54,8 @@ if !use_local
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-bookmarkamazing'
         \ , {'depends' : ['Shougo/unite.vim']}
+  NeoBundle 'yakisuzu/unite-signamazing'
+        \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'Shougo/vimfiler.vim'
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'kmnk/vim-unite-giti'

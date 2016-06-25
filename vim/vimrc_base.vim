@@ -50,7 +50,7 @@ set autoread
 " 進数 nf
 set nrformats=
 " Vim内部で使われる文字エンコーディングを設定する enc
-if g:Is_windows() && !has('gui_running')
+if g:Is_windows() && !has('gui')
   set encoding=cp932
 else
   set encoding=utf8
