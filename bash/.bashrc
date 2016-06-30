@@ -1,8 +1,10 @@
 #!/bin/sh
 
 export LANG=ja_JP.UTF-8
-#export LESSCHARSET=utf-8
+export LESSCHARSET=utf-8
 #export PATH=/usr/local/bin:$PATH
+
+export PATH=$PATH:$HOME/dotfiles/bin
 
 export NVM_DIR=~/.nvm
 export GOPATH=~/work/go
