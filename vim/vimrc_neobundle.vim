@@ -33,25 +33,27 @@ endif
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc! "}}}
 "---------------------------------------------------------------------------
-" plugin list "{{{
+" plugin list
 if !use_local
-  " NeoBundle 'Shougo/vimproc.vim' "{{{
+  " for utility "{{{
   if !g:Is_windows()
     NeoBundle 'Shougo/vimproc.vim', {
           \ 'build' : {
           \     'mac' : 'make -f make_mac.mak',
           \    },
           \ }
-  endif "}}}
+  endif
   NeoBundle 'vim-jp/vital.vim'
   NeoBundle 'Shougo/vimshell.vim'
+  "}}}
+  " for unite "{{{
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'ujihisa/unite-colorscheme'
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'osyo-manga/unite-quickfix'
         \ , {'depends' : ['Shougo/unite.vim']}
-  NeoBundle 'yakisuzu/unite-breakpoint'
-        \ , {'depends' : ['Shougo/unite.vim']}
+  "NeoBundle 'yakisuzu/unite-breakpoint'
+  "      \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-bookmarkamazing'
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-signamazing'
@@ -60,21 +62,29 @@ if !use_local
         \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'kmnk/vim-unite-giti'
         \ , {'depends' : ['Shougo/unite.vim']}
-
-  "NeoBundle 'Shougo/neocomplete.vim' "{{{
+  "}}}
+  " for neocomplete "{{{
   if v:version > 703  && has('lua')
     NeoBundle 'Shougo/neocomplete.vim'
-  endif "}}}
+  endif
   NeoBundle 'Shougo/neosnippet.vim'
         \ , {'depends' : ['Shougo/neocomplete.vim']}
   NeoBundle 'Shougo/neosnippet-snippets'
         \ , {'depends' : ['Shougo/neocomplete.vim']}
-
+ "}}}
+  " for operator "{{{
   NeoBundle 'kana/vim-operator-user'
   NeoBundle 'rhysd/vim-operator-surround'
         \ , {'depends' : ['kana/vim-operator-user']}
-
-  "NeoBundle 'plasticboy/vim-markdown'
+  "}}}
+  " for textobj "{{{
+  NeoBundle 'kana/vim-textobj-user'
+  NeoBundle 'kana/vim-textobj-function'
+        \ , {'depends' : ['kana/vim-textobj-user']}
+  "}}}
+  " for iroiro "{{{
+  " TODO: md
+  " NeoBundle 'plasticboy/vim-markdown'
   NeoBundle 'yakisuzu/previm'
   NeoBundle 'tyru/open-browser.vim'
 
@@ -82,41 +92,39 @@ if !use_local
   " NeoBundle 'cohama/lexima.vim'
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'vim-scripts/Align'
-  " NeoBundle 'supermomonga/shaberu.vim' "{{{
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
-  endif "}}}
+  endif
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
   NeoBundle 'Yggdroot/indentLine'
-  " NeoBundle 'mattn/emoji-vim' "{{{
-  if !g:Is_windows()
-    NeoBundle 'mattn/emoji-vim'
-  endif
-  "}}}
-
-  NeoBundle 'tpope/vim-fugitive'
-  " NeoBundle 'kakkyz81/evervim' "{{{
-  if !g:Is_windows()
-    NeoBundle 'kakkyz81/evervim'
-    " let g:evervim_devtoken = ''
-  endif
-  "}}}
+  NeoBundle 'mattn/emoji-vim'
   NeoBundle 'tyru/restart.vim'
+ "}}}
+  " for python "{{{
+  NeoBundleLazy 'davidhalter/jedi-vim'
+  NeoBundleLazy 'andviro/flake8-vim'
+  NeoBundleLazy 'hynek/vim-python-pep8-indent'
+  "}}}
+  " for yaml "{{{
+  NeoBundleLazy 'chase/vim-ansible-yaml'
+  "}}}
+  " for go "{{{
+  NeoBundleLazy 'fatih/vim-go'
+  "}}}
+  " for lazyload "{{{
+  augroup neobundlelazy
+    autocmd!
+    autocmd FileType python NeoBundleSource jedi-vim
+    autocmd FileType python NeoBundleSource flake8-vim
+    autocmd FileType python NeoBundleSource vim-python-pep8-indent
+    autocmd FileType yaml NeoBundleSource vim-ansible-yaml
+    autocmd FileType go NeoBundleSource vim-go
+  augroup END "}}}
+endif
 
-  " for python
-  NeoBundle 'davidhalter/jedi-vim'
-  NeoBundle 'andviro/flake8-vim'
-  NeoBundle 'hynek/vim-python-pep8-indent'
-
-  " for yaml
-  NeoBundle 'chase/vim-ansible-yaml'
-
-  " for go
-  NeoBundle 'fatih/vim-go'
-
-endif "}}}
-
+"---------------------------------------------------------------------------
+"tap setting
 if neobundle#tap('vital.vim') "{{{
   command! -nargs=1 -complete=file
         \ Open call g:VMfile.open(<q-args>)
