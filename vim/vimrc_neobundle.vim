@@ -92,6 +92,8 @@ if !use_local
   " NeoBundle 'cohama/lexima.vim'
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'scrooloose/syntastic'
+  NeoBundle 'mtscout6/syntastic-local-eslint.vim'
+        \ , {'depends' : ['scrooloose/syntastic']}
   NeoBundle 'vim-scripts/Align'
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
