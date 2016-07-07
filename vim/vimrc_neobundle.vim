@@ -91,6 +91,7 @@ if !use_local
   " TODO: ime returns to the letter problem
   " NeoBundle 'cohama/lexima.vim'
   NeoBundle 'thinca/vim-quickrun'
+  NeoBundle 'scrooloose/syntastic'
   NeoBundle 'vim-scripts/Align'
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
@@ -382,6 +383,11 @@ if neobundle#tap('indentLine') "{{{
 endif "}}}
 if neobundle#tap('open-browser.vim') "{{{
   command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('syntastic') "{{{
+  let g:syntastic_javascript_checkers=['eslint']
 
   call neobundle#untap()
 endif "}}}
