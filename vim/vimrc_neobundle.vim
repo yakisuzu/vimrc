@@ -92,8 +92,8 @@ if !use_local
   " NeoBundle 'cohama/lexima.vim'
   NeoBundle 'thinca/vim-quickrun'
   NeoBundle 'scrooloose/syntastic'
-  NeoBundle 'mtscout6/syntastic-local-eslint.vim'
-        \ , {'depends' : ['scrooloose/syntastic']}
+  "NeoBundle 'mtscout6/syntastic-local-eslint.vim'
+  "      \ , {'depends' : ['scrooloose/syntastic']}
   NeoBundle 'vim-scripts/Align'
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
@@ -389,7 +389,24 @@ if neobundle#tap('open-browser.vim') "{{{
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('syntastic') "{{{
-  let g:syntastic_javascript_checkers=['eslint']
+  let g:syntastic_auto_jump = 1
+  let g:syntastic_javascript_checkers = ['eslint']
+
+  augroup syntastic "{{{
+    autocmd!
+    "autocmd FileType javascript call s:filetype_js()
+
+    " TODO 起動時に読み込みされない
+    function! s:filetype_js()
+      let eslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/eslint*' ,1 ,1)
+      if empty(eslint_file_list)
+        return
+      endif
+      let eslint_file_idx = match(eslint_file_list, '.cmd')
+      " TODO 設定しても動かない
+      let b:syntastic_javascript_eslint_exec = (eslint_file_idx == -1) ? eslint_file_list[0] : eslint_file_list[eslint_file_idx]
+    endfunction
+  augroup END "}}}
 
   call neobundle#untap()
 endif "}}}
