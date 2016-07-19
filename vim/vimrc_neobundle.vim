@@ -323,17 +323,21 @@ if neobundle#tap('neosnippet.vim') "{{{
 endif "}}}
 if neobundle#tap('vim-quickrun') "{{{
   let g:quickrun_config = {
-        \  "_" : {
-        \    "runner" : "vimproc",
-        \    "runner/vimproc/updatetime" : 60
+        \  '_': {
+        \    'runner': 'vimproc',
+        \    'runner/vimproc/updatetime': 60,
+        \  },
+        \  'java': {
+        \    'exec': ['javac -encoding UTF-8 %o %s', '%c -Dfile.encoding=UTF8 %s:t:r %a'],
+        \    'hook/output_encode/encoding': 'cp932',
         \  },
         \}
   if g:Is_windows()
-    let g:quickrun_config = {
-          \  "cs/csc": {
-          \    "command": "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe",
+    let g:quickrun_config = extend(g:quickrun_config, {
+          \  'cs/csc': {
+          \    'command': 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe',
           \  },
-          \}
+          \})
   endif
 
   call neobundle#untap()
@@ -389,7 +393,10 @@ if neobundle#tap('open-browser.vim') "{{{
   call neobundle#untap()
 endif "}}}
 if neobundle#tap('syntastic') "{{{
+  "let g:syntastic_debug = 3
   let g:syntastic_auto_jump = 1
+
+  let g:syntastic_java_javac_args = '-encoding UTF-8'
   let g:syntastic_javascript_checkers = ['eslint']
 
   augroup syntastic "{{{
