@@ -116,7 +116,7 @@ if !use_local
   NeoBundleLazy 'fatih/vim-go'
   "}}}
   " for lazyload "{{{
-  augroup neobundlelazy
+  augroup neobundlelazy_vimrc
     autocmd!
     autocmd FileType python NeoBundleSource jedi-vim
     autocmd FileType python NeoBundleSource flake8-vim
@@ -210,7 +210,7 @@ if neobundle#tap('unite.vim') "{{{
     endfunction
     call unite#custom#action('jump_list', 'execute', di_action)
   endfunction "}}}
-  augroup unite "{{{
+  augroup unite_vimrc "{{{
     autocmd!
     autocmd FileType unite call s:filetype_unite()
 
@@ -271,7 +271,7 @@ if neobundle#tap('vimfiler.vim') "{{{
           \ })
   endfunction
 
-  augroup vimfiler "{{{
+  augroup vimfiler_vimrc "{{{
     autocmd!
     autocmd FileType vimfiler call s:filetype_vimfiler()
 
@@ -368,7 +368,7 @@ if neobundle#tap('shaberu.vim') "{{{
     call g:Shaberu_say_print(g:VMran.sample(a:li_str))
   endfunction
 
-  augroup shaberu
+  augroup shaberu_vimrc
     autocmd!
     autocmd VimEnter * call g:Say_random(['ビムへようこそ', 'ご注文はビムですか', 'ビ、ビムなんかじゃないんだからね', 'イーマックスへようこそ', 'ビムです', 'ビムではありません'])
     autocmd MenuPopup * call g:Say_random(['そんなにマウスが好きですか'])
@@ -399,18 +399,16 @@ if neobundle#tap('syntastic') "{{{
   let g:syntastic_java_javac_args = '-encoding UTF-8'
   let g:syntastic_javascript_checkers = ['eslint']
 
-  augroup syntastic "{{{
+  augroup syntastic_vimrc "{{{
     autocmd!
-    "autocmd FileType javascript call s:filetype_js()
+    autocmd FileType javascript call s:filetype_js()
 
-    " TODO 起動時に読み込みされない
     function! s:filetype_js()
       let eslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/eslint*' ,1 ,1)
       if empty(eslint_file_list)
         return
       endif
       let eslint_file_idx = match(eslint_file_list, '.cmd')
-      " TODO 設定しても動かない
       let b:syntastic_javascript_eslint_exec = (eslint_file_idx == -1) ? eslint_file_list[0] : eslint_file_list[eslint_file_idx]
     endfunction
   augroup END "}}}

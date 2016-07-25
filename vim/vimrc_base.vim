@@ -109,7 +109,7 @@ nnoremap <C-]> g<C-]>
 " 自動コマンド追加"{{{
 " ファイルタイプ更新
 let s:markdown_add_suffix = 1
-augroup markdown
+augroup markdown_vimrc
   autocmd!
   autocmd BufRead,BufNewFile *.md setlocal nowrap
   autocmd BufWritePre *.md call s:writePre_md()
@@ -137,9 +137,11 @@ augroup markdown
   endfunction
 augroup END
 
-augroup java
+augroup java_vimrc
   autocmd!
   autocmd BufRead,BufNewFile *.java call s:bufRead_java()
+  " TODO loclistへ反映しても、ステータスに反映されない
+  autocmd BufWritePost,FilterWritePost,FileAppendPost,FileWritePost *.java call s:locMakeConv()
 
   function! s:bufRead_java()
     if &fdm != 'diff'
@@ -147,9 +149,18 @@ augroup java
     endif
     SetExpandtabNo
   endfunction
+
+  function! s:locMakeConv()
+    let loclist = getloclist(0)
+    for i in loclist
+      let i.text = iconv(i.text, 'cp932', &enc)
+    endfor
+    echom string(loclist)
+    call setloclist(0, loclist, 'r')
+  endfunction
 augroup END
 
-augroup wsf
+augroup wsf_vimrc
   autocmd!
   autocmd BufRead,BufNewFile *.wsf set ft=javascript
 augroup END
