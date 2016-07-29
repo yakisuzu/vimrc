@@ -106,67 +106,6 @@ nnoremap <C-]> g<C-]>
 "}}}
 
 "---------------------------------------------------------------------------
-" 自動コマンド追加"{{{
-" ファイルタイプ更新
-let s:markdown_add_suffix = 1
-augroup markdown_vimrc
-  autocmd!
-  autocmd BufRead,BufNewFile *.md setlocal nowrap
-  autocmd BufWritePre *.md call s:writePre_md()
-
-  command! ToggleMarkdownSuffix let s:markdown_add_suffix = (s:markdown_add_suffix ? 0 : 1)
-  function! s:writePre_md()
-    silent %s/\v^#.*\zs  $//ge
-    silent %s/\v[^ ]\zs $//ge
-
-    let regexList = [
-          \ '^$'
-          \ ,'^#'
-          \ ,'^---'
-          \ ,'^```'
-          \ ,'^\|'
-          \ ,'  $'
-          \ ]
-    let exeCom = 'v/\v(' . join(regexList,'|') . ')/normal A  '
-
-    if s:markdown_add_suffix
-      silent exe exeCom
-    else
-      silent %s/  $//ge
-    endif
-  endfunction
-augroup END
-
-augroup java_vimrc
-  autocmd!
-  autocmd BufRead,BufNewFile *.java call s:bufRead_java()
-  " TODO loclistへ反映しても、ステータスに反映されない
-  autocmd BufWritePost,FilterWritePost,FileAppendPost,FileWritePost *.java call s:locMakeConv()
-
-  function! s:bufRead_java()
-    if &fdm != 'diff'
-      set fdm=syntax
-    endif
-    SetExpandtabNo
-  endfunction
-
-  function! s:locMakeConv()
-    let loclist = getloclist(0)
-    for i in loclist
-      let i.text = iconv(i.text, 'cp932', &enc)
-    endfor
-    echom string(loclist)
-    call setloclist(0, loclist, 'r')
-  endfunction
-augroup END
-
-augroup wsf_vimrc
-  autocmd!
-  autocmd BufRead,BufNewFile *.wsf set ft=javascript
-augroup END
-"}}}
-
-"---------------------------------------------------------------------------
 " コマンド追加"{{{
 command! -nargs=1 -complete=help H tab h <args>
 command! -nargs=1 -complete=command DebugProfile call g:Debug_profile(<q-args>)
@@ -354,7 +293,7 @@ function! g:Call_python3(st_pyfile, ...)
 endfunction
 
 function! g:Call_cscript(st_jsfile, ...)
-  return system(join(['cscript', '//NoLogo', a:st_jsfile, join(a:000), '|ruby', '-ne', '"$_.encode!(%(UTF-8),%(Shift_JIS));puts $_"']))
+  return system(join(['cscript', '//NoLogo', a:st_jsfile, join(a:000), '|ruby', '-ne', '"puts $_.encode(%(UTF-8),%(Shift_JIS))"']))
 endfunction
 "}}}
 

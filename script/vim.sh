@@ -1,3 +1,11 @@
+# ------------------------------
+function MAIN(){
+  for i in `ls -A $(pwd)/vim/*vimrc.vim`; do
+    MKLINK $i
+  done
+}
+
+# ------------------------------
 function MKLINK(){
   f_link=~/_`basename $1 .vim`
   f_file=$1
@@ -13,7 +21,7 @@ function MKLINK(){
   unset f_file
 }
 
-for i in `ls -A $(pwd)/vim/*vimrc.vim`; do
-  MKLINK $i
-done
+# ------------------------------
+MAIN
+unset MAIN
 unset MKLINK
