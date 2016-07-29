@@ -9,6 +9,13 @@ export PATH=$PATH:$HOME/dotfiles/bin
 export NVM_DIR=~/.nvm
 export GOPATH=~/work/go
 
+#\[\033[31m\] Red \[\033[0m\]
+#\[\033[32m\] Green \[\033[0m\]
+#\[\033[36m\] Cyan \[\033[0m\]
+#\[\033[1;32m\] Light Green \[\033[0m\]
+#\[\033[1;36m\] Light Cyan \[\033[0m\]
+PS1="\[\033[1;36m\]\u@\h \[\033[31m\]\w\[\033[0m\]\n$ "
+
 alias lsa='ls -lah'
 alias vi='vim -u NONE'
 
