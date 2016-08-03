@@ -65,6 +65,8 @@ set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft=
 set wildignore+=tags
 " テキスト表示の方法を変える dy
 set display=lastline
+" 前回の検索パターンを強調表示 hls
+set hlsearch
 "}}}
 
 "---------------------------------------------------------------------------
@@ -94,9 +96,8 @@ nnoremap tg gT
 nnoremap zl 20zl
 nnoremap zh 20zh
 nnoremap * yiw/<C-r>0<CR>N
-"TODO macデフォルトのvimで:nohlsearch<CR>がバグる
-nnoremap <Esc> :nohlsearch<CR>
-nnoremap <C-l> :checktime<CR><C-l>
+"TODO nnoremap <Esc>をマッピングすると、CLIのvimでバグる
+nnoremap <C-l> :nohlsearch<CR>:checktime<CR><C-l>
 nnoremap [space]<Tab> <C-w><C-w>
 nnoremap [space]/ :%s///g<Left><Left>
 nnoremap [space]o o<Esc>

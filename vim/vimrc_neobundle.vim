@@ -40,6 +40,7 @@ if !use_local
     NeoBundle 'Shougo/vimproc.vim', {
           \ 'build' : {
           \     'mac' : 'make -f make_mac.mak',
+          \     'linux' : 'make',
           \    },
           \ }
   endif
