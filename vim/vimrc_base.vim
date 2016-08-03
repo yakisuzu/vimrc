@@ -60,7 +60,20 @@ set fileencodings+=cp932
 " <EOL> を、カレントバッファについて設定する ff
 "let &ff = g:Is_windows() ? 'dos' : 'unix'
 " ステータス行の表示内容を設定する stl
-set statusline=%<%f\ %m%r%h%w%{'[enc='.&enc.'][ff='.&ff.']\ [fenc='.&fenc.'][ft='.&ft.']'}%=%l,%c%V%8P
+" < 先頭
+" f 相対パス
+" F フルパス
+" m 修正フラグ
+" r 読み込み専用フラグ
+" h ヘルプバッファフラグ
+" w プレビューウィンドウフラグ
+" = 左寄せ項目と右寄せ項目の区切り
+" l 何行目にカーソルがあるか
+" L バッファ内の総行数
+" c 何列目にカーソルがあるか
+" V 実際に何列目にカーソルがあるか
+" P 現在表示されているウィンドウ内のテキストが、ファイル内の何％の位置か
+set statusline=%<%F%=%m%r%h%w%{'[enc='.&enc.']\ [fenc='.&fenc.'][ft='.&ft.'][ff='.&ff.']\ [et='.(&et?'space':'tab').'][sw='.&sw.'][ts='.&ts.']'}\ [col=%-7(%c%V%)][row=%l/%L(%4P)]
 " ワイルドカードの展開時と、ファイル／ディレクトリ名の補完時に無視される wig
 set wildignore+=tags
 " テキスト表示の方法を変える dy

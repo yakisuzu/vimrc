@@ -7,7 +7,7 @@ function! s:bufRead_java()
   if &fdm != 'diff'
     set fdm=syntax
   endif
-  SetExpandtabNo
+  setl noet sw=4 ts=4
 endfunction
 
 function! s:locMakeConv()
