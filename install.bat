@@ -13,5 +13,9 @@ echo --------------------
 echo init vim
 call .\script\vim.bat
 
+echo --------------------
+echo init lint
+call .\script\lint.bat
+
 popd
 pause

@@ -13,5 +13,9 @@ echo --------------------
 echo init vim
 . ./script/vim.sh
 
+echo --------------------
+echo init lint
+. ./script/lint.sh
+
 popd >/dev/null
 read -p "pless enter"
