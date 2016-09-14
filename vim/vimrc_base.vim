@@ -58,6 +58,7 @@ endif
 " ファイル編集時に考慮される文字エンコーディングリスト fencs
 set fileencodings+=cp932
 " <EOL> を、カレントバッファについて設定する ff
+set fileformat=unix
 "let &ff = g:Is_windows() ? 'dos' : 'unix'
 " ステータス行の表示内容を設定する stl
 " < 先頭
