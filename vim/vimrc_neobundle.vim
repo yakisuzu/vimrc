@@ -399,6 +399,7 @@ if neobundle#tap('syntastic') "{{{
 
   let g:syntastic_java_javac_args = '-encoding UTF-8'
   let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_sh_checkers = []
 
   augroup syntastic_vimrc "{{{
     autocmd!
