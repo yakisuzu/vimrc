@@ -7,7 +7,7 @@ function! s:vrapperrc_write()
         \ , 'set hlsearch'
         \ , 'set list'
         \ , ''
-        \ , 'set gvimpath=gvim'
+        \ , 'set gvimpath=' . (g:Is_mac() ? '/Applications/MacVim.app/Contents/MacOS/gvim' : 'gvim')
         \ , 'set gvimargs=+{line} --servername vrapper --remote-tab-silent {file}'
         \ , 'set contentassistmode'
         \ , ''
