@@ -1,12 +1,18 @@
-for %%i in (.\git\.gitconfig) do (
-  call :MKLINK %%i
-)
-
-for %%i in (.\git\.gitconfig_*) do (
-  call :MKCP %%i
-)
+call :MAIN
 exit /b
 
+rem ------------------------------
+:MAIN
+  for %%i in (.\git\.gitconfig) do (
+    call :MKLINK %%i
+  )
+
+  for %%i in (.\git\.gitconfig_*) do (
+    call :MKCP %%i
+  )
+exit /b
+
+rem ------------------------------
 :MKLINK
   set f_link=%USERPROFILE%\%~x1
   set f_file=%~dpnx1
@@ -18,6 +24,7 @@ exit /b
   set f_file=
 exit /b
 
+rem ------------------------------
 :MKCP
   set f_link=%USERPROFILE%\%~x1
   set f_file=%~dpnx1
@@ -32,4 +39,3 @@ exit /b
   set f_link=
   set f_file=
 exit /b
-

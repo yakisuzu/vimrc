@@ -1,3 +1,11 @@
+# ------------------------------
+function MAIN(){
+  for i in `ls -A $(pwd)/bash/.[a-z]*`; do
+    MKLINK $i
+  done
+}
+
+# ------------------------------
 function MKLINK(){
   f_link=~/`basename $1`
   f_file=$1
@@ -13,7 +21,7 @@ function MKLINK(){
   unset f_file
 }
 
-for i in `ls -A $(pwd)/bash/.[a-z]*`; do
-  MKLINK $i
-done
+# ------------------------------
+MAIN
+unset MAIN
 unset MKLINK

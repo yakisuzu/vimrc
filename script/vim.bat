@@ -3,15 +3,15 @@ exit /b
 
 rem ------------------------------
 :MAIN
-rem mklink file
-for %%i in (.\vim\*vimrc.vim) do (
-  call :MKLINK %%i
-)
+  rem mklink file
+  for %%i in (.\vim\*vimrc.vim) do (
+    call :MKLINK %%i
+  )
 
-rem mklink dir
-for /F "usebackq" %%i in (`dir /AD /B /S .\vim\.vim\*`) do (
-  call :MKLINK_DIR %%i
-)
+  rem mklink dir
+  for /F "usebackq" %%i in (`dir /AD /B /S .\vim\.vim\*`) do (
+    call :MKLINK_DIR %%i
+  )
 exit /b
 
 rem ------------------------------

@@ -1,9 +1,16 @@
+# ------------------------------
+function MAIN(){
+  for i in `ls -A $(pwd)/lint/.[a-z]*`; do
+    MKLINK $i
+  done
+}
+
+# ------------------------------
 function MKLINK(){
   f_link=~/`basename $1`
   f_file=$1
 
-  # TODO kakuninn
-  if [ -e $f_link ]; then
+  if [ -L $f_link ]; then
     rm $f_link
   fi
 
@@ -14,7 +21,7 @@ function MKLINK(){
   unset f_file
 }
 
-for i in `ls -A $(pwd)/lint/`; do
-  MKLINK $i
-done
+# ------------------------------
+MAIN
+unset MAIN
 unset MKLINK

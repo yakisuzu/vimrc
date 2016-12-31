@@ -1,8 +1,14 @@
-for %%i in (.\bash\*) do (
-  call :MKLINK %%i
-)
+call :MAIN
 exit /b
 
+rem ------------------------------
+:MAIN
+  for %%i in (.\bash\*) do (
+    call :MKLINK %%i
+  )
+exit /b
+
+rem ------------------------------
 :MKLINK
   set f_link=%USERPROFILE%\%~nx1
   set f_file=%~dpnx1
