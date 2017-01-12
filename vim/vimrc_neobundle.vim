@@ -397,7 +397,8 @@ if neobundle#tap('syntastic') "{{{
   "let g:syntastic_debug = 3
   let g:syntastic_auto_jump = 1
 
-  let g:syntastic_java_javac_args = '-encoding UTF-8'
+  let g:syntastic_java_checkers = []
+  "let g:syntastic_java_javac_args = '-encoding UTF-8'
   let g:syntastic_javascript_checkers = ['eslint']
   let g:syntastic_sh_checkers = []
 
