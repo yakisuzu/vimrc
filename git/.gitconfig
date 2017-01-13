@@ -13,8 +13,16 @@
 [alias]
 	s = status
 	d = diff
+	dw = diff --word-diff=plain
+	dc = diff --cached
+	dcw = diff --cached --word-diff=plain
 	a = add
 	c = commit
-	diffw = diff --word-diff=plain
-	diffc = diff --cached
-	logo = log --oneline
+	cm = commit -m
+	l = log
+	ln = log -n 3
+	logd = log --oneline --graph --decorate
+	logdn = log --oneline --graph --decorate -n 10
+	los = log --oneline --numstat
+	w = whatchanged
+	wo = whatchanged --oneline
