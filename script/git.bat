@@ -6,6 +6,9 @@ rem ------------------------------
   for %%i in (.\git\.gitconfig) do (
     call :MKLINK %%i
   )
+  for %%i in (.\git\.gitattributes) do (
+    call :MKLINK %%i
+  )
 
   for %%i in (.\git\.gitconfig_*) do (
     call :MKCP %%i

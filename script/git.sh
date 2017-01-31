@@ -3,6 +3,9 @@ function MAIN(){
   for i in `ls -A $(pwd)/git/.gitconfig`; do
     MKLINK $i
   done
+  for i in `ls -A $(pwd)/git/.gitattributes`; do
+    MKLINK $i
+  done
 
   for k in `ls -A $(pwd)/git/.gitconfig_*`; do
     f_link=~/`basename $k`
