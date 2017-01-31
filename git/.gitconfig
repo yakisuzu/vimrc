@@ -1,6 +1,7 @@
 [include]
 	path = .gitconfig_local
 [core]
+	attributesfile = ~/.gitattributes
 	editor = vim
 	quotepath = false
 	autocrlf = false
@@ -8,6 +9,7 @@
 	default = simple
 [diff]
 	patience = true
+	compactionHeuristic = true
 [color]
 	ui = true
 [alias]

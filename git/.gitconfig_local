@@ -1,3 +1,6 @@
 [user]
 	name = null
 	email = null
+[diff "xlsx"]
+	binary = true
+	#textconv = xdoc2txt -8
