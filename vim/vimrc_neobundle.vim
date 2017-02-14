@@ -45,7 +45,8 @@ if !use_local
           \ }
   endif
   NeoBundle 'vim-jp/vital.vim'
-  NeoBundle 'Shougo/vimshell.vim'
+  "NeoBundle 'Shougo/vimshell.vim'
+
   "}}}
   " for unite "{{{
   NeoBundle 'Shougo/unite.vim'
@@ -72,7 +73,7 @@ if !use_local
         \ , {'depends' : ['Shougo/neocomplete.vim']}
   NeoBundle 'Shougo/neosnippet-snippets'
         \ , {'depends' : ['Shougo/neocomplete.vim']}
- "}}}
+  "}}}
   " for operator "{{{
   NeoBundle 'kana/vim-operator-user'
   NeoBundle 'rhysd/vim-operator-surround'
@@ -98,13 +99,14 @@ if !use_local
   NeoBundle 'vim-scripts/Align'
   if g:Is_mac()
     NeoBundle 'supermomonga/shaberu.vim'
+          \ , {'depends' : ['vim-jp/vital.vim']}
   endif
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
   NeoBundle 'Yggdroot/indentLine'
   NeoBundle 'mattn/emoji-vim'
   NeoBundle 'tyru/restart.vim'
- "}}}
+  "}}}
   " for python "{{{
   NeoBundleLazy 'davidhalter/jedi-vim'
   NeoBundleLazy 'andviro/flake8-vim'
