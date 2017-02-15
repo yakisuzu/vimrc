@@ -66,13 +66,13 @@ if !use_local
         \ , {'depends' : ['Shougo/unite.vim']}
   "}}}
   " for neocomplete "{{{
-  if v:version > 703  && has('lua')
-    NeoBundle 'Shougo/neocomplete.vim'
-  endif
-  NeoBundle 'Shougo/neosnippet.vim'
-        \ , {'depends' : ['Shougo/neocomplete.vim']}
-  NeoBundle 'Shougo/neosnippet-snippets'
-        \ , {'depends' : ['Shougo/neocomplete.vim']}
+  "if v:version > 703  && has('lua')
+  "  NeoBundle 'Shougo/neocomplete.vim'
+  "endif
+  "NeoBundle 'Shougo/neosnippet.vim'
+  "      \ , {'depends' : ['Shougo/neocomplete.vim']}
+  "NeoBundle 'Shougo/neosnippet-snippets'
+  "      \ , {'depends' : ['Shougo/neocomplete.vim']}
   "}}}
   " for operator "{{{
   NeoBundle 'kana/vim-operator-user'

@@ -28,3 +28,4 @@
 	los = log --oneline --numstat
 	w = whatchanged
 	wo = whatchanged --oneline
+	configl = config -l
