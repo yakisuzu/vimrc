@@ -79,6 +79,7 @@ if !use_local
   NeoBundle 'rhysd/vim-operator-surround'
         \ , {'depends' : ['kana/vim-operator-user']}
   NeoBundle 'tyru/operator-camelize.vim'
+        \ , {'depends' : ['kana/vim-operator-user']}
   "}}}
   " for textobj "{{{
   NeoBundle 'kana/vim-textobj-user'
