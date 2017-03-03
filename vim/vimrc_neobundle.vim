@@ -363,6 +363,12 @@ if neobundle#tap('vim-operator-surround') "{{{
 
   call neobundle#untap()
 endif "}}}
+if neobundle#tap('operator-camelize.vim') "{{{
+  map <silent> <Leader>c <Plug>(operator-camelize)
+  map <silent> <Leader>C <Plug>(operator-decamelize)
+
+  call neobundle#untap()
+endif "}}}
 if neobundle#tap('shaberu.vim') "{{{
   function! g:Shaberu_say_print(st_arg)
     echom a:st_arg
