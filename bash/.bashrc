@@ -2,9 +2,8 @@
 
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
-#export PATH=/usr/local/bin:$PATH
 
-export PATH=$PATH:$HOME/dotfiles/bin
+export PATH=$PATH:~/dotfiles/bin
 
 export NVM_DIR=~/.nvm
 export GOPATH=~/work/go
@@ -34,6 +33,8 @@ function MACRC(){
 
 #########################
 function WINRC(){
+  export PATH=$PATH:~/../../opscode/chefdk/embedded/bin
+
   # for windows alias
   alias ls='ls --color=auto --show-control-chars'
   alias powershell='powershell -ExecutionPolicy unrestricted'
