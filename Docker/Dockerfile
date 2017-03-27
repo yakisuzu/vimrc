@@ -1,8 +1,10 @@
 FROM centos:7
 
-COPY ssh /root/.ssh
 RUN set -x && yum update -y
 RUN yum install -y git
+
+COPY ssh /root/.ssh
+COPY netrc /root/.netrc
 
 WORKDIR /root/
 
