@@ -31,7 +31,7 @@ rem ------------------------------
   set f_link=%USERPROFILE%\.vim\%~n1
   set f_dir=%~f1
 
-  if exist "%f_link%" ( rmdir "%f_link%" )
+  if exist "%f_link%" ( rmdir /s /q "%f_link%" )
   mklink /D "%f_link%" "%f_dir%"
 
   set f_link=
