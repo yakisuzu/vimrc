@@ -12,7 +12,7 @@ function! s:writePre_md()
         \ ,'^#'
         \ ,'^---'
         \ ,'^```'
-        \ ,'^\|'
+        \ ,'\|$'
         \ ,'  $'
         \ ]
   let exeCom = 'v/\v(' . join(regexList,'|') . ')/normal A  '
