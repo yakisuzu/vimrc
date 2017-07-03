@@ -109,6 +109,9 @@ if !use_local
   NeoBundle 'mattn/emoji-vim'
   NeoBundle 'tyru/restart.vim'
   "}}}
+  " for typescript "{{{
+  NeoBundleLazy 'leafgarland/typescript-vim'
+  " }}}
   " for python "{{{
   NeoBundleLazy 'davidhalter/jedi-vim'
   NeoBundleLazy 'andviro/flake8-vim'
@@ -123,6 +126,7 @@ if !use_local
   " for lazyload "{{{
   augroup neobundlelazy_vimrc
     autocmd!
+    autocmd FileType typescript NeoBundleSource leafgarland/typescript-vim
     autocmd FileType python NeoBundleSource jedi-vim
     autocmd FileType python NeoBundleSource flake8-vim
     autocmd FileType python NeoBundleSource vim-python-pep8-indent
@@ -410,6 +414,7 @@ if neobundle#tap('syntastic') "{{{
   let g:syntastic_java_checkers = []
   "let g:syntastic_java_javac_args = '-encoding UTF-8'
   let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_typescript_checkers = ['tslint']
   let g:syntastic_sh_checkers = []
 
   augroup syntastic_vimrc "{{{
