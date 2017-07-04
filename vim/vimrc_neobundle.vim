@@ -126,7 +126,7 @@ if !use_local
   " for lazyload "{{{
   augroup neobundlelazy_vimrc
     autocmd!
-    autocmd FileType typescript NeoBundleSource leafgarland/typescript-vim
+    autocmd FileType typescript NeoBundleSource typescript-vim
     autocmd FileType python NeoBundleSource jedi-vim
     autocmd FileType python NeoBundleSource flake8-vim
     autocmd FileType python NeoBundleSource vim-python-pep8-indent
@@ -420,7 +420,6 @@ if neobundle#tap('syntastic') "{{{
   augroup syntastic_vimrc "{{{
     autocmd!
     autocmd FileType javascript call s:filetype_js()
-
     function! s:filetype_js()
       let eslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/eslint*' ,1 ,1)
       if empty(eslint_file_list)
@@ -429,7 +428,22 @@ if neobundle#tap('syntastic') "{{{
       let eslint_file_idx = match(eslint_file_list, '.cmd')
       let b:syntastic_javascript_eslint_exec = (eslint_file_idx == -1) ? eslint_file_list[0] : eslint_file_list[eslint_file_idx]
     endfunction
+
+    autocmd FileType typescript call s:filetype_ts()
+    function! s:filetype_ts()
+      let tslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/tslint*' ,1 ,1)
+      if empty(tslint_file_list)
+        return
+      endif
+      let tslint_file_idx = match(tslint_file_list, '.cmd')
+      let b:syntastic_typescript_tslint_exec = (tslint_file_idx == -1) ? tslint_file_list[0] : tslint_file_list[tslint_file_idx]
+    endfunction
   augroup END "}}}
+
+  call neobundle#untap()
+endif "}}}
+if neobundle#tap('typescript-vim') "{{{
+  let g:typescript_compiler_binary = 'tsc'
 
   call neobundle#untap()
 endif "}}}
