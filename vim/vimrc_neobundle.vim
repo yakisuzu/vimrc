@@ -419,8 +419,8 @@ if neobundle#tap('syntastic') "{{{
 
   augroup syntastic_vimrc "{{{
     autocmd!
-    autocmd FileType javascript call s:filetype_js()
-    function! s:filetype_js()
+    autocmd FileType javascript call s:filetype_js_exec()
+    function! s:filetype_js_exec()
       let eslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/eslint*' ,1 ,1)
       if empty(eslint_file_list)
         return
@@ -429,14 +429,21 @@ if neobundle#tap('syntastic') "{{{
       let b:syntastic_javascript_eslint_exec = (eslint_file_idx == -1) ? eslint_file_list[0] : eslint_file_list[eslint_file_idx]
     endfunction
 
-    autocmd FileType typescript call s:filetype_ts()
-    function! s:filetype_ts()
+    autocmd FileType typescript call s:filetype_ts_exec() || call s:filetype_ts_args()
+    function! s:filetype_ts_exec()
       let tslint_file_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/tslint*' ,1 ,1)
       if empty(tslint_file_list)
         return
       endif
       let tslint_file_idx = match(tslint_file_list, '.cmd')
       let b:syntastic_typescript_tslint_exec = (tslint_file_idx == -1) ? tslint_file_list[0] : tslint_file_list[tslint_file_idx]
+    endfunction
+    function! s:filetype_ts_args()
+      let tslint_json_list = glob(substitute(system('cd ' . expand('%:p:h') . ' && npm bin'), '\n', '', '') . '/../../tslint.json' ,1 ,1)
+      if empty(tslint_json_list)
+        return
+      endif
+      let b:syntastic_typescript_tslint_args = '--config ' . tslint_json_list[0]
     endfunction
   augroup END "}}}
 
