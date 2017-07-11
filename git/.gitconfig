@@ -21,6 +21,10 @@
 	a = add
 	c = commit
 	cm = commit -m
+	ch = checkout
+	chb = checkout -b
+	chm = checkout master
+	b = branch
 	l = log
 	ln = log -n 3
 	logd = log --oneline --graph --decorate
