@@ -19,8 +19,8 @@
 	dc = diff --cached
 	dcw = diff --cached --word-diff=plain
 	a = add
-	c = commit
-	cm = commit -m
+	co = commit
+	com = commit -m
 	ch = checkout
 	chb = checkout -b
 	chm = checkout master
