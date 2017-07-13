@@ -179,25 +179,9 @@ command! -nargs=1 System exe 'CdCurrent'|echo system(<q-args>)
 command! ClipToSlash let @+ = substitute(@+, '\\', '\/', 'g')
 command! ClipToYen let @+ = substitute(@+, '\/', '\\', 'g')
 
-command! GitStatus System git status
-command! GitPull System git pull
-command! GitCheckout exe join(['System', 'git', 'checkout', expand('%:p')])
-command! GitAdd exe join(['System', 'git', 'add', expand('%:p')])
-command! GitDiff System git diff
-command! -nargs=+ GitCommit exe join(['System', 'git', 'commit', '-m', shellescape(<q-args>)])
-command! GitPush System git push
-command! -nargs=+ GitCommitThis exe join(['System', 'git', 'commit', expand('%:p'), '-m', shellescape(<q-args>)])
-
-if g:Is_windows()
-  command! ExCmd !start cmd
-  command! ExSh !start sh --login -i
-else
-  if g:Is_mac()
-    command! ExTerminal !open /Applications/Utilities/Terminal.app
-  endif
+if !g:Is_windows()
   command! Wsudo w !sudo tee % > /dev/null
 endif
-"command! ShWebRootCh !. ~/.vim/sh/webroot_permission.sh
 "}}}
 
 "---------------------------------------------------------------------------
