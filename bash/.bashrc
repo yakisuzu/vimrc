@@ -41,8 +41,8 @@ function WINRC(){
 
   # for 64bit
   if [ `uname -m` == 'x86_64' ]; then
-    MAKE_ALIAS vim  "$SYSTEMDRIVE/Program Files (x86)/vim74-kaoriya-win64/vim.exe"
-    MAKE_ALIAS gvim "$SYSTEMDRIVE/Program Files (x86)/vim74-kaoriya-win64/gvim.exe"
+    MAKE_ALIAS vim  "$SYSTEMDRIVE/Program Files (x86)/vim80-kaoriya-win64/vim.exe"
+    MAKE_ALIAS gvim "$SYSTEMDRIVE/Program Files (x86)/vim80-kaoriya-win64/gvim.exe"
   fi
 }
 

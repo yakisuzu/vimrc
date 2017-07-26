@@ -113,9 +113,10 @@ if !use_local
   NeoBundleLazy 'leafgarland/typescript-vim'
   " }}}
   " for python "{{{
-  NeoBundleLazy 'davidhalter/jedi-vim'
-  NeoBundleLazy 'andviro/flake8-vim'
-  NeoBundleLazy 'hynek/vim-python-pep8-indent'
+  " TODO 3.6対応まで利用しない
+  "NeoBundleLazy 'davidhalter/jedi-vim'
+  "NeoBundleLazy 'andviro/flake8-vim'
+  "NeoBundleLazy 'hynek/vim-python-pep8-indent'
   "}}}
   " for yaml "{{{
   NeoBundleLazy 'chase/vim-ansible-yaml'
@@ -127,9 +128,9 @@ if !use_local
   augroup neobundlelazy_vimrc
     autocmd!
     autocmd FileType typescript NeoBundleSource typescript-vim
-    autocmd FileType python NeoBundleSource jedi-vim
-    autocmd FileType python NeoBundleSource flake8-vim
-    autocmd FileType python NeoBundleSource vim-python-pep8-indent
+    " autocmd FileType python NeoBundleSource jedi-vim
+    " autocmd FileType python NeoBundleSource flake8-vim
+    " autocmd FileType python NeoBundleSource vim-python-pep8-indent
     autocmd FileType yaml NeoBundleSource vim-ansible-yaml
     autocmd FileType go NeoBundleSource vim-go
   augroup END "}}}
