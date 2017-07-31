@@ -8,4 +8,5 @@ call g:Load_vimrc('vimrc_init.vim')
 call g:Load_vimrc('vimrc_neobundle.vim')
 call g:Load_vimrc('vimrc_base.vim')
 call g:Load_vimrc('vimrc_vrapper.vim')
+call g:Load_vimrc('vimrc_ideavim.vim')
 source ~/_vimrc_local
