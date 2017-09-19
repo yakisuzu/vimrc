@@ -36,34 +36,34 @@ endif
 " plugin list
 if !use_local
   " for utility "{{{
-  if !g:Is_windows()
-    NeoBundle 'Shougo/vimproc.vim', {
-          \ 'build' : {
-          \     'mac' : 'make -f make_mac.mak',
-          \     'linux' : 'make',
-          \    },
-          \ }
-  endif
+  "if !g:Is_windows()
+  "  NeoBundle 'Shougo/vimproc.vim', {
+  "        \ 'build' : {
+  "        \     'mac' : 'make -f make_mac.mak',
+  "        \     'linux' : 'make',
+  "        \    },
+  "        \ }
+  "endif
   NeoBundle 'vim-jp/vital.vim'
   "NeoBundle 'Shougo/vimshell.vim'
 
   "}}}
   " for unite "{{{
   NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'ujihisa/unite-colorscheme'
-        \ , {'depends' : ['Shougo/unite.vim']}
+  "NeoBundle 'ujihisa/unite-colorscheme'
+  "      \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'osyo-manga/unite-quickfix'
         \ , {'depends' : ['Shougo/unite.vim']}
   "NeoBundle 'yakisuzu/unite-breakpoint'
   "      \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'yakisuzu/unite-bookmarkamazing'
         \ , {'depends' : ['Shougo/unite.vim']}
-  NeoBundle 'yakisuzu/unite-signamazing'
-        \ , {'depends' : ['Shougo/unite.vim']}
+  "NeoBundle 'yakisuzu/unite-signamazing'
+  "      \ , {'depends' : ['Shougo/unite.vim']}
   NeoBundle 'Shougo/vimfiler.vim'
         \ , {'depends' : ['Shougo/unite.vim']}
-  NeoBundle 'kmnk/vim-unite-giti'
-        \ , {'depends' : ['Shougo/unite.vim']}
+  "NeoBundle 'kmnk/vim-unite-giti'
+  "      \ , {'depends' : ['Shougo/unite.vim']}
   "}}}
   " for neocomplete "{{{
   "if v:version > 703  && has('lua')
@@ -106,7 +106,7 @@ if !use_local
   NeoBundle 'rhysd/clever-f.vim'
   NeoBundle 'haya14busa/incsearch.vim'
   NeoBundle 'Yggdroot/indentLine'
-  NeoBundle 'mattn/emoji-vim'
+  "NeoBundle 'mattn/emoji-vim'
   NeoBundle 'tyru/restart.vim'
   "}}}
   " for typescript "{{{
@@ -119,7 +119,7 @@ if !use_local
   "NeoBundleLazy 'hynek/vim-python-pep8-indent'
   "}}}
   " for yaml "{{{
-  NeoBundleLazy 'chase/vim-ansible-yaml'
+  "NeoBundleLazy 'chase/vim-ansible-yaml'
   "}}}
   " for go "{{{
   NeoBundleLazy 'fatih/vim-go'
@@ -131,7 +131,7 @@ if !use_local
     " autocmd FileType python NeoBundleSource jedi-vim
     " autocmd FileType python NeoBundleSource flake8-vim
     " autocmd FileType python NeoBundleSource vim-python-pep8-indent
-    autocmd FileType yaml NeoBundleSource vim-ansible-yaml
+    " autocmd FileType yaml NeoBundleSource vim-ansible-yaml
     autocmd FileType go NeoBundleSource vim-go
   augroup END "}}}
 endif
@@ -155,24 +155,24 @@ if neobundle#tap('vital.vim') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vimshell.vim') "{{{
-  let di_bin_path = {}
-  if g:Is_mac()
-    let di_bin_path = {'/usr/bin' : 'utf-8-mac'}
-  elseif has('win32')
-    let di_bin_path = {'C:/Program Files/Git/bin' : 'utf-8'}
-  elseif has('win64')
-    let di_bin_path = {'C:/Program Files (x86)/Git/bin' : 'utf-8'}
-  endif
-  if !empty(di_bin_path)
-    let g:vimshell_interactive_encodings = di_bin_path
-  endif
-
-  function! neobundle#hooks.on_source(bundle)
-  endfunction
-
-  call neobundle#untap()
-endif "}}}
+"if neobundle#tap('vimshell.vim') "{{{
+"  let di_bin_path = {}
+"  if g:Is_mac()
+"    let di_bin_path = {'/usr/bin' : 'utf-8-mac'}
+"  elseif has('win32')
+"    let di_bin_path = {'C:/Program Files/Git/bin' : 'utf-8'}
+"  elseif has('win64')
+"    let di_bin_path = {'C:/Program Files (x86)/Git/bin' : 'utf-8'}
+"  endif
+"  if !empty(di_bin_path)
+"    let g:vimshell_interactive_encodings = di_bin_path
+"  endif
+"
+"  function! neobundle#hooks.on_source(bundle)
+"  endfunction
+"
+"  call neobundle#untap()
+"endif "}}}
 if neobundle#tap('unite.vim') "{{{
   " for buffer "{{{
   command! UBuffer Unite buffer
@@ -334,14 +334,16 @@ endif "}}}
 if neobundle#tap('vim-quickrun') "{{{
   let g:quickrun_config = {
         \  '_': {
-        \    'runner': 'vimproc',
-        \    'runner/vimproc/updatetime': 60,
+        \    'runner': 'job',
         \  },
         \  'java': {
         \    'exec': ['javac -encoding UTF-8 %o %s', '%c -Dfile.encoding=UTF8 %s:t:r %a'],
         \    'hook/output_encode/encoding': 'cp932',
         \  },
         \}
+
+  " \    'runner': 'vimproc',
+  " \    'runner/vimproc/updatetime': 60,
   if g:Is_windows()
     let g:quickrun_config = extend(g:quickrun_config, {
           \  'cs/csc': {
@@ -441,11 +443,11 @@ if neobundle#tap('typescript-vim') "{{{
 
   call neobundle#untap()
 endif "}}}
-if neobundle#tap('vim-ansible-yaml') "{{{
-  command! SetAnsible setl ft=ansible
-
-  call neobundle#untap()
-endif "}}}
+"if neobundle#tap('vim-ansible-yaml') "{{{
+"  command! SetAnsible setl ft=ansible
+"
+"  call neobundle#untap()
+"endif "}}}
 if neobundle#tap('vim-go') "{{{
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
