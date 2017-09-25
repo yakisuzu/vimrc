@@ -1,5 +1,4 @@
-let g:dir_bundle = '~/.vim/bundle/'
-let g:dir_home = '~/.vim/'
+let g:dir_home = '~/.vim'
 
 let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')

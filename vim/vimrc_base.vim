@@ -135,14 +135,14 @@ command! -nargs=? -complete=customlist,s:gvimrc_comp
 command! VimrcLocalOpen tabe ~/_vimrc_local
 
 function! s:vimrc_comp(A,L,P) "{{{
-  return g:File_list(g:dir_vimrc . 'vimrc_*')
+  return g:File_list(g:dir_vimrc . '/vimrc_*')
 endfunction "}}}
 function! s:gvimrc_comp(A,L,P) "{{{
-  return g:File_list(g:dir_vimrc . 'gvimrc_*')
+  return g:File_list(g:dir_vimrc . '/gvimrc_*')
 endfunction "}}}
 function! s:vimrc_open(st_file, st_default_file) "{{{
   let st_exe_file = !empty(a:st_file) ? a:st_file : a:st_default_file
-  let st_path = glob(g:dir_vimrc . st_exe_file)
+  let st_path = glob(g:dir_vimrc . '/' . st_exe_file)
   if !empty(st_path)
     exe join(['tabe', st_path])
   endif
@@ -187,58 +187,12 @@ endif
 "---------------------------------------------------------------------------
 " vim script"{{{
 cd ~
-let g:debug = exists('g:debug') ? g:debug : 0
-command! ToggleDebug let g:debug = g:debug ? 0 : 1
-function! g:Echomsg(st_msg)
-  if g:debug | echomsg a:st_msg | endif
-endfunction
-
 function! g:Debug_profile(cmd)
   cd ~
   profile start profile.log
   profile func *
   silent exe a:cmd
   qa!
-endfunction
-
-function! g:Index_increment()
-  %s/\v(^\t*)@<=\d+/\=submatch(0)+1/ge
-  "	for cnt in range(9,1,-1)
-  "		exe '%s/\v(^\t*)@<='.cnt.'\.@=/'.expand(cnt+1).'/ge'
-  "	endfo
-endfunction
-
-function! g:Index_decrement()
-  %s/\v(^\t*)@<=\d+/\=submatch(0)-1/ge
-endfunction
-
-function! g:Index_increment_lines()
-  g/./exe 'normal ' . (line('.')-1) . ''
-endfunction
-
-let g:conv_md_codetype = 'sh'
-function! g:Conv_backlog_to_md()
-  silent %s/\v^\*{3}\s?/### /ge
-  silent %s/\v^\*{2}\s?/## /ge
-  silent %s/\v^\*{1}\s?/# /ge
-  silent %s/\v^\{code}/\='```' . g:conv_md_codetype/ge
-  silent %s/\v^\{\/code}/```/ge
-  silent %s/\v {1}$/  /ge
-  silent %s/\v^\[\[/\[/ge
-  silent %s/\v:/\]\(/ge
-  silent %s/\v\]\]/\)/ge
-endfunction
-
-function! g:Conv_md_to_backlog()
-  silent %s/\v^\#{3}\s?/*** /ge
-  silent %s/\v^\#{2}\s?/** /ge
-  silent %s/\v^\#{1}\s?/* /ge
-  silent exe '%s/\v^```' . g:conv_md_codetype . '/{code}/ge'
-  silent %s/\v^```/{\/code}/ge
-  silent %s/\v {2}$/ /ge
-  silent %s/\v^\[/\[\[/ge
-  silent %s/\v\]\(/:/ge
-  silent %s/\v\)/\]\]/ge
 endfunction
 
 function! g:Git_filter_branch()
@@ -257,16 +211,6 @@ function! g:File_list(st_path)
   return sort(map(
         \ split(glob(a:st_path), '\n'),
         \ 'fnamemodify(v:val, ":t")'))
-endfunction
-
-function! g:Add_runtimepath(st_pkg)
-  let st_path = g:dir_bundle . a:st_pkg . (match(a:st_pkg, '.*/$') == 0 ? '' : '/')
-  let &runtimepath .= ',' . st_path
-
-  let st_doc_path = st_path . 'doc'
-  if !empty(glob(st_doc_path))
-    exe 'helptags ' . st_doc_path
-  endif
 endfunction
 
 function! g:Get_current_buf()

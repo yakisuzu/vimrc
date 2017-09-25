@@ -3,11 +3,12 @@ scriptencoding utf-8
 " NeoBundle
 "---------------------------------------------------------------------------
 " Required begin "{{{
+let g:dir_bundle = g:dir_home . '/bundle'
 if has('vim_starting')
   " Be iMproved
   set nocompatible
   " Required: rtp
-  let &runtimepath .= ',' . g:dir_bundle . 'neobundle.vim/'
+  let &runtimepath .= ',' . g:dir_bundle . '/neobundle.vim'
 endif
 
 let use_local = 0
