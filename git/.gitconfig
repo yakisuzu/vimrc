@@ -5,6 +5,7 @@
 	editor = vim
 	quotepath = false
 	autocrlf = false
+	ignorecase = false
 [push]
 	default = simple
 [diff]
