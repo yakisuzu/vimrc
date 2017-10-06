@@ -19,9 +19,10 @@ $Apps = [App[]](
   [App]::new("OpenSSH", $ProgramFiles + "\OpenSSH-Win64"),
   [App]::new("vim", $ProgramFiles + "\vim80-kaoriya-win64"),
   [App]::new("ConEmu", $SystemDrive + "\ConEmu"),
+  #[App]::new("Docker", $ProgramFiles + "\Docker Toolbox"),
+  [App]::new("Docker", $ProgramFiles + "\Docker\Docker\Resources\bin"),
   [App]::new("msys2/root", $SystemDrive + "\msys64"),
   [App]::new("msys2/bin", $SystemDrive + "\msys64\usr\bin"),
-  #[App]::new("docker", $ProgramFiles + "\Docker Toolbox"),
   [App]::new("dotfiles", $HOME + "\dotfiles\bin")
 )
 
