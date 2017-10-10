@@ -32,15 +32,25 @@ Write-Output ""
 [string[]] $AddAppPaths = @()
 $EnvironmentPaths = [Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::User) -split ";"
 $Apps | % {
+  # sort add paths
+  $PathIndex = [array]::IndexOf($EnvironmentPaths, $_.Path)
+  if($PathIndex -ge 0){
+    $EnvironmentPaths[$PathIndex] = $null
+  }
   if(!($EnvironmentPaths -contains $_.Path)){
     $AddAppPaths += $_.Path
   }
 }
+# add other EnvironmentPaths
+$EnvironmentPaths | % {
+  # check delete item
+  if($_.Length -ne 0){
+    $AddAppPaths += $_
+  }
+}
+[Environment]::SetEnvironmentVariable('PATH', ($AddAppPaths -join ";"), [EnvironmentVariableTarget]::User)
 
-$AfterPaths = $AddAppPaths + $EnvironmentPaths
-[Environment]::SetEnvironmentVariable('PATH', ($AfterPaths -join ";"), [EnvironmentVariableTarget]::User)
-
-Write-Output AfterPaths
+Write-Output AddAppPaths
 Write-Output ----------
-Write-Output $AfterPaths
+Write-Output $AddAppPaths
 
