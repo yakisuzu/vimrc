@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:latest
 
 RUN set -x && yum update -y
 RUN yum install -y sudo man unzip
@@ -12,8 +12,6 @@ RUN provisioning-ansible/run_ansible.sh
 
 COPY netrc /root/.netrc
 
-
 WORKDIR /root
-#ENTRYPOINT ["/bin/bash", "--login", "-i"]
-CMD ["/bin/bash", "--login", "-i"]
-
+ENTRYPOINT ["/bin/bash"]
+CMD ["--login", "-i"]
