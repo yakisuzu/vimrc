@@ -3,9 +3,6 @@
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
 
-export PATH=$PATH:~/dotfiles/bin
-
-export NVM_DIR=~/.nvm
 export GOPATH=~/work/go
 
 #########################
@@ -21,6 +18,8 @@ function MAKE_ALIAS(){
 
 #########################
 function MACRC(){
+  export NVM_DIR=~/.nvm
+
   # for mac alias
   MAKE_ALIAS vim /Applications/MacVim.app/Contents/MacOS/Vim
   MAKE_ALIAS gvim /Applications/MacVim.app 'open '
@@ -33,17 +32,31 @@ function MACRC(){
 
 #########################
 function WINRC(){
-  export PATH=$PATH:~/../../opscode/chefdk/embedded/bin
+  # PATH before
+  export PATH=$PROGRAMFILES/Git/cmd:$PATH
+  export PATH=$PROGRAMFILES/OpenSSH-Win64:$PATH
+  export PATH=$PROGRAMFILES/vim80-kaoriya-win64:$PATH
+
+  # PATH after
+  #export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
+  export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
+  export PATH=$PATH:$NVM_HOME
+  export PATH=$PATH:$NVM_SYMLINK
+
+  # sed drive path
+  TMP_DRIVE=$(echo $SYSTEMDRIVE | cut -c 1)
+  TMP_PATH=$(echo $PATH | sed "s#$SYSTEMDRIVE#/${TMP_DRIVE}#g" | sed "s#\\\\#/#g")
+  export PATH=$TMP_PATH
+  unset TMP_DRIVE
+  unset TMP_PATH
 
   # for windows alias
   alias ls='ls --color=auto --show-control-chars'
   alias powershell='powershell -ExecutionPolicy unrestricted'
 
   # for 64bit
-  if [ `uname -m` == 'x86_64' ]; then
-    MAKE_ALIAS vim  "$SYSTEMDRIVE/Program Files/vim80-kaoriya-win64/vim.exe"
-    MAKE_ALIAS gvim "$SYSTEMDRIVE/Program Files/vim80-kaoriya-win64/gvim.exe"
-  fi
+  #if [ `uname -m` == 'x86_64' ]; then
+  #fi
 }
 
 #########################
@@ -65,9 +78,15 @@ elif [ `expr substr $(uname -s) 1 7` == 'MSYS_NT' ]; then
   WINRC
 fi
 
+export PATH=$PATH:~/dotfiles/bin
+
 if [ -e ~/.bashrc_local ]; then
   . ~/.bashrc_local
 fi
+
+echo path
+echo ----
+echo $PATH | sed 's/:/\n/g'
 
 unset MACRC
 unset WINRC

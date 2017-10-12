@@ -45,6 +45,7 @@ sudo apt install p7zip-full
 [OpenSSH](https://github.com/PowerShell/Win32-OpenSSH/releases/latest)  
 [vim](https://github.com/koron/vim-kaoriya/releases/latest)  
 [ConEmu](https://github.com/Maximus5/ConEmu/releases/latest)  
+[xdoc2txt](http://ebstudio.info/home/xdoc2txt.html)  
 [Intellij IDEA](https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows)  
 [NVM](https://github.com/coreybutler/nvm-windows/releases/latest)  
 [jq](https://stedolan.github.io/jq/download/)  
