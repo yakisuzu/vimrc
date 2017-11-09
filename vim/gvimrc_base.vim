@@ -10,11 +10,14 @@ set lines=40
 " colorscheme evening
 colorscheme desert
 
-" 透過度
 if g:Is_windows()
-  autocmd GUIenter * set transparency=200
+  " 透過度
+  autocmd GUIenter * set transparency=220
+  " フォントサイズ
+  autocmd GUIenter * set guifont=MS_Gothic:h14:cSHIFTJIS
 endif
 if g:Is_mac()
+  " 透過度
   set transparency=15
 endif
 
