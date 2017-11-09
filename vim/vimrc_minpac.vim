@@ -55,27 +55,29 @@ let &packpath = expand(g:dir_home) . ',' . &packpath
 " minpack install
 " TODO Review installation timing
 "confirm('Install minpac ?', "yes\nNo", 2) == 2
-if empty(glob(g:dir_minpac_opt)) && input('Install minpac ? (y/n): ') == 'y'
+let isInitialize = empty(glob(g:dir_minpac_opt)) && input('Install minpac ? (y/n): ') == 'y'
+
+if isInitialize
   " Not installed
   let dir_minpac_git = expand(g:dir_minpac_opt . '/minpac')
   call system('git clone https://github.com/k-takata/minpac.git ' . dir_minpac_git)
   echom 'Finish install minpac !!!'
-
-  packadd minpac
-  call minpac#init()
-  call s:minpac_add_plugins()
-  call minpac#update()
-else
-  silent! packadd minpac
-  if !exists('*minpac#init')
-    echom 'minpac is unavailable.'
-    finish
-  endif
-
-  " minpac is available.
-  call minpac#init()
-  call s:minpac_add_plugins()
 endif
+
+silent! packadd minpac
+if !exists('*minpac#init')
+  echom 'minpac is unavailable.'
+  finish
+endif
+
+" minpac is available.
+call minpac#init()
+call s:minpac_add_plugins()
+
+if isInitialize
+  call minpac#update()
+endif
+
 command! MinpacUpdate call minpac#clean() | call minpac#update()
 "}}}
 
