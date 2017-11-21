@@ -32,23 +32,27 @@ function MACRC(){
 
 #########################
 function WINRC(){
+  # JAVA_HOME
+  export JAVA_HOME=$PROGRAMFILES/Java/jdk-9.0.1
+
   # PATH before
   export PATH=$PROGRAMFILES/Git/cmd:$PATH
   export PATH=$PROGRAMFILES/OpenSSH-Win64:$PATH
   export PATH=$PROGRAMFILES/vim80-kaoriya-win64:$PATH
 
   # PATH after
-  #export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
-  export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
+  export PATH=$PATH:$JAVA_HOME/bin
   export PATH=$PATH:$NVM_HOME
   export PATH=$PATH:$NVM_SYMLINK
+  export PATH=$PATH:$PROGRAMFILES/Python36
+  export PATH=$PATH:$PROGRAMFILES/Python36/Scripts
+  #export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
+  export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
 
   # sed drive path
   TMP_DRIVE=$(echo $SYSTEMDRIVE | cut -c 1)
-  TMP_PATH=$(echo $PATH | sed "s#$SYSTEMDRIVE#/${TMP_DRIVE}#g" | sed "s#\\\\#/#g")
-  export PATH=$TMP_PATH
+  export PATH=$(echo $PATH | sed "s#$SYSTEMDRIVE#/${TMP_DRIVE}#g" | sed "s#\\\\#/#g")
   unset TMP_DRIVE
-  unset TMP_PATH
 
   # for windows alias
   alias ls='ls --color=auto --show-control-chars'
