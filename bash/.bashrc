@@ -32,8 +32,6 @@ function MACRC(){
 
 #########################
 function WINRC(){
-  # JAVA_HOME
-  export JAVA_HOME=$PROGRAMFILES/Java/jdk1.8.0_152
 
   # PATH before
   export PATH=$PROGRAMFILES/Git/cmd:$PATH
@@ -41,12 +39,6 @@ function WINRC(){
   export PATH=$PROGRAMFILES/vim80-kaoriya-win64:$PATH
 
   # PATH after
-  export PATH=$PATH:$JAVA_HOME/bin
-  export PATH=$PATH:$NVM_HOME
-  export PATH=$PATH:$NVM_SYMLINK
-  export PATH=$PATH:$PROGRAMFILES/Python36
-  export PATH=$PATH:$PROGRAMFILES/Python36/Scripts
-  #export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
   export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
 
   # sed drive path
@@ -86,6 +78,15 @@ export PATH=$PATH:~/dotfiles/bin
 
 if [ -e ~/.bashrc_local ]; then
   . ~/.bashrc_local
+
+  # sample
+  # export JAVA_HOME=$PROGRAMFILES/Java/jdk1.8.0_152
+  # export PATH=$PATH:$JAVA_HOME/bin
+  # export PATH=$PATH:$NVM_HOME
+  # export PATH=$PATH:$NVM_SYMLINK
+  # export PATH=$PATH:$PROGRAMFILES/Python36
+  # export PATH=$PATH:$PROGRAMFILES/Python36/Scripts
+  # export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
 fi
 
 echo path
