@@ -33,7 +33,7 @@ function MACRC(){
 #########################
 function WINRC(){
   # JAVA_HOME
-  export JAVA_HOME=$PROGRAMFILES/Java/jdk-9.0.1
+  export JAVA_HOME=$PROGRAMFILES/Java/jdk1.8.0_152
 
   # PATH before
   export PATH=$PROGRAMFILES/Git/cmd:$PATH

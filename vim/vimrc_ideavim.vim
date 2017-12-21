@@ -7,6 +7,7 @@ function! s:ideavim_write()
         \ , 'set clipboard+=unnamed'
         \ , 'set nrformats='
         \ , 'set hlsearch'
+        \ , 'set ignorecase'
         \ , ''
         \ , 'map <C-j> <Esc>'
         \ , 'map <Space>h ^'

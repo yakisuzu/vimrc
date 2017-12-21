@@ -8,7 +8,7 @@ $ProgramFiles = [Environment]::GetEnvironmentVariable('ProgramFiles', [Environme
 $NVM_HOME = [Environment]::GetEnvironmentVariable('NVM_HOME', [EnvironmentVariableTarget]::Process)
 $NVM_SYMLINK = [Environment]::GetEnvironmentVariable('NVM_SYMLINK', [EnvironmentVariableTarget]::Process)
 
-$JAVA_HOME = $ProgramFiles + '\Java\jdk-9.0.1'
+$JAVA_HOME = $ProgramFiles + '\Java\jdk1.8.0_152'
 [Environment]::SetEnvironmentVariable('JAVA_HOME',$JAVA_HOME, [EnvironmentVariableTarget]::User)
 
 # env setting
