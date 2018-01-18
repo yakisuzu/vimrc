@@ -22,6 +22,7 @@
 	a = add
 	co = commit
 	com = commit -m
+	coan = commit --amend --no-edit
 	ch = checkout
 	chb = checkout -b
 	chm = checkout master
