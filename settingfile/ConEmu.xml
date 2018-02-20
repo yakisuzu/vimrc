@@ -138,7 +138,7 @@
 			<key name="Tasks" modified="2017-10-06 18:02:13" build="161206">
 				<value name="Count" type="long" data="4"/>
 				<key name="Task1" modified="2017-10-06 18:02:13" build="161206">
-					<value name="Name" type="string" data="{Shells::cmd (Admin)}"/>
+					<value name="Name" type="string" data="{Shells::cmd}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -147,7 +147,7 @@
 					<value name="Count" type="long" data="1"/>
 				</key>
 				<key name="Task2" modified="2017-10-06 18:02:13" build="161206">
-					<value name="Name" type="string" data="{Shells::PowerShell (Admin)}"/>
+					<value name="Name" type="string" data="{Shells::PowerShell}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
@@ -160,7 +160,7 @@
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data="-icon &quot;%USERPROFILE%\AppData\Local\lxss\bash.ico&quot;"/>
-					<value name="Cmd1" type="string" data="%windir%\system32\bash.exe -cur_console:pm:/mnt"/>
+					<value name="Cmd1" type="string" data="%windir%\system32\bash.exe -cur_console:pm:/mnt -new_console:a"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
@@ -169,7 +169,7 @@
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set CHERE_INVOKING=1 &amp; %ConEmuDrive%\msys64\usr\bin\bash.exe --login -i -new_console:C:&quot;%ConEmuDrive%\msys64\msys2.ico&quot;"/>
+					<value name="Cmd1" type="string" data="set CHERE_INVOKING=1 &amp; %ConEmuDrive%\msys64\usr\bin\bash.exe --login -i -new_console:C:&quot;%ConEmuDrive%\msys64\msys2.ico&quot; -new_console:a"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
