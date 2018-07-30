@@ -4,12 +4,13 @@
 # env to var
 $SystemDrive = [Environment]::GetEnvironmentVariable('SystemDrive', [EnvironmentVariableTarget]::Process)
 $ProgramFiles = [Environment]::GetEnvironmentVariable('ProgramFiles', [EnvironmentVariableTarget]::Process)
+$ProgramFiles86 = [Environment]::GetEnvironmentVariable('ProgramFiles(x86)', [EnvironmentVariableTarget]::Process)
+
+$JAVA_HOME = $ProgramFiles + '\Java\jdk'
+[Environment]::SetEnvironmentVariable('JAVA_HOME',$JAVA_HOME, [EnvironmentVariableTarget]::User)
 
 $NVM_HOME = [Environment]::GetEnvironmentVariable('NVM_HOME', [EnvironmentVariableTarget]::Process)
 $NVM_SYMLINK = [Environment]::GetEnvironmentVariable('NVM_SYMLINK', [EnvironmentVariableTarget]::Process)
-
-$JAVA_HOME = $ProgramFiles + '\Java\jdk1.8.0_152'
-[Environment]::SetEnvironmentVariable('JAVA_HOME',$JAVA_HOME, [EnvironmentVariableTarget]::User)
 
 # env setting
 Class App {
@@ -30,8 +31,9 @@ $Apps = [App[]](
   [App]::new("msys2/root", $SystemDrive + "\msys64"),
   [App]::new("msys2/bin", $SystemDrive + "\msys64\usr\bin"),
   [App]::new("java", $JAVA_HOME + "\bin"),
-  [App]::new("nvm/nvm", $NVM_HOME),
-  [App]::new("nvm/node", $NVM_SYMLINK),
+  [App]::new("node/nvm", $NVM_HOME),
+  [App]::new("node/node", $NVM_SYMLINK),
+  [App]::new("node/yarn", $ProgramFiles86 + "\Yarn\bin"),
   #[App]::new("Docker", $ProgramFiles + "\Docker Toolbox"),
   [App]::new("Docker", $ProgramFiles + "\Docker\Docker\Resources\bin"),
   [App]::new("dotfiles", $HOME + "\dotfiles\bin")

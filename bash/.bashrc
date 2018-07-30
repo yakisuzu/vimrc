@@ -33,12 +33,19 @@ function MACRC(){
 #########################
 function WINRC(){
 
+  export PROGRAMFILES86="$PROGRAMFILES (x86)"
+  export JAVA_HOME=$PROGRAMFILES/Java/jdk
+
   # PATH before
   export PATH=$PROGRAMFILES/Git/cmd:$PATH
   export PATH=$PROGRAMFILES/OpenSSH-Win64:$PATH
   export PATH=$PROGRAMFILES/vim80-kaoriya-win64:$PATH
 
   # PATH after
+  export PATH=$PATH:$JAVA_HOME/bin
+  export PATH=$PATH:$NVM_HOME
+  export PATH=$PATH:$NVM_SYMLINK
+  export PATH=$PATH:$PROGRAMFILES86/Yarn/bin
   export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
 
   # sed drive path
@@ -68,6 +75,15 @@ PS1='\[\033[36m\]\u@\h \[\033[31m\]\w\[\033[0m\]\n$ '
 alias lsa='ls -lah'
 alias vi='vim -u NONE'
 
+if [ -e ~/.bashrc_local ]; then
+  . ~/.bashrc_local
+
+  # sample
+  # export PATH=$PATH:$PROGRAMFILES/Python36
+  # export PATH=$PATH:$PROGRAMFILES/Python36/Scripts
+  # export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
+fi
+
 if [ `uname` == 'Darwin' ]; then
   MACRC
 elif [ `expr substr $(uname -s) 1 7` == 'MSYS_NT' ]; then
@@ -75,19 +91,6 @@ elif [ `expr substr $(uname -s) 1 7` == 'MSYS_NT' ]; then
 fi
 
 export PATH=$PATH:~/dotfiles/bin
-
-if [ -e ~/.bashrc_local ]; then
-  . ~/.bashrc_local
-
-  # sample
-  # export JAVA_HOME=$PROGRAMFILES/Java/jdk1.8.0_152
-  # export PATH=$PATH:$JAVA_HOME/bin
-  # export PATH=$PATH:$NVM_HOME
-  # export PATH=$PATH:$NVM_SYMLINK
-  # export PATH=$PATH:$PROGRAMFILES/Python36
-  # export PATH=$PATH:$PROGRAMFILES/Python36/Scripts
-  # export PATH=$PATH:$SYSTEMDRIVE/opscode/chefdk/embedded/bin
-fi
 
 echo path
 echo ----
