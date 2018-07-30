@@ -49,7 +49,7 @@ function WINRC(){
   export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
 
   # sed drive path
-  TMP_DRIVE=$(echo $SYSTEMDRIVE | cut -c 1)
+  TMP_DRIVE=$(echo $SYSTEMDRIVE | cut -c 1 | tr '[A-Z]' '[a-z]')
   export PATH=$(echo $PATH | sed "s#$SYSTEMDRIVE#/${TMP_DRIVE}#g" | sed "s#\\\\#/#g")
   unset TMP_DRIVE
 
