@@ -6,25 +6,13 @@ export LESSCHARSET=utf-8
 export GOPATH=~/work/go
 
 #########################
-# $1 alias name
-# $2 path
-# $3 path prefix
-function MAKE_ALIAS(){
-  #echo "$2"
-  if [ -e "$2" ]; then
-    alias $1="$3\"$2\""
-  fi
-}
-
-#########################
 function MACRC(){
-  export NVM_DIR=~/.nvm
-
   # for mac alias
-  MAKE_ALIAS vim /Applications/MacVim.app/Contents/MacOS/Vim
-  MAKE_ALIAS gvim /Applications/MacVim.app 'open '
+  alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
+  alias gvim="open /Applications/MacVim.app"
 
   # Node Version Manager
+  export NVM_DIR=~/.nvm
   if [ -d $NVM_DIR ]; then
     . $(brew --prefix nvm)/nvm.sh
   fi
@@ -98,4 +86,3 @@ echo $PATH | sed 's/:/\n/g'
 
 unset MACRC
 unset WINRC
-unset MAKE_ALIAS
