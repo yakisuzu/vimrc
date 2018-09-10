@@ -28,6 +28,7 @@ function WINRC(){
   export PATH=$PROGRAMFILES/Git/cmd:$PATH
   export PATH=$PROGRAMFILES/OpenSSH-Win64:$PATH
   export PATH=$PROGRAMFILES/vim80-kaoriya-win64:$PATH
+  export PATH=$PROGRAMFILES/Amazon/AWSCLI:$PATH
 
   # PATH after
   export PATH=$PATH:$JAVA_HOME/bin
