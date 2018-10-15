@@ -34,7 +34,6 @@ function WINRC(){
   export PATH=$PATH:$JAVA_HOME/bin
   export PATH=$PATH:$NVM_HOME
   export PATH=$PATH:$NVM_SYMLINK
-  export PATH=$PATH:$PROGRAMFILES86/Yarn/bin
   export PATH=$PATH:$PROGRAMFILES/Docker/Docker/Resources/bin
 
   # sed drive path

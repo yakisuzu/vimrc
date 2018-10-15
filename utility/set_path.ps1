@@ -33,7 +33,6 @@ $Apps = [App[]](
   [App]::new("java", $JAVA_HOME + "\bin"),
   [App]::new("node/nvm", $NVM_HOME),
   [App]::new("node/node", $NVM_SYMLINK),
-  [App]::new("node/yarn", $ProgramFiles86 + "\Yarn\bin"),
   #[App]::new("Docker", $ProgramFiles + "\Docker Toolbox"),
   [App]::new("Docker", $ProgramFiles + "\Docker\Docker\Resources\bin"),
   [App]::new("dotfiles", $HOME + "\dotfiles\bin")
