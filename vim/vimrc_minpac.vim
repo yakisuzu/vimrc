@@ -93,7 +93,8 @@ endfunction "}}}
 function! s:hook_shaberu() "{{{
   function! g:Shaberu_say_print(st_arg)
     echom a:st_arg
-    call shaberu#say(a:st_arg)
+    " TODO ちょっと動かない
+    " call shaberu#say(a:st_arg)
   endfunction
 
   function! g:Say_random(li_str)
